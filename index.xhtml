@@ -8,20 +8,31 @@
 <title>SLEEF Performance</title>
 </head>
 <body>
-  <H1>SLEEF Performance</H1>
+  <H1  style="font-size:2em;">SLEEF Performance</H1>
 
-  <p class="description">
+  <p class="description" style="font-size:1em;">
     These graphs show compare execution time of SLEEF-3.1(nightly build) and SVML. Click graphs to enlarge.
   </p>
 
-  <p class="description">
+  <p class="description" style="font-size:1em;">
     The execution time of each function is measured by executing each
     function 10^8 times. Each time a function is executed, a uniformly
     distributed random number is set to each element of argument
-    vector(each element is set a different value.) Argument vectors
+    vector(each element is set a different value.) The ranges of the
+    random number for each function are shown below. Argument vectors
     are generated beforehand, and the time to generate random argument
     vectors is not included in the execution time.
   </p>
+
+  <ul style="font-size:0.9em;">
+    <li>Trigonometric functions : [0, 6.28] and [0, 10^8]</li>
+    <li>Log : [0, 10^300] and [0, 10^38] for double-precision functions and single-precision functions, respectively</li>
+    <li>Exp : [-700, 700] and [-100, 100] for double-precision functions and single-precision functions, respectively</li>
+    <li>Pow : [-30, 30] for both the first and the second arguments</li>
+    <li>Arcsin : [-1, 1]</li>
+    <li>Arctan : [-10, 10]</li>
+    <li>Atan2 : [-10, 10] for both the first and the second arguments</li>
+  </ul>
   
   <p>&nbsp;</p>
   
