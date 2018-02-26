@@ -48,38 +48,6 @@
   compilers may call the functions in this library.
 </p>
 
-<p>
-  Since it is compatible with libmvec, you can link sleef instead of
-  libmvec with gcc. For example, you can compile <a class="underlined"
-  href="vectest.c">the code shown in Fig. 7.1</a> with the command
-  shown in Fig. 7.2.
-</p>
-
-<pre class="code">
-<code>#include &lt;stdio.h&gt;</code>
-<code>#include &lt;stdlib.h&gt;</code>
-<code>#include &lt;time.h&gt;</code>
-<code>#include &lt;math.h&gt;</code>
-<code></code>
-<code>#define N 256</code>
-<code>__attribute__ ((__aligned__(16))) double a[N];</code>
-<code></code>
-<code>int main(int argc, char **argv) {</code>
-<code>  srand(time(NULL));</code>
-<code>  for(int i = 0;i &lt; N;i++) a[i] = rand();</code>
-<code>  for(int i = 0;i &lt; N;i++) a[i] = sin(a[i]);</code>
-<code>  for(int i = 0;i &lt; N;i++) printf("%g\n", a[i]);</code>
-<code>}</code>
-</pre>
-<p style="text-align:center; margin-bottom: 1.0cm;">
-  Fig. 7.1: Vectorizer test
-</p>
-
-<pre class="command">$ gcc-7.3.0 -ffast-math -O3 vectest.c -o vectest -lsleefgnuabi</pre>
-<p style="text-align:center; margin-bottom: 1.0cm;">
-  Fig. 7.2: Command for compiling the vectorizer test program
-</p>
-
 
 <h2 id="dispatcher">How the dispatcher works</h2>
 
