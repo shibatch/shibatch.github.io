@@ -61,8 +61,20 @@
   vendor-tuned libraries, SLEEF is portable : it can be easily ported
   to other architectures by writing a helper file, which is a thin
   abstraction layer of SIMD intrinsics. SLEEF is also designed to work
-  with various operating systems and compilers. It also includes
-  vectorized DFT subroutines.
+  with various operating systems and compilers.
+</p>
+
+<p>
+  SLEEF also includes vectorized subroutines for discrete Fourier
+  transform(DFT). These subroutines are fully vectorized, heavily
+  unrolled, and parallelized so that modern SIMD instructions and
+  multiple cores can be utilized for efficient computation. It can
+  utilize long vectors up to 2048 bits, and even longer vectors can be
+  utilized by a small modification. It shares the same helper file for
+  SLEEF libm, and thus it is easy to port to other
+  architectures. <a class="underlined"
+  href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
+  results of benchmark</a> are available.
 </p>
 
 <p>
@@ -305,7 +317,8 @@ information about Boost Software License.
 <h4>3.3 (Not released yet)</h4>
 <ul class="disc">
   <li>SVE target support is added (PR <a class="underlined"
-  href="https://github.com/shibatch/sleef/pull/180">#180</a>)</li>
+  href="https://github.com/shibatch/sleef/pull/180">#180</a>, <a class="underlined"
+  href="https://github.com/shibatch/sleef/pull/182">#182</a>)</li>
 </ul>
 
 <h4>3.2 (Released on Feb 26, 2018)</h4>
