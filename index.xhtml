@@ -65,19 +65,6 @@
 </p>
 
 <p>
-  SLEEF also includes vectorized subroutines for discrete Fourier
-  transform(DFT). These subroutines are fully vectorized, heavily
-  unrolled, and parallelized so that modern SIMD instructions and
-  multiple cores can be utilized for efficient computation. It can
-  utilize long vectors up to 2048 bits, and even longer vectors can be
-  utilized by a small modification. It shares the same helper file for
-  SLEEF libm, and thus it is easy to port to other
-  architectures. <a class="underlined"
-  href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
-  results of benchmark</a> are available.
-</p>
-
-<p>
   The library contains subroutines for all C99 real FP math functions
   in double precision and single precision. Different accuracy of the
   results can be chosen for a subset of the elementary functions; for
@@ -92,6 +79,21 @@
   library</a>. Especially, we carefully checked the error of the
   trigonometric functions when the arguments are close to an integral
   multiple of <i class="math">&pi;</i>/2.
+</p>
+
+<p>
+  SLEEF also includes subroutines for discrete Fourier
+  transform(DFT). These subroutines are fully vectorized, heavily
+  unrolled, and parallelized so that modern SIMD instructions and
+  multiple cores can be utilized for efficient computation, and have
+  an API similar to that of FFTW for easy migration. The subroutines
+  can utilize long vectors up to 2048 bits, and even longer vectors
+  can be utilized by a small modification. The helper files for
+  abstracting SIMD intrinsics are shared with SLEEF libm, and thus it
+  is easy to port DFT subroutines to other
+  architectures. <a class="underlined"
+  href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
+  results of benchmark</a> are now available.
 </p>
 
 <h2 id="environment">Supported environments</h2>
