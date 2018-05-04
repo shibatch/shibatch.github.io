@@ -151,16 +151,24 @@ optimized, or any other special set of flags.
 <ul style="margin-top: 1em; margin-bottom: 1em;">
   <li>`CMAKE_BUILD_TYPE`: By default, CMake supports the following configuration:</li>
   <ul>
-    <li>`Debug`: basic debug flags turned on</li>
-    <li>`Release`: basic optimizations turned on</li>
-    <li>`MinSizeRel`: builds the smallest (but not fastest) object code</li>
-    <li>`RelWithDebInfo`: builds optimized code with debug information as well</li>
+    <li>`Release`: Basic optimizations are turned on. This is the default setting.</li>
+    <li>`Debug`: Basic debug flags are turned on. Optimization is disabled.</li>
+    <li>`MinSizeRel`: Builds the smallest (but not fastest) object code</li>
+    <li>`RelWithDebInfo`: Builds optimized code with debug information as well</li>
   </ul>
   <li style="margin-top: 1em;">`CMAKE_INSTALL_PREFIX` : The prefix it uses when running `make
   install`. Defaults to /usr/local on GNU/Linux and MacOS. Defaults to
   C:/Program Files on Windows.</li>
+  <li style="margin-top: 1em;">`BUILD_TESTS` : Avoid building testing
+  tools if set to FALSE</li>
+  <li style="margin-top: 1em;">`BUILD_GNUABI_LIBS` : Avoid building
+  libraries with GNU ABI if set to FALSE</li>
+  <li style="margin-top: 1em;">`BUILD_DFT` : Avoid building DFT
+  libraries if set to FALSE</li>
   <li style="margin-top: 1em;">`BUILD_SHARED_LIBS` : Static libs are
   built if set to FALSE</li>
+  <li style="margin-top: 1em;">`BUILD_POSITION_INDEPENDENT_CODE` :
+  Avoid generating position independent code if set to FALSE</li>
   <li style="margin-top: 1em;">`SLEEFDFT_MAXBUTWIDTH` : This variable
   specifies the maximum length of combined butterfly block used in the
   DFT. Setting this value to 7 makes DFT faster but compilation takes
@@ -260,6 +268,32 @@ $ &block;</pre>
   appropriately. If you are trying to execute the program on Mac OSX
   or Windows, try copying the DLLs to the current directory.
 </p>
+
+<h2 id="import">Importing SLEEF into your project</h2>
+
+
+<p class="noindent">
+  Below is an example CMakeLists.txt that compiles the above
+  hellox86.c.
+</p>
+
+<pre class="code">
+cmake_minimum_required(VERSION 3.4.3)
+include(ExternalProject)
+find_package(Git REQUIRED)
+
+ExternalProject_Add(libsleef
+  GIT_REPOSITORY https://github.com/shibatch/sleef
+  CMAKE_ARGS -DBUILD_DFT=FALSE -DBUILD_SHARED_LIBS=FALSE -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+)
+
+include_directories(${CMAKE_BINARY_DIR}/contrib/include)
+link_directories(${CMAKE_BINARY_DIR}/contrib/lib)
+
+add_executable(hellox86 hellox86.c)
+add_dependencies(hellox86 libsleef)
+target_link_libraries(hellox86 sleef)
+</pre>
 
 <p class="footer">
   Copyright &copy; 2018 SLEEF Project.<br/>
