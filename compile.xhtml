@@ -25,6 +25,7 @@
       <li><a href="compile.xhtml#linux">Compiling and installing library on Linux</a></li>
       <li><a href="compile.xhtml#MSVC">Compiling library with Microsoft Visual C++</a></li>
       <li><a href="compile.xhtml#hello">Compiling and running "Hello SLEEF"</a></li>
+      <li><a href="compile.xhtml#import">Importing SLEEF into your project</a></li>
     </ul>
   <li>&nbsp;</li>
   <li><a class="underlined" href="purec.xhtml">Math library reference</a></li>
@@ -167,8 +168,6 @@ optimized, or any other special set of flags.
   libraries if set to FALSE</li>
   <li style="margin-top: 1em;">`BUILD_SHARED_LIBS` : Static libs are
   built if set to FALSE</li>
-  <li style="margin-top: 1em;">`BUILD_POSITION_INDEPENDENT_CODE` :
-  Avoid generating position independent code if set to FALSE</li>
   <li style="margin-top: 1em;">`SLEEFDFT_MAXBUTWIDTH` : This variable
   specifies the maximum length of combined butterfly block used in the
   DFT. Setting this value to 7 makes DFT faster but compilation takes
@@ -275,7 +274,9 @@ $ &block;</pre>
 <p class="noindent">
   Below is an example <a class="underlined"
   href="CMakeLists.txt">CMakeLists.txt</a> for compiling the above
-  hellox86.c.
+  hellox86.c. CMake will automatically download SLEEF from GitHub
+  repository, so you don't need to include SLEEF in your software
+  package.
 </p>
 
 <pre class="code">
