@@ -13,3 +13,13 @@ link_directories(${CMAKE_BINARY_DIR}/contrib/lib)
 add_executable(hellox86 hellox86.c)
 add_dependencies(hellox86 libsleef)
 target_link_libraries(hellox86 sleef)
+
+#
+
+option(BUILD_DFT_TUTORIAL "Build DFT tutorial" OFF)
+if (BUILD_DFT_TUTORIAL)
+  add_executable(dfttutorial tutorial.c)
+  add_dependencies(dfttutorial libsleef)
+  find_library(LIBM m)
+  target_link_libraries(dfttutorial sleef sleefdft ${LIBM})
+endif()
