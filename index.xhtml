@@ -85,13 +85,15 @@
   SLEEF also includes subroutines for discrete Fourier
   transform(DFT). These subroutines are fully vectorized, heavily
   unrolled, and parallelized so that modern SIMD instructions and
-  multiple cores can be utilized for efficient computation, and have
-  an API similar to that of FFTW for easy migration. The subroutines
-  can utilize long vectors up to 2048 bits, and even longer vectors
-  can be utilized by a small modification. The helper files for
-  abstracting SIMD intrinsics are shared with SLEEF libm, and thus it
-  is easy to port DFT subroutines to other
-  architectures. <a class="underlined"
+  multiple cores can be utilized for efficient computation. It has
+  an API similar to that of FFTW for easy migration, and distributed under 
+  <a class="underlined"
+  href="http://www.boost.org/users/license.html">BSL</a>, which is a
+  permissive open source license. The subroutines can utilize long
+  vectors up to 2048 bits, and even longer vectors can be utilized by
+  a small modification. The helper files for abstracting SIMD
+  intrinsics are shared with SLEEF libm, and thus it is easy to port
+  DFT subroutines to other architectures. <a class="underlined"
   href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
   results of benchmark</a> are now available.
 </p>
@@ -199,13 +201,13 @@
 	  <td class="lt-lr" align="center">Supported(Cygwin)(*4)</td>
 	  <td class="lt-r" align="center">Supported(Cygwin)(*4)</td>
 	  <td class="lt-r" align="center"></td>
-	  <td class="lt-" align="center">Supported(*5)</td>
+	  <td class="lt-" align="center">Supported</td>
 	</tr>
 	<tr>
 	  <td class="lt-br" align="left">Generic</td>
 	  <td class="lt-hl"></td>
-	  <td class="lt-blr" align="center">Supported(*6)</td>
-	  <td class="lt-br" align="center">Supported(*6)</td>
+	  <td class="lt-blr" align="center">Supported(*5)</td>
+	  <td class="lt-br" align="center">Supported(*5)</td>
 	  <td class="lt-br" align="center"></td>
 	  <td class="lt-b" align="center"></td>
 	</tr>
@@ -226,7 +228,7 @@
   <li>GCC : version 5 and later</li>
   <li>Clang : version 3.9 and later</li>
   <li>Intel Compiler : ICC version 17</li>
-  <li>MSVC : Visual Studio 2015</li>
+  <li>MSVC : Visual Studio 2017</li>
 </ul>
 
 <div><br/></div>
@@ -251,11 +253,7 @@
 </p>
 
 <p>
-  *5 AVX512F is not supported by Visual Studio 2015.
-</p>
-
-<p>
-  *6 Generic architecture is supported through GCC/Clang vector
+  *5 Generic architecture is supported through GCC/Clang vector
   extensions. IEEE 754-compliant 64-bit and 32-bit calculation is
   required.
 </p>
