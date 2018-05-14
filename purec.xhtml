@@ -1111,6 +1111,36 @@ extended-precision (80-bit) floating point values, which is defined in
 
 <hr/>
 
+<p class="funcname"><b id="Sleef_sinh_u35" class="func">Sleef_sinh_u35</b>, <b id="Sleef_sinhf_u35" class="func">Sleef_sinhf_u35</b> - hyperbolic sine functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleef.h&gt;<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sinh_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sinhf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<!--<b class="type">long double</b> <b class="func">Sleef_sinhl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<span class="normal">Link with</span> -lsleef.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluates the hyperbolic sine function of a value
+  in <i class="var">a</i>. The error bound of the returned value is 3.5 ULP
+  if <i class="var">a</i> is in [-709, 709] for the double-precision function or
+  [-88, 88] for the single-precision function . If <i class="var">a</i> is a
+  finite value out of this range, infinity with a correct sign or a
+  correct value with 3.5 ULP error bound is returned. These functions
+  treat the non-number arguments and return non-numbers as specified
+  in the C99 specification. These functions do not set errno nor raise
+  an exception.
+</p>
+
+<hr/>
+
 <p class="funcname"><b id="Sleef_cosh_u10" class="func">Sleef_cosh_u10</b>, <b id="Sleef_coshf_u10" class="func">Sleef_coshf_u10</b> - hyperbolic cosine functions</p>
 
 <p class="header">Synopsis</p>
@@ -1141,6 +1171,36 @@ extended-precision (80-bit) floating point values, which is defined in
 
 <hr/>
 
+<p class="funcname"><b id="Sleef_cosh_u35" class="func">Sleef_cosh_u35</b>, <b id="Sleef_coshf_u35" class="func">Sleef_coshf_u35</b> - hyperbolic cosine functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleef.h&gt;<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_cosh_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_coshf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<!--<b class="type">long double</b> <b class="func">Sleef_coshl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<span class="normal">Link with</span> -lsleef.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluates the hyperbolic cosine function of a value
+  in <i class="var">a</i>. The error bound of the returned value is 3.5 ULP
+  if <i class="var">a</i> is in [-709, 709] for the double-precision function or
+  [-88, 88] for the single-precision function . If <i class="var">a</i> is a
+  finite value out of this range, infinity with a correct sign or a
+  correct value with 3.5 ULP error bound is returned. These functions
+  treat the non-number arguments and return non-numbers as specified
+  in the C99 specification. These functions do not set errno nor raise
+  an exception.
+</p>
+
+<hr/>
+
 <p class="funcname"><b id="Sleef_tanh_u10" class="func">Sleef_tanh_u10</b>, <b id="Sleef_tanhf_u10" class="func">Sleef_tanhf_u10</b> - hyperbolic tangent functions</p>
 
 <p class="header">Synopsis</p>
@@ -1161,6 +1221,33 @@ extended-precision (80-bit) floating point values, which is defined in
   These functions evaluates the hyperbolic tangent function of a value
   in <i class="var">a</i>. The error bound of the returned value is 1.0 ULP for
   the double-precision function or 1.0001 ULP for the single-precision
+  function. These functions treat the non-number arguments and return
+  non-numbers as specified in the C99 specification. These functions
+  do not set errno nor raise an exception.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_tanh_u35" class="func">Sleef_tanh_u35</b>, <b id="Sleef_tanhf_u35" class="func">Sleef_tanhf_u35</b> - hyperbolic tangent functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleef.h&gt;<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_tanh_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_tanhf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<!--<b class="type">long double</b> <b class="func">Sleef_tanhl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<span class="normal">Link with</span> -lsleef.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluates the hyperbolic tangent function of a value
+  in <i class="var">a</i>. The error bound of the returned value is 3.5 ULP for
+  the double-precision function or 3.5 ULP for the single-precision
   function. These functions treat the non-number arguments and return
   non-numbers as specified in the C99 specification. These functions
   do not set errno nor raise an exception.
