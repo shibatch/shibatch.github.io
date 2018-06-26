@@ -2342,8 +2342,8 @@ This is the vectorized function of <a href="purec.xhtml#Sleef_fmodf"><b class="f
 <p class="synopsis">
 #include &lt;sleef.h&gt;<br/>
 <br/>
-<b class="type">vector double</b> <b class="func">Sleef_ldexpd2</b>(<b class="type">vector double</b> <i class="var">a</i>, <b class="type">int32x2_t</b> <i class="var">b</i>);<br/>
-<b class="type">vector double</b> <b class="func">Sleef_ldexpd2_vsx</b>(<b class="type">vector double</b> <i class="var">a</i>, <b class="type">int32x2_t</b> <i class="var">b</i>);<br/>
+<b class="type">vector double</b> <b class="func">Sleef_ldexpd2</b>(<b class="type">vector double</b> <i class="var">a</i>, <b class="type">vector int</b> <i class="var">b</i>);<br/>
+<b class="type">vector double</b> <b class="func">Sleef_ldexpd2_vsx</b>(<b class="type">vector double</b> <i class="var">a</i>, <b class="type">vector int</b> <i class="var">b</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -2402,8 +2402,8 @@ This is the vectorized function of <a href="purec.xhtml#Sleef_frfrexpf"><b class
 <p class="synopsis">
 #include &lt;sleef.h&gt;<br/>
 <br/>
-<b class="type">int32x2_t</b> <b class="func">Sleef_expfrexpd2</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
-<b class="type">int32x2_t</b> <b class="func">Sleef_expfrexpd2_vsx</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
+<b class="type">vector int</b> <b class="func">Sleef_expfrexpd2</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
+<b class="type">vector int</b> <b class="func">Sleef_expfrexpd2_vsx</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -2423,8 +2423,8 @@ This is the vectorized function of <a href="purec.xhtml#Sleef_expfrexp"><b class
 <p class="synopsis">
 #include &lt;sleef.h&gt;<br/>
 <br/>
-<b class="type">int32x2_t</b> <b class="func">Sleef_ilogbd2</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
-<b class="type">int32x2_t</b> <b class="func">Sleef_ilogbd2_vsx</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
+<b class="type">vector int</b> <b class="func">Sleef_ilogbd2</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
+<b class="type">vector int</b> <b class="func">Sleef_ilogbd2_vsx</b>(<b class="type">vector double</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
