@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="viewport" content="width=1024" />
+<meta name="viewport" content="width=device-width, initial-scale=0.4"/>
 <meta name="description" content="SLEEF implements vectorized C99 math functions. It utilizes vector extensions including SSE2, AVX, AVX2, AVX512F for x86, and Advanced SIMD for ARM processors." />
 <meta name="google" content="notranslate" />
 <link rel="canonical" href="https://sleef.org/" />
@@ -108,10 +108,10 @@
 <div><br/></div>
 
 <ul class="disc">
-  <li>x86 - SSE2, SSE4.1, AVX, FMA4, AVX2+FMA3, AVX512F</li>
-  <li>AArch64 - Advanced SIMD, SVE</li>
-  <li>AArch32 - NEON</li>
-  <li>PowerPC64 - VSX</li>
+  <li><a href="x86.xhtml">x86 - SSE2, SSE4.1, AVX, FMA4, AVX2+FMA3, AVX512F</a></li>
+  <li><a href="aarch64.xhtml">AArch64 - Advanced SIMD, SVE</a></li>
+  <li><a href="aarch32.xhtml">AArch32 - NEON</a></li>
+  <li><a href="ppc64.xhtml">PowerPC64 - VSX</a></li>
 </ul>
 
 <div><br/></div>
@@ -190,6 +190,14 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
+	  <td class="lt-r" align="left">PowerPC, Linux</td>
+	  <td></td>
+	  <td class="lt-lr" align="center"></td>
+	  <td class="lt-r" align="center">Supported(*4)</td>
+	  <td class="lt-r" align="center">N/A</td>
+	  <td class="lt-" align="center">N/A</td>
+	</tr>
+	<tr>
 	  <td class="lt-r" align="left">x86 (64bit), OS X</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported</td>
@@ -198,20 +206,12 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-r" align="left">x86 (64bit), Windows</td>
-	  <td></td>
-	  <td class="lt-lr" align="center">Supported(Cygwin)(*4)</td>
-	  <td class="lt-r" align="center">Supported(Cygwin)(*4)</td>
-	  <td class="lt-r" align="center"></td>
-	  <td class="lt-" align="center">Supported</td>
-	</tr>
-	<tr>
-	  <td class="lt-br" align="left">Generic</td>
+	  <td class="lt-br" align="left">x86 (64bit), Windows</td>
 	  <td class="lt-hl"></td>
-	  <td class="lt-blr" align="center">Supported(*5)</td>
-	  <td class="lt-br" align="center">Supported(*5)</td>
+	  <td class="lt-blr" align="center">Supported(Cygwin)(*5)</td>
+	  <td class="lt-br" align="center">Supported(Cygwin)(*5)</td>
 	  <td class="lt-br" align="center"></td>
-	  <td class="lt-b" align="center"></td>
+	  <td class="lt-b" align="center">Supported</td>
 	</tr>
       </table>
     </td>
@@ -250,14 +250,12 @@
 </p>
 
 <p>
-  *4 AVX functions are not supported for Cygwin, since AVX is not
-  supported by Cygwin ABI.
+  *4 Clang-5.0 and later are supported.
 </p>
 
 <p>
-  *5 Generic architecture is supported through GCC/Clang vector
-  extensions. IEEE 754-compliant 64-bit and 32-bit calculation is
-  required.
+  *5 AVX functions are not supported for Cygwin, since AVX is not
+  supported by Cygwin ABI.
 </p>
 
 <div style="margin-top: 1.0cm;"></div>
@@ -373,9 +371,9 @@ information about Boost Software License.
   href="https://github.com/shibatch/sleef/pull/192">#192</a>)</li>
   <li>PowerPC VSX target support is added (PR <a class="underlined"
   href="https://github.com/shibatch/sleef/pull/195">#195</a>)</li>
-  <!--<li>Modified Payne-Hanek argument reduction is added to the
+  <li>Modified Payne-Hanek argument reduction is added to the
   trigonometric functions in libsleef (PR <a class="underlined"
-  href="https://github.com/shibatch/sleef/pull/197">#197</a>)</li>-->
+  href="https://github.com/shibatch/sleef/pull/197">#197</a>)</li>
 </ul>
 
 <h4>3.2 (Released on Feb 26, 2018)</h4>
