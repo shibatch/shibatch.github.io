@@ -35,6 +35,7 @@
       <li><a href="x86.xhtml#eg">Error and gamma functions</a></li>
       <li><a href="x86.xhtml#nearint">Nearest integer functions</a></li>
       <li><a href="x86.xhtml#other">Other functions</a></li>
+      <li><a href="x86.xhtml#supplementary">Supplementary functions</a></li>
     </ul>
     <li><a class="underlined" href="aarch64.xhtml">Data types and functions for AArch64 architecture</a></li>
     <li><a class="underlined" href="aarch32.xhtml">Data types and functions for AArch32 architecture</a></li>
@@ -4128,6 +4129,27 @@ These are the vectorized functions of <a href="purec.xhtml#Sleef_nextafter"><b c
 <p class="noindent">
 These are the vectorized functions of <a href="purec.xhtml#Sleef_nextafterf"><b class="func">Sleef_nextafterf</b></a> with the same accuracy specification.
 </p>
+
+<h2 id="supplementary">Supplementary Functions</h2>
+
+<p class="funcname">CPU feature identification function</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleef.h&gt;<br/>
+<br/>
+<b class="type">void</b> <b class="func">Sleef_x86CpuID</b>(<b class="type">int32_t</b> <i class="var">out</i>[4], <b class="type">uint32_t</b> <i class="var">eax</i>, <b class="type">uint32_t</b> <i class="var">ecx</i>);<br/>
+<br/>
+<span class="normal">Link with</span> -lsleef.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+This is a function for obtaining CPU features by the cpuid instruction available on x86 architecture. This function executes cpuid instruction by passing the values <i class="var">eax</i> and <i class="var">ecx</i> to the corresponding registers. The information returned in EAX, EBX, ECX, and EDX registers will be stored in array <i class="var">out</i>.
+</p>
+
 
 <p class="footer">
   Copyright &copy; 2018 SLEEF Project.<br/>
