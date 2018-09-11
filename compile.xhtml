@@ -23,6 +23,7 @@
     <ul class="disc">
       <li><a href="compile.xhtml#cmake">About CMake</a></li>
       <li><a href="compile.xhtml#linux">Compiling and installing library on Linux</a></li>
+      <li><a href="compile.xhtml#debian">Installing library on Debian</a></li>
       <li><a href="compile.xhtml#ubuntu">Installing library on Ubuntu</a></li>
       <li><a href="compile.xhtml#MSVC">Compiling library with Microsoft Visual C++</a></li>
       <li><a href="compile.xhtml#hello">Compiling and running "Hello SLEEF"</a></li>
@@ -197,6 +198,16 @@ $ sudo make install</pre>
   In order to uninstall the libraries and headers, run the following command.
 
   <pre class="command" style="margin-top: 1em;">$ sudo xargs rm -v &lt; install_manifest.txt</pre>
+</p>
+
+<h2 id="ubuntu">Installing library on Debian</h2>
+
+<p class="noindent">
+  If you are using Debian 10(Buster), you can install the
+  library through apt-get. The DFT library will not be installed.
+
+  <pre class="command">$ sudo apt-get update
+$ sudo apt-get install libsleef-dev</pre>
 </p>
 
 <h2 id="ubuntu">Installing library on Ubuntu</h2>
