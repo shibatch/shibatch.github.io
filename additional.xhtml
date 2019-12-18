@@ -30,7 +30,7 @@
       <li><a href="additional.xhtml#gnuabi">About the GNUABI version of the library</a></li>
       <li><a href="additional.xhtml#dispatcher">How the dispatcher works</a></li>
       <li><a href="additional.xhtml#ulp">ULP, gradual underflow and flush-to-zero mode</a></li>
-      <li><a href="additional.xhtml#sincospi">About sincospi</a></li>
+      <li><a href="additional.xhtml#paynehanek">Explanatory source code for the modified Payne Hanek reduction method</a></li>
       <li><a href="additional.xhtml#logo">About the logo</a></li>
     </ul>
 </ul>
@@ -165,53 +165,104 @@
   this page.</a>
 </p>
 
-<h2 id="sincospi">About sincospi</h2>
+<h2 id="paynehanek">Explanatory source code for our modified Payne Hanek reduction method</h2>
 
 <p class="noindent">
-  The sincospi series of functions evaluates <i class="math">sin(
-    &pi;<i class="var">a</i> )</i> and <i class="math">cos(
-    &pi;<i class="var">a</i> )</i> simultaneously. These functions are
-    added to SLEEF as of version 3.0. There are a few reasons that I
-    added these functions.
+In order to evaluate a trigonometric function with a large argument,
+an argument reduction method is used to find an FP remainder of
+dividing the argument <i class="var">x</i> by &pi;. The range
+reduction method suggested by Cody and Waite is used for small
+arguments, while Payne and Hanek's method provides an accurate
+range-reduction for a large argument. We devised a variation of the
+Payne-Hanek argument reduction method which is suitable for vector
+computation. Fig. 7.2 shows <a class="underlined" href="ph.c">an
+explanatory source code</a> for this method. See <a class="underlined"
+href="http://dx.doi.org/10.1109/TPDS.2019.2960333">our paper</a> for
+the details.
 </p>
 
-<p>
-  C standards include specifications for functions that evaluate
-  trigonometric functions. In order to do calculations for evaluating
-  these functions, reduction of an argument is required. This involves
-  a multiple precision multiplication with <i class="math">&pi;</i>,
-  which requires many operations of addition and multiplication. This
-  is slow especially if accurate evaluation is required. By designing
-  the function in a way that the argument is pre-multiplied
-  by <i class="math">&pi;</i>, this reduction can be eliminated. This
-  leads to faster and more accurate evaluation.
+<pre class="code">
+<code>#include &#60;stdio.h&#62;</code>
+<code>#include &#60;stdlib.h&#62;</code>
+<code>#include &#60;math.h&#62;</code>
+<code>#include &#60;mpfr.h&#62;</code>
+<code></code>
+<code>typedef struct { double x, y; } double2;</code>
+<code>double2 dd(double d) { double2 r = { d, 0 }; return r; }</code>
+<code>int64_t d2i(double d) { union { double f; int64_t i; } tmp = {.f = d }; return tmp.i; }</code>
+<code>double i2d(int64_t i) { union { double f; int64_t i; } tmp = {.i = i }; return tmp.f; }</code>
+<code>double upper(double d) { return i2d(d2i(d) &#38; 0xfffffffff8000000LL); }</code>
+<code>double clearlsb(double d) { return i2d(d2i(d) &#38; 0xfffffffffffffffeLL); }</code>
+<code></code>
+<code>double2 ddrenormalize(double2 t) {</code>
+<code>  double2 s = dd(t.x + t.y);</code>
+<code>  s.y = t.x - s.x + t.y;</code>
+<code>  return s;</code>
+<code>}</code>
+<code></code>
+<code>double2 ddadd(double2 x, double2 y) {</code>
+<code>  double2 r = dd(x.x + y.x);</code>
+<code>  double v = r.x - x.x;</code>
+<code>  r.y = (x.x - (r.x - v)) + (y.x - v) + (x.y + y.y);</code>
+<code>  return r;</code>
+<code>}</code>
+<code></code>
+<code>double2 ddmul(double x, double y) {</code>
+<code>  double2 r = dd(x * y);</code>
+<code>  r.y = fma(x, y, -r.x);</code>
+<code>  return r;</code>
+<code>}</code>
+<code></code>
+<code>double2 ddmul2(double2 x, double2 y) {</code>
+<code>  double2 r = ddmul(x.x, y.x);</code>
+<code>  r.y += x.x * y.y + x.y * y.x;</code>
+<code>  return r;</code>
+<code>}</code>
+<code></code>
+<code>// This function computes remainder(a, PI/2)</code>
+<code>double2 modifiedPayneHanek(double a) {</code>
+<code>  double table[4];</code>
+<code>  int scale = fabs(a) > 1e+200 ? -128 : 0;</code>
+<code>  a = ldexp(a, scale);</code>
+<code></code>
+<code>  // Table genration</code>
+<code></code>
+<code>  mpfr_set_default_prec(2048);</code>
+<code>  mpfr_t pi, m;</code>
+<code>  mpfr_inits(pi, m, NULL);</code>
+<code>  mpfr_const_pi(pi, GMP_RNDN);</code>
+<code></code>
+<code>  mpfr_d_div(m, 2, pi, GMP_RNDN);</code>
+<code>  mpfr_set_exp(m, mpfr_get_exp(m) + (ilogb(a) - 53 - scale));</code>
+<code>  mpfr_frac(m, m, GMP_RNDN);</code>
+<code>  mpfr_set_exp(m, mpfr_get_exp(m) - (ilogb(a) - 53));</code>
+<code></code>
+<code>  for(int i=0;i&#60;4;i++) {</code>
+<code>    table[i] = clearlsb(mpfr_get_d(m, GMP_RNDN));</code>
+<code>    mpfr_sub_d(m, m, table[i], GMP_RNDN);</code>
+<code>  }</code>
+<code></code>
+<code>  mpfr_clears(pi, m, NULL);</code>
+<code></code>
+<code>  // Main computation</code>
+<code></code>
+<code>  double2 x = dd(0);</code>
+<code>  for(int i=0;i&#60;4;i++) {</code>
+<code>    x = ddadd(x, ddmul(a, table[i]));</code>
+<code>    x.x = x.x - round(x.x);</code>
+<code>    x = ddrenormalize(x);</code>
+<code>  }</code>
+<code></code>
+<code>  double2 pio2 = { 3.141592653589793*0.5, 1.2246467991473532e-16*0.5 };</code>
+<code>  x = ddmul2(x, pio2);</code>
+<code>  return fabs(a) &#60; 0.785398163397448279 ? dd(a) : x;</code>
+<code>}</code>
+</pre>
+<p style="text-align:center; margin-bottom: 1.0cm;">
+  <a href="ph.c">Fig. 7.2: Explanatory source code for our modified Payne Hanek reduction method</a>
 </p>
 
-<p>
-  The second reason is that sincospi functions are handy for
-  implementing an FFT library. FFT libraries need to evaluate
-  trigonometric functions for generating twiddle factors that is used in
-  the butterfly operations. Since the butterfly operations are
-  repeatedly applied, the error in twiddle factors accumulates. Thus, we
-  want to make the error in twiddle factors as small as possible.  In an
-  FFT of power-of-two size, twiddle factors are
-  <i class="math">sin( &pi;<i class="var">m</i> /
-    2<sup><i class="var">n</i></sup> )</i> where <i class="var">m</i>
-    and <i class="var">n</i> are integer. If we just use the usual
-    trigonometric functions defined in the C standards with the
-    precision same as that used for butterfly operations, we already
-    have error when calculating arguments, since
-    &pi;<i class="var">m</i> / 2<sup><i class="var">n</i></sup> cannot
-    be represented as a floating point value without error. On the
-    other hand, if we use sincospi function, the argument can be
-    accurately represented by a radix 2 FP number. Thus, we can
-    calculate twiddle factors with better accuracy.
-</p>
 
-<p>
-  The third reason is that sinpi is needed internally to implement
-  gamma functions.
-</p>
 
 <h2 id="logo">About the logo</h2>
 
