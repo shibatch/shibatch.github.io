@@ -213,17 +213,20 @@ $ sudo apt-get install libsleef-dev</pre>
 <h2 id="MSVC">Compiling library with Microsoft Visual C++</h2>
 
 <p class="noindent">
-  You need Visual Studio 2017. Open developer command prompt for
-  VS2017, change directory to sleef-3.X, and then run the following
+  You need Visual Studio 2017 or 2019. Open developer command prompt for
+  VS201X, change directory to sleef-3.X, and then run the following
   commands.
   
   <pre class="command">D:\sleef-3.X> mkdir build
 D:\sleef-3.X> cd build
-D:\sleef-3.X\build> cmake -G"Visual Studio 15 2017 Win64" ..
+D:\sleef-3.X\build> cmake -G"Visual Studio 15 2017 Win64" ..    &amp;:: If you are using VS2017
+D:\sleef-3.X\build> cmake -G"Visual Studio 16 2019" ..          &amp;:: If you are using VS2019
 D:\sleef-3.X\build> cmake --build . --config Release -- /maxcpucount:1</pre>
 
   Note that parallel build is not supported on MSVC.
 </p>
+
+
 
 <h2 id="hello">Compiling and running "Hello SLEEF"</h2>
 
@@ -317,7 +320,7 @@ $ &block;</pre>
 </p>
 
 <p class="footer">
-  Copyright &copy; 2019 SLEEF Project.<br/>
+  Copyright &copy; 2020 SLEEF Project.<br/>
   SLEEF is open-source software and is distributed under the Boost Software License, Version 1.0.
 </p>
 
