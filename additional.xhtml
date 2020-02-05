@@ -27,6 +27,7 @@
   <li>&nbsp;</li>
   <li><a class="underlined" href="additional.xhtml">Additional notes</a></li>
     <ul class="disc">
+      <li><a href="additional.xhtml#faq">Frequently asked questions</a></li>
       <li><a href="additional.xhtml#gnuabi">About the GNUABI version of the library</a></li>
       <li><a href="additional.xhtml#dispatcher">How the dispatcher works</a></li>
       <li><a href="additional.xhtml#ulp">ULP, gradual underflow and flush-to-zero mode</a></li>
@@ -34,6 +35,29 @@
       <li><a href="additional.xhtml#logo">About the logo</a></li>
     </ul>
 </ul>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<p class="noindent">
+  <b>Q:</b> Is the scalar functions in SLEEF faster than the
+  corresponding functions in the standard library?
+</p>
+
+<br/>
+
+<p class="noindent">
+  <b>A:</b> No. Todays standard C libraries are very well optimized,
+  and there is small room for further optimization. The reason why
+  SLEEF is fast is that it carries out computation directly on SIMD
+  registers. This is not simple as it sounds, because conditional
+  branches have to be eliminated in order to take full advantage of
+  SIMD computation. If the algorithm requires conditional branches
+  according to the argument, it must prepare for the case where the
+  elements in the input vector contain both values that would make a
+  branch happen and not happen. This will spoil the advantage of SIMD
+  computation, because each element in a vector would require a
+  different code path.
+</p>
 
 <h2 id="gnuabi">About the GNUABI version of the library</h2>
 
