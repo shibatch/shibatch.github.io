@@ -39,24 +39,40 @@
 <h2 id="faq">Frequently asked questions</h2>
 
 <p class="noindent">
-  <b>Q:</b> Is the scalar functions in SLEEF faster than the
-  corresponding functions in the standard library?
+  <b>Q1:</b> Is the scalar functions in SLEEF faster than the
+  corresponding functions in the standard C library?
 </p>
 
 <br/>
 
 <p class="noindent">
-  <b>A:</b> No. Todays standard C libraries are very well optimized,
+  <b>A1:</b> No. Todays standard C libraries are very well optimized,
   and there is small room for further optimization. The reason why
   SLEEF is fast is that it carries out computation directly on SIMD
-  registers. This is not simple as it sounds, because conditional
-  branches have to be eliminated in order to take full advantage of
-  SIMD computation. If the algorithm requires conditional branches
-  according to the argument, it must prepare for the case where the
-  elements in the input vector contain both values that would make a
-  branch happen and not happen. This will spoil the advantage of SIMD
-  computation, because each element in a vector would require a
-  different code path.
+  registers and ALUs. This is not simple as it sounds, because
+  conditional branches have to be eliminated in order to take full
+  advantage of SIMD computation. If the algorithm requires conditional
+  branches according to the argument, it must prepare for the case
+  where the elements in the input vector contain both values that
+  would make a branch happen and not happen. This will spoil the
+  advantage of SIMD computation, because each element in a vector
+  would require a different code path.
+</p>
+
+<br/>
+<br/>
+
+<p class="noindent">
+  <b>Q2:</b> Do the trigonometric functions (e.g. sin) in SLEEF return
+  correct values for the whole range of inputs?
+</p>
+
+<br/>
+
+<p class="noindent">
+  <b>A2:</b> Yes. SLEEF does implement a vectorized version of Payne
+  Hanek range reduction, and all the trigonometric functions return
+  a correct value with the specified accuracy.
 </p>
 
 <h2 id="gnuabi">About the GNUABI version of the library</h2>
