@@ -42,15 +42,15 @@
 </p>
 
 <p>
-  The first kind consists of a tester and an IUT (which stands for
-  Implementation Under Test.) Those two are built as separate
-  executables, and communicate with each other using a pipe. The role
-  for this tester is to perform a perfunctory set of tests to check if
-  the build is correct. It also performs regression tests. Since the
-  tester executable and the IUT executable are separate, the IUT can
-  be implemented with an exotic languages or on an operating system
-  that does not support libraries required in testing. It is also
-  possible to perform a test over the network.
+  The first kind of testers consists of a tester and an IUT (which
+  stands for Implementation Under Test.) The role for this tester is
+  to perform a perfunctory set of tests to check if the build is
+  correct. It also performs regression tests. The tester and IUT are
+  built as separate executables, and communicate with each other using
+  a pipe. Since these two are separate, the IUT can be implemented
+  with an exotic languages or on an operating system that does not
+  support libraries required for testing. It is also possible to
+  perform a test over the network.
 </p>
 
 <p>
@@ -82,8 +82,8 @@
   roundtriptest, executes a forward transform followed by a backward
   transform. Then, it compares the results with the original data.
   While this test does not require external library and it runs on all
-  environment, there could be cases where this does not find flaw. The
-  roundtrip testers are used only if FFTW is not available.
+  environment, there could be cases where this test does not find some
+  flaw. The roundtrip testers are used only if FFTW is not available.
 </p>
 
 
@@ -109,20 +109,20 @@
   can be reduced to a linear programming problem, and the Simplex
   method is used in this implementation. This requires multi-precision
   calculation, and the implementation uses the MPFR library. In this
-  phase, it uses only a small number of values (specified by macro S,
-  usually less than 100) within the input domain of the kernel
-  function to approximate the function.  The function to approximate
-  is given by FRFUNC function. Specifying higher values for S does not
+  phase, it uses only a small number of values (specified by the macro
+  S, usually less than 100) within the input domain of the kernel
+  function to approximate the function. The function to approximate is
+  given by FRFUNC function. Specifying higher values for S does not
   always give better results.
 </p>
 
 <p>
   The second phase is to optimize the coefficients so that it gives
   good accuracy with double precision calculation. In this phase, it
-  checks 10000 points (specified by macro Q) within the specified
+  checks 10000 points (specified by the macro Q) within the specified
   argument range to see if the polynomial gives good error bounds. In
   some cases, the last few terms have to be calculated in higher
-  precision in order to achieve 1 ULP or less overall accuracy, and
+  precision in order to achieve 1 ULP or better overall accuracy, and
   this implementation can take care of that. The L parameter specifies
   the number of high precision coefficients.
 </p>
@@ -157,7 +157,8 @@
 
 <p>
   Then, change directory to sleef-3.X/src/libm-benchmarks/. You also
-  need to set the build directory to BUILDDIR environment variable.
+  need to set the build directory to BUILDDIR environment
+  variable. You also need Java runtime environment.
 </p>
 
 <pre class="command">$ export BUILDDIR=$PATH:`pwd`/../../build</pre>

@@ -54,7 +54,7 @@
   advantage of SIMD computation. If the algorithm requires conditional
   branches according to the argument, it must prepare for the case
   where the elements in the input vector contain both values that
-  would make a branch happen and not happen. This will spoil the
+  would make a branch happen and not happen. This would spoil the
   advantage of SIMD computation, because each element in a vector
   would require a different code path.
 </p>
@@ -128,9 +128,9 @@
 <p>
   The third advantage is low overhead. You might think that the
   overhead is one function call including execution of the prologue
-  and the epilogue. However, since modern compilers eliminate
-  redundant execution of the prologue, epilogue and return
-  instruction, the actual overhead is just one jmp instruction. This
+  and the epilogue. However, modern compilers are smart enough to
+  eliminate redundant execution of the prologue, epilogue and return
+  instruction. The actual overhead is just one jmp instruction, which
   has very small overhead since it is not conditional. This overhead
   is likely hidden by out-of-order execution.
 </p>
@@ -179,44 +179,45 @@
 
 <p class="noindent">
   ULP stands for "unit in the last place", which is sometimes used for
-  measuring accuracy of calculation. 1 ULP is basically the distance
-  between the two closest floating point number, which depends on the
-  exponent of the FP number. The accuracy of calculation by reputable
-  math libraries is usually between 0.5 and 1 ULP. Here, the accuracy
-  means the largest error of calculation. SLEEF math library provides
+  representing accuracy of calculation. 1 ULP is the distance between
+  the two closest floating point number, which depends on the exponent
+  of the FP number. The accuracy of calculation by reputable math
+  libraries is usually between 0.5 and 1 ULP. Here, the accuracy means
+  the largest error of calculation. SLEEF math library provides
   multiple accuracy choices for most of the math functions. Many
   functions have 3.5-ULP and 1-ULP versions, and 3.5-ULP versions are
-  significantly faster than 1-ULP versions. If you care more about
-  execution speed than accuracy, it is advised to use the 3.5-ULP
-  versions along with -ffast-math or "unsafe math optimization"
-  options for the compiler.
+  faster than 1-ULP versions. If you care more about execution speed
+  than accuracy, it is advised to use the 3.5-ULP versions along with
+  -ffast-math or "unsafe math optimization" options for the compiler.
 </p>
 
 <p>
-  Note that 3.5 ULPs of error is acceptable in many cases. If you do
-  not carefully manage the error of computation by controlling how
-  computation is performed by each operator in your code, you would
-  easily have that amount of error in your computation results.
+  Note that 3.5 ULPs of error is small enough in many applications. If
+  you do not manage the error of computation by carefully ordering
+  floating point operations in your code, you would easily have that
+  amount of error in the computation results.
 </p>
 
 <p>
   In IEEE 754 standard, underflow does not happen abruptly when the
-  exponent becomes zero. Instead, denormal numbers are produced which
-  has less precision, and this is sometimes called gradual
-  underflow. On some implementation which is not IEEE-754 conformant,
-  flush-to-zero mode is used since it is easier to implement. In
-  flush-to-zero mode, numbers smaller than the smallest normalized
-  number are replaced with zero. Because of this, the accuracy of
-  calculation may be influenced in some cases. The smallest normalized
-  precision number can be referred with DBL_MIN for double precision,
-  and FLT_MIN for single precision. The naming of these macros is a
-  little bit confusing because DBL_MIN is not the smallest double
-  precision number.
+  exponent becomes zero. Instead, when a number to be represented is
+  smaller than a certain value, a denormal number is produced which
+  has less precision. This is sometimes called gradual underflow. On
+  some processor implementation, a flush-to-zero mode is used since it
+  is easier to implement by hardware. In flush-to-zero mode, numbers
+  smaller than the smallest normalized number are replaced with
+  zero. FP operations are not IEEE-754 conformant if a flush-to-zero
+  mode is used. A flush-to-zero mode influences the accuracy of
+  calculation in some cases. The smallest normalized precision number
+  can be referred with DBL_MIN for double precision, and FLT_MIN for
+  single precision. The naming of these macros is a little bit
+  confusing because DBL_MIN is not the smallest double precision
+  number.
 </p>
 
 <p>
   You can see known maximum errors in math functions in glibc
-  on <a class="underlined"
+  at <a class="underlined"
   href="http://www.gnu.org/software/libc/manual/html_node/Errors-in-Math-Functions.html">
   this page.</a>
 </p>
@@ -227,14 +228,11 @@
 <p class="noindent">
   In order to evaluate a trigonometric function with a large argument,
   an argument reduction method is used to find an FP remainder of
-  dividing the argument <i class="var">x</i> by &pi;. The range
-  reduction method suggested by Cody and Waite is used for small
-  arguments, while Payne and Hanek's method provides an accurate
-  range-reduction for a large argument. We devised a variation of the
-  Payne-Hanek argument reduction method which is suitable for vector
-  computation. Fig. 7.2 shows <a class="underlined" href="ph.c">an
-  explanatory source code</a> for this
-  method. See <a class="underlined"
+  dividing the argument <i class="var">x</i> by &pi;. We devised a
+  variation of the Payne-Hanek argument reduction method which is
+  suitable for vector computation. Fig. 7.2
+  shows <a class="underlined" href="ph.c">an explanatory source
+  code</a> for this method. See <a class="underlined"
   href="http://dx.doi.org/10.1109/TPDS.2019.2960333">our paper</a> for
   the details.
 </p>

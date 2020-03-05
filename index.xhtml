@@ -73,9 +73,9 @@
   The library contains implementations of all C99 real FP math
   functions in double precision and single precision. Different
   accuracy of the results can be chosen for a subset of the elementary
-  functions; for this subset there are versions with up to 1 ulp error
+  functions; for this subset there are versions with up to 1 ULP error
   (which is the maximum error, not the average) and even faster
-  versions with a few ulps of error. For non-finite inputs and
+  versions with a few ULPs of error. For non-finite inputs and
   outputs, the functions return correct results as specified in the
   C99 standard. All the functions in the library are thoroughly tested
   and confirmed that the evaluation error is within the designed
@@ -123,10 +123,10 @@
 
 <p>
   In addition to the SIMD implementation, Pure C (scalar) version is
-  provided. For x86 architecture, the library provides dispatchers
-  that automatically choose the best subroutines for the computer the
-  library is executed on. The supported combinations of the
-  architecture, operating system and compiler are shown in Table 1.1.
+  provided. The library provides dispatchers that automatically choose
+  the best subroutines for the computer the library is executed
+  on. The supported combinations of the architecture, operating system
+  and compiler are shown in Table 1.1.
 </p>
 
 <div style="margin-top: 1.0cm;"></div>

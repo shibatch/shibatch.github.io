@@ -278,13 +278,15 @@ $ sudo apt-get install libsleef-dev</pre>
 <p>
   Below is an example of commands for building SLEEF with Visual
   Studio.
-  
-  <pre class="command">D:\sleef-3.X> mkdir build
+</p>
+
+<pre class="command">D:\sleef-3.X> mkdir build
 D:\sleef-3.X> cd build
 D:\sleef-3.X\build> cmake -G"Visual Studio 15 2017 Win64" ..    &amp;:: If you are using VS2017
 D:\sleef-3.X\build> cmake -G"Visual Studio 16 2019" ..          &amp;:: If you are using VS2019
 D:\sleef-3.X\build> cmake --build . --config Release -- /maxcpucount:1</pre>
 
+<p>
   Note that parallel build is not supported on MSVC.
 </p>
 
