@@ -104,11 +104,11 @@
   <b class="func">mainFunc</b> is called for the first
   time, <b class="func">dispatcherMain</b> is called internally,
   since <i class="var">funcPtr</i> is initialized to the pointer to
-  <b class="func">dispatcherMain</b>(line 14). It then detects if the
-  CPU supports SSE 4.1(line 7), and
+  <b class="func">dispatcherMain</b> (line 14). It then detects if the
+  CPU supports SSE 4.1 (line 7), and
   rewrites <i class="var">funcPtr</i> to a pointer to the function
   that utilizes SSE 4.1 or SSE 2, depending on the result of CPU
-  feature detection(line 10).  When
+  feature detection (line 10).  When
   <b class="func">mainFunc</b> is called for the second time, it does
   not execute the
   <b class="func">dispatcherMain</b>. It just executes the function
