@@ -54,46 +54,50 @@
 <p class="noindent">
   SLEEF stands for SIMD Library for Evaluating Elementary
   Functions. It implements vectorized versions of all C99 real
-  floating point math functions. It can utilize SIMD instructions of
-  modern processors. SLEEF is designed to fully utilize SIMD
-  computation by reducing the use of conditional branches and
-  scatter/gather memory access. Our <a class="underlined"
+  floating point math functions. It can utilize SIMD instructions that
+  are available on modern processors. SLEEF is designed to effciently
+  perform computation with SIMD instruction by reducing the use of
+  conditional branches and scatter/gather memory
+  access. Our <a class="underlined"
   href="benchmark.xhtml">benchmarks</a> show that the performance of
   SLEEF is comparable to that of the best commercial library. Unlike
-  vendor-tuned libraries, SLEEF is portable : it can be easily ported
-  to other architectures by writing a helper file, which is a thin
-  abstraction layer of SIMD intrinsics. SLEEF is also designed to work
-  with various operating systems and compilers.
+  vendor-tuned assembly-optimized libraries, SLEEF can be easily
+  ported to other architectures by writing a helper file, which is a
+  thin abstraction layer of SIMD intrinsics. SLEEF is also designed to
+  work with various operating systems and compilers. Link time
+  optimization can be used to reduce the overhead of calling
+  functions.
 </p>
 
 <p>
-  The library contains subroutines for all C99 real FP math functions
-  in double precision and single precision. Different accuracy of the
-  results can be chosen for a subset of the elementary functions; for
-  this subset there are versions with up to 1 ulp error (which is the
-  maximum error, not the average) and versions with a few ulp
-  error. Obviously, less accurate versions are faster. For non-finite
-  inputs and outputs, the library should return the same results as
-  libm as specified in the C99 standard. The library is rigorously
-  tested if the evaluation error is within the designed limit. The
-  library is tested against high-precision evaluation
-  using <a class="underlined" href="http://www.mpfr.org/">the libmpfr
-  library</a>. Especially, we carefully checked the error of the
-  trigonometric functions when the arguments are close to an integral
-  multiple of <i class="math">&pi;</i>/2.
+  The library contains implementations of all C99 real FP math
+  functions in double precision and single precision. Different
+  accuracy of the results can be chosen for a subset of the elementary
+  functions; for this subset there are versions with up to 1 ulp error
+  (which is the maximum error, not the average) and even faster
+  versions with a few ulps of error. For non-finite inputs and
+  outputs, the functions return correct results as specified in the
+  C99 standard. All the functions in the library are thoroughly tested
+  and confirmed that the evaluation error is within the designed
+  limit, by comparing the returned values against high-precision
+  evaluation using <a class="underlined"
+  href="http://www.mpfr.org/">the libmpfr library</a>. Especially, we
+  carefully checked the error of the trigonometric functions with
+  arguments close to an integral multiple
+  of <i class="math">&pi;</i>/2.
 </p>
 
 <p>
   SLEEF also includes subroutines for discrete Fourier
   transform(DFT). These subroutines are fully vectorized, heavily
-  unrolled, and parallelized so that modern SIMD instructions and
-  multiple cores can be utilized for efficient computation. It has
-  an API similar to that of FFTW for easy migration, and distributed under 
+  unrolled, and parallelized in such a way that modern SIMD
+  instructions and multiple cores can be utilized for efficient
+  computation. It has an API similar to that of FFTW for easy
+  migration, and distributed under
   <a class="underlined"
   href="http://www.boost.org/users/license.html">BSL</a>, which is a
   permissive open source license. The subroutines can utilize long
-  vectors up to 2048 bits, and even longer vectors can be utilized by
-  a small modification. The helper files for abstracting SIMD
+  vectors up to 2048 bits. The helper files for abstracting SIMD
   intrinsics are shared with SLEEF libm, and thus it is easy to port
   DFT subroutines to other architectures. <a class="underlined"
   href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
@@ -121,8 +125,8 @@
   In addition to the SIMD implementation, Pure C (scalar) version is
   provided. For x86 architecture, the library provides dispatchers
   that automatically choose the best subroutines for the computer the
-  library is run. The supported combinations of the architecture,
-  operating system and compiler are shown in Table 1.1.
+  library is executed on. The supported combinations of the
+  architecture, operating system and compiler are shown in Table 1.1.
 </p>
 
 <div style="margin-top: 1.0cm;"></div>
