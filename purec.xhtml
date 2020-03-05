@@ -1588,6 +1588,31 @@ max(0.50001 ULP, FLT_MIN), respectively.
 
 <hr/>
 
+<p class="funcname"><b id="Sleef_remainder" class="func">Sleef_remainder</b>, <b id="Sleef_remainderf" class="func">Sleef_remainderf</b> - FP remainder</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleef.h&gt;<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_remainder</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_remainderf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
+<span class="normal">Link with</span> -lsleef.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions return the value as specified in the C99
+  specification of remainder and remainderf functions, if <i>|<i class="var">x</i> / <i class="var">y</i>|</i> is
+  smaller than 1e+300 and 1e+38, respectively. The returned value is
+  undefined, otherwise. These functions do not set errno nor raise an
+  exception.
+</p>
+
+<hr/>
+
 <p class="funcname"><b id="Sleef_ldexp" class="func">Sleef_ldexp</b>, <b id="Sleef_ldexpf" class="func">Sleef_ldexpf</b> - multiply by integral power of 2</p>
 
 <p class="header">Synopsis</p>
