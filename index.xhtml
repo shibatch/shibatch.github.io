@@ -392,6 +392,8 @@ generated (PR <a class="underlined"
 href="https://github.com/shibatch/sleef/pull/283">#283</a>)</li>
   <li>IEEE remainder function is added (PR
     <a class="underlined" href="https://github.com/shibatch/sleef/pull/271">#271</a>)</li>
+  <li>GCC-10 can now build SLEEF with SVE support (PR
+    <a class="underlined" href="https://github.com/shibatch/sleef/pull/310">#310</a>)</li>
 </ul>
 
 <h4>3.4.1 (Released on Oct 1, 2019)</h4>
@@ -489,36 +491,6 @@ href="https://github.com/shibatch/sleef/pull/283">#283</a>)</li>
   <li>Etc.</li>
 </ul>
 
-<h4>3.0 (Released on Feb. 7, 2017)</h4>
-<ul class="disc">
-  <li>New API is defined</li>
-  <li>Functions for DFT are added</li>
-  <li>sincospi functions are added</li>
-  <li>gencoef now supports single, extended and quad precision in addition to double precision</li>
-  <li>Linux, Windows and Mac OS X are supported</li>
-  <li>GCC, Clang, Intel Compiler, Microsoft Visual C++ are supported</li>
-  <li>The library can be compiled as DLLs</li>
-  <li>Files needed for creating a debian package are now included</li>
-</ul>
-
-<h4>2.120 (Released on Jan. 30, 2017)</h4>
-<ul class="disc">
-  <li>Relicensed to Boost Software License Version 1.0</li>
-</ul>
-
-<h4>2.110 (Released on Dec. 11, 2016)</h4>
-<ul class="disc">
-  <li>The valid range of argument is extended for trig functions</li>
-  <li>Specification of each functions regarding to the domain and accuracy is added</li>
-  <li>A coefficient generation tool is added</li>
-  <li>New testing tools are introduced</li>
-  <li>Following functions returned incorrect values when the argument is very large or small : exp, pow, asinh, acosh</li>
-  <li>SIMD xsin and xcos returned values more than 1 when FMA is enabled</li>
-  <li>Pure C cbrt returned incorrect values when the argument is negative</li>
-  <li>tan_u1 returned values with more than 1 ulp of error on rare occasions</li>
-  <li>Removed support for Java language(because no one seems using this)</li>
-</ul>
-
 <h2 id="related">Related projects and links</h2>
 
 <ul class="disc">
@@ -557,6 +529,7 @@ href="https://github.com/shibatch/sleef/pull/283">#283</a>)</li>
       <li><a href="https://github.com/pytorch/pytorch/pull/6725">PyTorch</a></li>
       <li><a href="https://github.com/cdl-saarland/rv">The Region Vectorizer(Compiler Design Lab at Saarland University)</a></li>
       <li><a href="https://agenium-scale.github.io/nsimd">Agenium Scale NSIMD</a></li>
+      <li><a href="https://code.jsoftware.com/wiki/System/ReleaseNotes/J902">J Language</a></li>
     </ul>
   </li>
 </ul>
