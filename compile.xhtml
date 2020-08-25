@@ -243,8 +243,14 @@ $ make
 $ make test
 $ sudo make install</pre>
 </p>
-  
-<p class="noindent">
+
+<p>
+  <b style="color:red">Parallel build is only supported with Ninja.</b>
+</p>
+
+<br/>
+
+<p>
   In order to uninstall the libraries and headers, run the following command.
 
   <pre class="command" style="margin-top: 1em;">$ sudo xargs rm -v &lt; install_manifest.txt</pre>
@@ -285,11 +291,6 @@ D:\sleef-3.X> cd build
 D:\sleef-3.X\build> cmake -G"Visual Studio 15 2017 Win64" ..    &amp;:: If you are using VS2017
 D:\sleef-3.X\build> cmake -G"Visual Studio 16 2019" ..          &amp;:: If you are using VS2019
 D:\sleef-3.X\build> cmake --build . --config Release -- /maxcpucount:1</pre>
-
-<p>
-  Parallel build is only supported with Ninja.
-</p>
-
 
 
 <h2 id="hello">Compiling and running "Hello SLEEF"</h2>
