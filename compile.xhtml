@@ -252,9 +252,39 @@ $ sudo make install</pre>
 
 <p>
   In order to uninstall the libraries and headers, run the following command.
-
-  <pre class="command" style="margin-top: 1em;">$ sudo xargs rm -v &lt; install_manifest.txt</pre>
 </p>
+
+<pre class="command" style="margin-top: 1em;">$ sudo xargs rm -v &lt; install_manifest.txt</pre>
+
+<h3 id="lto">Building the library with LTO support</h3>
+
+<p>
+  You can build the library with link time opimization(LTO) support
+  with the following commands. Note that you can only build static
+  libraries with LTO support. You also have to use the same compiler
+  with the same version to build the library and other source codes.
+</p>
+
+<pre class="command">$ mkdir build
+$ cd build
+$ cmake -DBUILD_SHARED_LIBS=FALSE -DENABLE_LTO=TRUE ..
+$ make</pre>
+
+
+<h3 id="inline">Building the header files for inlining the whole SLEEF functions</h3>
+
+<p>
+  Header files for inlining the whole SLEEF functions can be built
+  with the following commands. With these header files, it may be
+  easier to inline the whole SLEEF functions than using LTO. You
+  cannot include more than one of these header files from the same
+  file.
+</p>
+
+<pre class="command">$ mkdir build
+$ cd build
+$ cmake -DBUILD_INLINE_HEADERS=TRUE ..
+$ make</pre>
 
 <h2 id="debian">Installing library on Debian and Ubuntu</h2>
 
@@ -291,6 +321,22 @@ D:\sleef-3.X> cd build
 D:\sleef-3.X\build> cmake -G"Visual Studio 15 2017 Win64" ..    &amp;:: If you are using VS2017
 D:\sleef-3.X\build> cmake -G"Visual Studio 16 2019" ..          &amp;:: If you are using VS2019
 D:\sleef-3.X\build> cmake --build . --config Release -- /maxcpucount:1</pre>
+
+
+<h3 id="cow">Compiling library with Clang on Windows</h3>
+
+<p class="noindent">
+  You need Visual Studio 2019. Download clang on Windows
+  from <a href="https://releases.llvm.org/download.html">llvm.org</a>,
+  and install it. Below is an example of commands for building SLEEF
+  with Clang on Windows.
+</p>
+
+<pre class="command">D:\sleef-3.X> "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+D:\sleef-3.X> mkdir build
+D:\sleef-3.X> cd build
+D:\sleef-3.X\build> cmake -GNinja -DCMAKE_C_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" ..
+D:\sleef-3.X\build> ninja</pre>
 
 
 <h2 id="hello">Compiling and running "Hello SLEEF"</h2>
