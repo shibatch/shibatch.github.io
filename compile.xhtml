@@ -64,15 +64,13 @@ introductions in the wiki</a> (recommended).
 
 <p class="noindent">
 1. Make sure cmake is available on the command-line. The command below
-should display a version number greater than or equal to 3.4.3.
+should display a version number greater than or equal to 3.5.1.
 </p>
 <pre class="command">$ cmake --version</pre>
 
 <p class="noindent">
-2. Download the tar from
-the <a class="underlined" href="https://sourceforge.net/projects/sleef/files/">software
-repository</a> or checkout out the source code from
-the <a class="underlined" href="https://github.com/shibatch/sleef">GitHub repository</a>.
+2. Checkout out the source code from our <a class="underlined"
+href="https://github.com/shibatch/sleef">GitHub repository</a>.
 </p>
 <pre class="command">$ git clone https://github.com/shibatch/sleef</pre>
 
@@ -86,16 +84,10 @@ $ mkdir build &amp;&amp; cd build</pre>
 <p class="noindent">
 4. Run cmake to configure your project and generate the system to build it:
 </p>
-<pre class="command">$ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DCMAKE_INSTALL_PREFIX=../my-sleef-install \
-	..</pre>
+<pre class="command">$ cmake ..</pre>
 
 <p class="noindent">
-This flag configures an optimised libsleef shared library build with
-basic debug info.  By default, cmake will autodetect your system
-platform and configure the build using the default parameters. You can
-control and modify these parameters by setting variables when running
-cmake. See the list of <a class="underlined"
+See the list of <a class="underlined"
 href="#build-customization">options and variables</a> for customizing
 your build.
 </p>
@@ -107,14 +99,14 @@ of the build directory:
 <pre class="command">$ make</pre>
 
 <p class="noindent">
-6. Install the library under ../my-sleef/install by running:
-</p>
-<pre class="command">$ make install</pre>
-
-<p class="noindent">
-7. You can execute the tests by running:
+6. You can execute the tests by running:
 </p>
 <pre class="command">$ make test</pre>
+
+<p class="noindent">
+7. Install the library under ../my-sleef/install by running:
+</p>
+<pre class="command">$ make install</pre>
 
 <h3 id="build-customization">Build customization</h3>
 
@@ -285,7 +277,8 @@ $ sudo make install</pre>
   with the following commands. With these header files, it may be
   easier to inline the whole SLEEF functions than using LTO. You
   cannot include more than one of these header files from the same
-  file.
+  file. You have to specify "-ffp-contract=off" compiler option when
+  compiling a source code that includes one of these header files.
 </p>
 
 <pre class="command">$ cmake -DBUILD_INLINE_HEADERS=TRUE ..</pre>
@@ -304,15 +297,12 @@ $ sudo apt-get install libsleef-dev</pre>
 <h2 id="MSVC">Compiling library with Microsoft Visual C++</h2>
 
 <p class="noindent">
-  You need Visual Studio 2017 or 2019. Open developer command prompt
-  for VS201X, change directory to sleef-3.X. When configuring a build
-  with cmake, you need to use a specific generator like this: `cmake
-  -G"Visual Studio 15 2017 Win64" ..` specifying the Visual Studio
-  version and targeting specifically `Win64` (to support compilation
-  of AVX/AVX2.) Check `cmake -G` to get a full list of supported
-  Visual Studio project generators. This generator will create a
-  proper solution `SLEEF.sln` under the build directory. You can still
-  use `cmake --build .` to build without opening Visual Studio.
+  You need Visual Studio 2019. Open developer command prompt for
+  VS2019 and change directory to sleef-3.X. When configuring a build
+  with cmake, you need to use a specific generator: `cmake -G"Visual
+  Studio 16 2019" ..` This generator will create a proper solution
+  `SLEEF.sln` under the build directory. You can still use `cmake
+  --build .` to build the library without opening Visual Studio.
 </p>
 
 <p>
@@ -330,10 +320,10 @@ D:\sleef-3.X\build> cmake --build . --config Release -- /maxcpucount:1</pre>
 <h3 id="cow">Compiling library with Clang on Windows</h3>
 
 <p class="noindent">
-  You need Visual Studio 2019. Download clang on Windows
-  from <a href="https://releases.llvm.org/download.html">llvm.org</a>,
-  and install it. Below is an example of commands for building SLEEF
-  with Clang on Windows.
+  You need Visual Studio 2019. Install ninja via VS2019 installer.
+  Download and install clang on Windows from <a class="underlined"
+  href="https://releases.llvm.org/download.html">llvm.org</a>. Below
+  is an example of commands for building SLEEF with Clang on Windows.
 </p>
 
 <pre class="command">D:\sleef-3.X> "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"

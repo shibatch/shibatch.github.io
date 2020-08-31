@@ -175,8 +175,8 @@
 	<tr>
 	  <td class="lt-r" align="left">x86 (32bit), Linux</td>
 	  <td></td>
-	  <td class="lt-lr" align="center">Supported(*2)</td>
-	  <td class="lt-r" align="center">Supported(*2)</td>
+	  <td class="lt-lr" align="center">Supported(*1)</td>
+	  <td class="lt-r" align="center">Supported(*1)</td>
 	  <td class="lt-r" align="center"></td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
@@ -191,8 +191,8 @@
 	<tr>
 	  <td class="lt-r" align="left">AArch32, Linux</td>
 	  <td></td>
-	  <td class="lt-lr" align="center">Supported(*3)</td>
-	  <td class="lt-r" align="center">Supported(*3)</td>
+	  <td class="lt-lr" align="center">Supported(*2)</td>
+	  <td class="lt-r" align="center">Supported(*2)</td>
 	  <td class="lt-r" align="center">N/A</td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
@@ -200,7 +200,7 @@
 	  <td class="lt-r" align="left">PowerPC, Linux</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported</td>
-	  <td class="lt-r" align="center">Supported(*4)</td>
+	  <td class="lt-r" align="center">Supported</td>
 	  <td class="lt-r" align="center">N/A</td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
@@ -231,8 +231,8 @@
 	<tr>
 	  <td class="lt-br" align="left">x86 (64bit), Windows</td>
 	  <td class="lt-hl"></td>
-	  <td class="lt-blr" align="center">Supported(Cygwin)(*5)</td>
-	  <td class="lt-br" align="center">Supported(*5)</td>
+	  <td class="lt-blr" align="center">Supported(Cygwin)(*3)</td>
+	  <td class="lt-br" align="center">Supported(*3)</td>
 	  <td class="lt-br" align="center"></td>
 	  <td class="lt-b" align="center">Supported</td>
 	</tr>
@@ -251,29 +251,25 @@
 
 <ul class="disc">
   <li>GCC : version 5 and later</li>
-  <li>Clang : version 3.9 and later</li>
+  <li>Clang : version 6 and later</li>
   <li>Intel Compiler : ICC version 17</li>
-  <li>MSVC : Visual Studio 2017 and later</li>
+  <li>MSVC : Visual Studio 2019</li>
 </ul>
 
 <div><br/></div>
 
 <p>
-  *2 SSE2 is required to run the scalar functions on 32-bit x86
+  *1 SSE2 is required to run the scalar functions on 32-bit x86
   architecture. x87 is not supported.
 </p>
 
 <p>
-  *3 NEON has only single precision support. The computation results
+  *2 NEON has only single precision support. The computation results
   are not in full accuracy because NEON is not IEEE 754-compliant.
 </p>
 
 <p>
-  *4 Clang-5.0 and later are supported.
-</p>
-
-<p>
-  *5 AVX functions are not supported for Cygwin, because AVX is not
+  *3 AVX functions are not supported for Cygwin, because AVX is not
   supported by Cygwin ABI.
 </p>
 
@@ -485,19 +481,6 @@ href="https://github.com/shibatch/sleef/pull/283">#283</a>)</li>
   FMA4 implementation.</li>
 </ul>
 
-<h4>3.1 (Released on July 19, 2017)</h4>
-<ul class="disc">
-  <li>Added AArch64 support</li>
-  <li>Implemented the remaining C99 math functions : lgamma, tgamma,
-  erf, erfc, fabs, copysign, fmax, fmin, fdim, trunc, floor, ceil,
-  round, rint, modf, ldexp, nextafter, frexp, hypot, and fmod.</li>
-  <li>Added dispatcher for x86 functions</li>
-  <li>Improved reduction of trigonometric functions</li>
-  <li>Added support for 32-bit x86, Cygwin, etc.</li>
-  <li>Improved tester</li>
-  <li>Etc.</li>
-</ul>
-
 <h2 id="related">Related projects and links</h2>
 
 <ul class="disc">
@@ -537,7 +520,11 @@ href="https://github.com/shibatch/sleef/pull/283">#283</a>)</li>
       <li><a href="https://github.com/cdl-saarland/rv">The Region Vectorizer(Compiler Design Lab at Saarland University)</a></li>
       <li><a href="https://agenium-scale.github.io/nsimd">Agenium Scale NSIMD</a></li>
       <li><a href="https://code.jsoftware.com/wiki/System/ReleaseNotes/J902">J Language</a></li>
-    </ul>
+      <li><a href="https://github.com/simd-everywhere/simde">SIMD Everywhere</a></li>
+      <li><a href="https://github.com/dnbaker/minocore">Minocore</a></li>
+      <li><a href="https://github.com/greatest-ape/OctaSine">OctaSine</a></li>
+      <li><a href="https://github.com/jackmott/simdeez">Simdeez</a></li>
+   </ul>
   </li>
 </ul>
 
