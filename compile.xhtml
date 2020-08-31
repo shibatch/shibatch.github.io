@@ -139,19 +139,19 @@ configure a build for SLEEF.
 </p>
 
 <ul style="margin-top: 1em; margin-bottom: 1em;">
-  <li>`CMAKE_BUILD_TYPE`: By default, CMake supports the following configuration:</li>
+  <li><b>CMAKE_BUILD_TYPE</b>: By default, CMake supports the following configuration:</li>
   <ul>
     <li>`Release`: Basic optimizations are turned on. This is the default setting.</li>
     <li>`Debug`: Basic debug flags are turned on. Optimization is disabled.</li>
     <li>`MinSizeRel`: Builds the smallest (but not fastest) object code</li>
     <li>`RelWithDebInfo`: Builds optimized code with debug information as well</li>
   </ul>
-  <li style="margin-top: 1em;">`BUILD_SHARED_LIBS` : Static libs are
+  <li style="margin-top: 1em;"><b>BUILD_SHARED_LIBS</b> : Static libs are
   built if set to FALSE</li>
-  <li style="margin-top: 1em;">`CMAKE_INSTALL_PREFIX` : The prefix it
+  <li style="margin-top: 1em;"><b>CMAKE_INSTALL_PREFIX</b> : The prefix it
   uses when running `make install`. Defaults to /usr/local on
   GNU/Linux and MacOS. Defaults to C:/Program Files on Windows.</li>
-  <li style="margin-top: 1em;">`CMAKE_C_FLAGS_RELEASE` : The
+  <li style="margin-top: 1em;"><b>CMAKE_C_FLAGS_RELEASE</b> : The
   optimization options used by the compiler.</li>
 </ul>
 
@@ -162,67 +162,69 @@ Below is the list of SLEEF-specific cmake variables.
 </p>
 
 <ul style="margin-top: 1em; margin-bottom: 1em;">
-  <li>`SLEEF_SHOW_CONFIG` : Show relevant
+  <li><b>SLEEF_SHOW_CONFIG</b> : Show relevant
   cmake variables upon configuring a build</li>
-  <li>`SLEEF_SHOW_ERROR_LOG` : Show cmake error log</li>
-  <li>`BUILD_TESTS` : Avoid building testing
+  <li><b>SLEEF_SHOW_ERROR_LOG</b> : Show cmake error log</li>
+  <li><b>BUILD_TESTS</b> : Avoid building testing
   tools if set to FALSE</li>
-  <li>`DISABLE_LONG_DOUBLE` : Disable support for long double data type</li>
-  <li>`ENFORCE_LONG_DOUBLE` : Build fails if long double data type is
+  <li><b>DISABLE_LONG_DOUBLE</b> : Disable support for long double data type</li>
+  <li><b>ENFORCE_LONG_DOUBLE</b> : Build fails if long double data type is
   not supported by the compiler</li>
-  <li>`DISABLE_FLOAT128` : Disable support for float128 data type</li>
-  <li>`ENFORCE_FLOAT128` : Build fails if float128 data type is not
+  <li><b>DISABLE_FLOAT128</b> : Disable support for float128 data type</li>
+  <li><b>ENFORCE_FLOAT128</b> : Build fails if float128 data type is not
   supported by the compiler</li>
-  <li>`DISABLE_OPENMP` : Disable support for OpenMP</li>
-  <li>`ENFORCE_OPENMP` : Build fails if OpenMP is not
+  <li><b>DISABLE_OPENMP</b> : Disable support for OpenMP</li>
+  <li><b>ENFORCE_OPENMP</b> : Build fails if OpenMP is not
   supported by the compiler</li>
-  <li>`ENABLE_LTO` : Enable support for LTO with gcc, or thin-LTO with
+  <li><b>ENABLE_LTO</b> : Enable support for LTO with gcc, or thinLTO with
   llvm</li>
-  <li>`BUILD_INLINE_HEADERS` : Generate header files for inlining
+  <li><b>LLVM_AR_COMMAND</b> : Specify LLVM AR command when you build the
+  library with thinLTO support with clang.</li>
+  <li><b>BUILD_INLINE_HEADERS</b> : Generate header files for inlining
   whole SLEEF functions</li>
 
-  <li style="margin-top: 1em;">`DISABLE_SSE2` : Disable support for x86 SSE2</li>
-  <li>`ENFORCE_SSE2` : Build fails if SSE2 is not
+  <li style="margin-top: 1em;"><b>DISABLE_SSE2</b> : Disable support for x86 SSE2</li>
+  <li><b>ENFORCE_SSE2</b> : Build fails if SSE2 is not
   supported by the compiler</li>
-  <li>`DISABLE_SSE4` : Disable support for x86 SSE4</li>
-  <li>`ENFORCE_SSE4` : Build fails if SSE4 is not
+  <li><b>DISABLE_SSE4</b> : Disable support for x86 SSE4</li>
+  <li><b>ENFORCE_SSE4</b> : Build fails if SSE4 is not
   supported by the compiler</li>
-  <li>`DISABLE_AVX` : Disable support for x86 AVX</li>
-  <li>`ENFORCE_AVX` : Build fails if AVX is not
+  <li><b>DISABLE_AVX</b> : Disable support for x86 AVX</li>
+  <li><b>ENFORCE_AVX</b> : Build fails if AVX is not
   supported by the compiler</li>
-  <li>`DISABLE_FMA4` : Disable support for x86 FMA4</li>
-  <li>`ENFORCE_FMA4` : Build fails if FMA4 is not
+  <li><b>DISABLE_FMA4</b> : Disable support for x86 FMA4</li>
+  <li><b>ENFORCE_FMA4</b> : Build fails if FMA4 is not
   supported by the compiler</li>
-  <li>`DISABLE_AVX2` : Disable support for x86 AVX2</li>
-  <li>`ENFORCE_AVX2` : Build fails if AVX2 is not
+  <li><b>DISABLE_AVX2</b> : Disable support for x86 AVX2</li>
+  <li><b>ENFORCE_AVX2</b> : Build fails if AVX2 is not
   supported by the compiler</li>
-  <li>`DISABLE_AVX512F` : Disable support for x86 AVX512F</li>
-  <li>`ENFORCE_AVX512F` : Build fails if AVX512F is not
+  <li><b>DISABLE_AVX512F</b> : Disable support for x86 AVX512F</li>
+  <li><b>ENFORCE_AVX512F</b> : Build fails if AVX512F is not
   supported by the compiler</li>
-  <li>`DISABLE_SVE` : Disable support for AArch64 SVE</li>
-  <li>`ENFORCE_SVE` : Build fails if SVE is not
+  <li><b>DISABLE_SVE</b> : Disable support for AArch64 SVE</li>
+  <li><b>ENFORCE_SVE</b> : Build fails if SVE is not
   supported by the compiler</li>
-  <li>`DISABLE_VSX` : Disable support for PowerPC VSX</li>
-  <li>`ENFORCE_VSX` : Build fails if VSX is not
+  <li><b>DISABLE_VSX</b> : Disable support for PowerPC VSX</li>
+  <li><b>ENFORCE_VSX</b> : Build fails if VSX is not
   supported by the compiler</li>
-  <li>`ENABLE_ALTDIV` : Enable alternative division method (aarch64 only)</li>
-  <li>`ENABLE_ALTSQRT` : Enable alternative sqrt method (aarch64 only)</li>
+  <li><b>ENABLE_ALTDIV</b> : Enable alternative division method (aarch64 only)</li>
+  <li><b>ENABLE_ALTSQRT</b> : Enable alternative sqrt method (aarch64 only)</li>
 
-  <li style="margin-top: 1em;">`SLEEF_ENABLE_LLVM_BITCODE` : Generate
+  <li style="margin-top: 1em;"><b>SLEEF_ENABLE_LLVM_BITCODE</b> : Generate
   LLVM bitcode</li>
-  <li>`ENFORCE_TESTER3` : Build fails if
+  <li><b>ENFORCE_TESTER3</b> : Build fails if
   tester3 cannot be built</li>
-  <li>`BUILD_GNUABI_LIBS` : Avoid building
+  <li><b>BUILD_GNUABI_LIBS</b> : Avoid building
   libraries with GNU ABI if set to FALSE</li>
 
-  <li style="margin-top: 1em;">`BUILD_DFT` : Avoid building DFT
+  <li style="margin-top: 1em;"><b>BUILD_DFT</b> : Avoid building DFT
   libraries if set to FALSE</li>
-  <li>`SLEEFDFT_MAXBUTWIDTH` : This variable
+  <li><b>SLEEFDFT_MAXBUTWIDTH</b> : This variable
   specifies the maximum length of combined butterfly block used in the
   DFT. Setting this value to 7 makes DFT faster but compilation takes
   more time and the library size will be larger.</li>
 
-  <li style="margin-top: 1em;">`BUILD_QUAD` : An <b>experimental</b> quad-precision
+  <li style="margin-top: 1em;"><b>BUILD_QUAD</b> : An <b>experimental</b> quad-precision
   library will be built if set to TRUE</li>
 </ul>
 
@@ -265,10 +267,15 @@ $ sudo make install</pre>
   with the same version to build the library and other source codes.
 </p>
 
-<pre class="command">$ mkdir build
-$ cd build
-$ cmake -DBUILD_SHARED_LIBS=FALSE -DENABLE_LTO=TRUE ..
-$ make</pre>
+<pre class="command">$ CC=gcc cmake -DBUILD_SHARED_LIBS=FALSE -DENABLE_LTO=TRUE ..</pre>
+
+<p>
+  In order to build the library with thinLTO support with clang, you
+  need to specify LLVM AR command that exactly corresponds to the
+  clang compiler.
+</p>
+
+<pre class="command">$ CC=clang-9 cmake -DBUILD_SHARED_LIBS=FALSE -DENABLE_LTO=TRUE -DLLVM_AR_COMMAND=llvm-ar-9 ..</pre>
 
 
 <h3 id="inline">Building the header files for inlining the whole SLEEF functions</h3>
@@ -281,10 +288,7 @@ $ make</pre>
   file.
 </p>
 
-<pre class="command">$ mkdir build
-$ cd build
-$ cmake -DBUILD_INLINE_HEADERS=TRUE ..
-$ make</pre>
+<pre class="command">$ cmake -DBUILD_INLINE_HEADERS=TRUE ..</pre>
 
 <h2 id="debian">Installing library on Debian and Ubuntu</h2>
 
