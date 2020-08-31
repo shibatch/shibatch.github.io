@@ -22,9 +22,10 @@
   <li><a class="underlined" href="compile.xhtml">Compiling and installing the library</a></li>
     <ul class="disc">
       <li><a href="compile.xhtml#preliminaries">Preliminaries</a></li>
-      <li><a href="compile.xhtml#linux">Compiling and installing library on Linux</a></li>
-      <li><a href="compile.xhtml#debian">Installing library on Debian and Ubuntu</a></li>
-      <li><a href="compile.xhtml#MSVC">Compiling library with Microsoft Visual C++</a></li>
+      <li><a href="compile.xhtml#cmakevars">Common CMake variables</a></li>
+      <li><a href="compile.xhtml#linux">Compiling and installing the library on Linux</a></li>
+      <li><a href="compile.xhtml#debian">Installing the library on Debian and Ubuntu</a></li>
+      <li><a href="compile.xhtml#MSVC">Compiling the library with Microsoft Visual C++</a></li>
       <li><a href="compile.xhtml#hello">Compiling and running "Hello SLEEF"</a></li>
       <li><a href="compile.xhtml#import">Importing SLEEF into your project</a></li>
     </ul>
@@ -56,8 +57,8 @@ Microsoft Visual Studio, Apple XCode, etc). If you are not already
 familiar with cmake, please refer to the
 <a class="underlined" href="https://cmake.org/documentation/">official documentation</a>
 or
-the <a class="underlined" href="https://cmake.org/Wiki/CMake#Basic_Introductions">basic
-introductions in the wiki</a> (recommended).
+the <a class="underlined" href="https://gitlab.kitware.com/cmake/community/-/wikis/home">basic
+introductions in the wiki</a>.
 </p>
 
 <h3>Quick start</h3>
@@ -87,9 +88,8 @@ $ mkdir build &amp;&amp; cd build</pre>
 <pre class="command">$ cmake ..</pre>
 
 <p class="noindent">
-See the list of <a class="underlined"
-href="#build-customization">options and variables</a> for customizing
-your build.
+See the list of <a class="underlined" href="#cmakevars">options and
+variables</a> for customizing your build.
 </p>
 
 <p class="noindent" style="margin-top: 1em;">
@@ -108,22 +108,8 @@ of the build directory:
 </p>
 <pre class="command">$ make install</pre>
 
-<h3 id="build-customization">Build customization</h3>
 
-<p class="noindent">
-Variables dictate how the build is generated; options are defined and undefined,
-respectively, on the cmake command line like this:
-</p>
-<ul style="margin-top: 1em; margin-bottom: 1em;">
-  <li>cmake -DVARIABLE=&lt;value&gt; &lt;cmake-build-dir&gt;</li>
-  <li>cmake -UVARIABLE &lt;cmake-build-dir&gt;</li>
-</ul>
-<p class="noindent">
-Build configurations allow a project to be built in different ways for debug,
-optimized, or any other special set of flags.
-</p>
-
-<h4>Common CMake variables</h4>
+<h4 id="cmakevars">Common CMake variables</h4>
 
 <p>
 Below is the list of common cmake variables that are used to
@@ -138,13 +124,13 @@ configure a build for SLEEF.
     <li>`MinSizeRel`: Builds the smallest (but not fastest) object code</li>
     <li>`RelWithDebInfo`: Builds optimized code with debug information as well</li>
   </ul>
-  <li style="margin-top: 1em;"><b>BUILD_SHARED_LIBS</b> : Static libs are
-  built if set to FALSE</li>
-  <li style="margin-top: 1em;"><b>CMAKE_INSTALL_PREFIX</b> : The prefix it
-  uses when running `make install`. Defaults to /usr/local on
-  GNU/Linux and MacOS. Defaults to C:/Program Files on Windows.</li>
-  <li style="margin-top: 1em;"><b>CMAKE_C_FLAGS_RELEASE</b> : The
-  optimization options used by the compiler.</li>
+  <li><b>BUILD_SHARED_LIBS</b> : Static libs are built if set to
+  FALSE</li>
+  <li><b>CMAKE_C_FLAGS_RELEASE</b> : The optimization options used by
+  the compiler.</li>
+  <li><b>CMAKE_INSTALL_PREFIX</b> : The prefix it uses when running
+  `make install`. Defaults to /usr/local on GNU/Linux and
+  MacOS. Defaults to C:/Program Files on Windows.</li>
 </ul>
 
 <h4>SLEEF-specific CMake variables</h4>
@@ -154,27 +140,29 @@ Below is the list of SLEEF-specific cmake variables.
 </p>
 
 <ul style="margin-top: 1em; margin-bottom: 1em;">
+  <!-- Options for building the entire library -->
   <li><b>SLEEF_SHOW_CONFIG</b> : Show relevant
   cmake variables upon configuring a build</li>
-  <li><b>SLEEF_SHOW_ERROR_LOG</b> : Show cmake error log</li>
+  <li><b>SLEEF_SHOW_ERROR_LOG</b> : Show the content of
+  CMakeError.log</li>
   <li><b>BUILD_TESTS</b> : Avoid building testing
   tools if set to FALSE</li>
-  <li><b>DISABLE_LONG_DOUBLE</b> : Disable support for long double data type</li>
-  <li><b>ENFORCE_LONG_DOUBLE</b> : Build fails if long double data type is
-  not supported by the compiler</li>
-  <li><b>DISABLE_FLOAT128</b> : Disable support for float128 data type</li>
-  <li><b>ENFORCE_FLOAT128</b> : Build fails if float128 data type is not
-  supported by the compiler</li>
   <li><b>DISABLE_OPENMP</b> : Disable support for OpenMP</li>
   <li><b>ENFORCE_OPENMP</b> : Build fails if OpenMP is not
   supported by the compiler</li>
-  <li><b>ENABLE_LTO</b> : Enable support for LTO with gcc, or thinLTO with
-  llvm</li>
-  <li><b>LLVM_AR_COMMAND</b> : Specify LLVM AR command when you build the
-  library with thinLTO support with clang.</li>
+  <li><b>ENABLE_ALTDIV</b> : Enable alternative division method (aarch64 only)</li>
+  <li><b>ENABLE_ALTSQRT</b> : Enable alternative sqrt method (aarch64 only)</li>
+
+  <!-- Options for LTO -->
+  <li><b>ENABLE_LTO</b> : Enable support for LTO with gcc, or thinLTO
+  with llvm</li>
+  <li><b>LLVM_AR_COMMAND</b> : Specify LLVM AR command when you build
+  the library with thinLTO support with clang.</li>
+  <li><b>SLEEF_ENABLE_LLVM_BITCODE</b> : Generate LLVM bitcode</li>
   <li><b>BUILD_INLINE_HEADERS</b> : Generate header files for inlining
   whole SLEEF functions</li>
 
+  <!-- Options regarding to vector extensions -->
   <li style="margin-top: 1em;"><b>DISABLE_SSE2</b> : Disable support for x86 SSE2</li>
   <li><b>ENFORCE_SSE2</b> : Build fails if SSE2 is not
   supported by the compiler</li>
@@ -199,28 +187,39 @@ Below is the list of SLEEF-specific cmake variables.
   <li><b>DISABLE_VSX</b> : Disable support for PowerPC VSX</li>
   <li><b>ENFORCE_VSX</b> : Build fails if VSX is not
   supported by the compiler</li>
-  <li><b>ENABLE_ALTDIV</b> : Enable alternative division method (aarch64 only)</li>
-  <li><b>ENABLE_ALTSQRT</b> : Enable alternative sqrt method (aarch64 only)</li>
+  <li><b>DISABLE_ZVECTOR2</b> : Disable support for ZVECTOR2</li>
+  <li><b>ENFORCE_ZVECTOR2</b> : Build fails if ZVECTOR2 is not
+  supported by the compiler</li>
 
-  <li style="margin-top: 1em;"><b>SLEEF_ENABLE_LLVM_BITCODE</b> : Generate
-  LLVM bitcode</li>
+  <!-- Options for libm -->
+  <li style="margin-top: 1em;"><b>BUILD_GNUABI_LIBS</b> : Avoid building
+  libraries with GNU ABI if set to FALSE</li>
+  <li><b>DISABLE_LONG_DOUBLE</b> : Disable support for long double data type</li>
+  <li><b>ENFORCE_LONG_DOUBLE</b> : Build fails if long double data type is
+  not supported by the compiler</li>
+  <li><b>DISABLE_FLOAT128</b> : Disable support for float128 data type</li>
+  <li><b>ENFORCE_FLOAT128</b> : Build fails if float128 data type is not
+  supported by the compiler</li>
   <li><b>ENFORCE_TESTER3</b> : Build fails if
   tester3 cannot be built</li>
-  <li><b>BUILD_GNUABI_LIBS</b> : Avoid building
-  libraries with GNU ABI if set to FALSE</li>
 
+  <!-- Options for DFT -->
   <li style="margin-top: 1em;"><b>BUILD_DFT</b> : Avoid building DFT
   libraries if set to FALSE</li>
   <li><b>SLEEFDFT_MAXBUTWIDTH</b> : This variable
   specifies the maximum length of combined butterfly block used in the
   DFT. Setting this value to 7 makes DFT faster but compilation takes
   more time and the library size will be larger.</li>
+  <li><b>DISABLE_FFTW</b> : Disable FFW-based testing of the DFT
+  library.</li>
 
+
+  <!-- Options for Quad -->
   <li style="margin-top: 1em;"><b>BUILD_QUAD</b> : An <b>experimental</b> quad-precision
   library will be built if set to TRUE</li>
 </ul>
 
-<h2 id="linux">Compiling and installing library on Linux</h2>
+<h2 id="linux">Compiling and installing the library on Linux</h2>
 
 <p class="noindent">
   In order to build the library, you need to install OpenMP. In order
@@ -283,7 +282,7 @@ $ sudo make install</pre>
 
 <pre class="command">$ cmake -DBUILD_INLINE_HEADERS=TRUE ..</pre>
 
-<h2 id="debian">Installing library on Debian and Ubuntu</h2>
+<h2 id="debian">Installing the library on Debian and Ubuntu</h2>
 
 <p class="noindent">
   If you are using Debian 10(Buster), Ubuntu 18.04(Bionic) or later,
@@ -294,7 +293,7 @@ $ sudo make install</pre>
 $ sudo apt-get install libsleef-dev</pre>
 </p>
 
-<h2 id="MSVC">Compiling library with Microsoft Visual C++</h2>
+<h2 id="MSVC">Compiling the library with Microsoft Visual C++</h2>
 
 <p class="noindent">
   You need Visual Studio 2019. Open developer command prompt for
@@ -317,7 +316,7 @@ D:\sleef-3.X\build> cmake -G"Visual Studio 16 2019" ..          &amp;:: If you a
 D:\sleef-3.X\build> cmake --build . --config Release -- /maxcpucount:1</pre>
 
 
-<h3 id="cow">Compiling library with Clang on Windows</h3>
+<h3 id="cow">Compiling the library with Clang on Windows</h3>
 
 <p class="noindent">
   You need Visual Studio 2019. Install ninja via VS2019 installer.
@@ -404,7 +403,7 @@ $ &block;</pre>
 </p>
 
 <pre class="code">
-<code>cmake_minimum_required(VERSION 3.4.3)</code>
+<code>cmake_minimum_required(VERSION 3.5.1)</code>
 <code>include(ExternalProject)</code>
 <code>find_package(Git REQUIRED)</code>
 <code></code>
