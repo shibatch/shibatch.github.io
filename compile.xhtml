@@ -147,11 +147,17 @@ Below is the list of SLEEF-specific cmake variables.
   CMakeError.log</li>
   <li><b>BUILD_TESTS</b> : Avoid building testing
   tools if set to FALSE</li>
+  <li><b>ENABLE_ALTDIV</b> : Enable alternative division method (aarch64 only)</li>
+  <li><b>ENABLE_ALTSQRT</b> : Enable alternative sqrt method (aarch64 only)</li>
+  <li><b>DISABLE_LONG_DOUBLE</b> : Disable support for long double data type</li>
+  <li><b>ENFORCE_LONG_DOUBLE</b> : Build fails if long double data type is
+  not supported by the compiler</li>
+  <li><b>DISABLE_FLOAT128</b> : Disable support for float128 data type</li>
+  <li><b>ENFORCE_FLOAT128</b> : Build fails if float128 data type is not
+  supported by the compiler</li>
   <li><b>DISABLE_OPENMP</b> : Disable support for OpenMP</li>
   <li><b>ENFORCE_OPENMP</b> : Build fails if OpenMP is not
   supported by the compiler</li>
-  <li><b>ENABLE_ALTDIV</b> : Enable alternative division method (aarch64 only)</li>
-  <li><b>ENABLE_ALTSQRT</b> : Enable alternative sqrt method (aarch64 only)</li>
 
   <!-- Options for LTO -->
   <li><b>ENABLE_LTO</b> : Enable support for LTO with gcc, or thinLTO
@@ -194,12 +200,6 @@ Below is the list of SLEEF-specific cmake variables.
   <!-- Options for libm -->
   <li style="margin-top: 1em;"><b>BUILD_GNUABI_LIBS</b> : Avoid building
   libraries with GNU ABI if set to FALSE</li>
-  <li><b>DISABLE_LONG_DOUBLE</b> : Disable support for long double data type</li>
-  <li><b>ENFORCE_LONG_DOUBLE</b> : Build fails if long double data type is
-  not supported by the compiler</li>
-  <li><b>DISABLE_FLOAT128</b> : Disable support for float128 data type</li>
-  <li><b>ENFORCE_FLOAT128</b> : Build fails if float128 data type is not
-  supported by the compiler</li>
   <li><b>ENFORCE_TESTER3</b> : Build fails if
   tester3 cannot be built</li>
 
@@ -212,7 +212,6 @@ Below is the list of SLEEF-specific cmake variables.
   more time and the library size will be larger.</li>
   <li><b>DISABLE_FFTW</b> : Disable FFW-based testing of the DFT
   library.</li>
-
 
   <!-- Options for Quad -->
   <li style="margin-top: 1em;"><b>BUILD_QUAD</b> : An <b>experimental</b> quad-precision

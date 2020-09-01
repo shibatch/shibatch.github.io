@@ -31,8 +31,6 @@
     <ul class="disc">
       <li><a href="index.xhtml#overview">Overview</a></li>
       <li><a href="index.xhtml#environment">Supported environments</a></li>
-      <!--<li><a href="index.xhtml#compatibility">Compatibility with other libraries</a></li>-->
-      <!--<li><a href="index.xhtml#porting">Porting</a></li>-->
       <li><a href="index.xhtml#credit">Credit</a></li>
       <li><a href="index.xhtml#partners">Partners</a></li>
       <li><a href="index.xhtml#license">License</a></li>
@@ -165,19 +163,11 @@
           <td class="lt-hl"></td>
         </tr>
 	<tr>
-	  <td class="lt-r" align="left">x86 (64bit), Linux</td>
+	  <td class="lt-r" align="left">x86_64, Linux</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported</td>
 	  <td class="lt-r" align="center">Supported</td>
 	  <td class="lt-r" align="center">Supported</td>
-	  <td class="lt-" align="center">N/A</td>
-	</tr>
-	<tr>
-	  <td class="lt-r" align="left">x86 (32bit), Linux</td>
-	  <td></td>
-	  <td class="lt-lr" align="center">Supported(*1)</td>
-	  <td class="lt-r" align="center">Supported(*1)</td>
-	  <td class="lt-r" align="center"></td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
@@ -191,8 +181,8 @@
 	<tr>
 	  <td class="lt-r" align="left">AArch32, Linux</td>
 	  <td></td>
-	  <td class="lt-lr" align="center">Supported(*2)</td>
-	  <td class="lt-r" align="center">Supported(*2)</td>
+	  <td class="lt-lr" align="center">Supported(*1)</td>
+	  <td class="lt-r" align="center">Supported(*1)</td>
 	  <td class="lt-r" align="center">N/A</td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
@@ -213,23 +203,23 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-r" align="left">x86 (64bit), FreeBSD</td>
+	  <td class="lt-r" align="left">x86_64, FreeBSD</td>
 	  <td></td>
 	  <td class="lt-lr" align="center"></td>
 	  <td class="lt-r" align="center">Supported</td>
-	  <td class="lt-r" align="center"></td>
+	  <td class="lt-r" align="center">N/A</td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-r" align="left">x86 (64bit), OS X</td>
+	  <td class="lt-r" align="left">x86_64, OS X</td>
 	  <td></td>
-	  <td class="lt-lr" align="center">Supported</td>
-	  <td class="lt-r" align="center">Supported</td>
+	  <td class="lt-lr" align="center">Supported(*2)</td>
+	  <td class="lt-r" align="center">Supported(*2)</td>
 	  <td class="lt-r" align="center"></td>
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-br" align="left">x86 (64bit), Windows</td>
+	  <td class="lt-br" align="left">x86_64, Windows</td>
 	  <td class="lt-hl"></td>
 	  <td class="lt-blr" align="center">Supported(Cygwin)(*3)</td>
 	  <td class="lt-br" align="center">Supported(*3)</td>
@@ -259,13 +249,12 @@
 <div><br/></div>
 
 <p>
-  *1 SSE2 is required to run the scalar functions on 32-bit x86
-  architecture. x87 is not supported.
+  *1 NEON has only single precision support. The computation results
+  are not in full accuracy because NEON is not IEEE 754-compliant.
 </p>
 
 <p>
-  *2 NEON has only single precision support. The computation results
-  are not in full accuracy because NEON is not IEEE 754-compliant.
+  *2 LTO is not supported.
 </p>
 
 <p>
