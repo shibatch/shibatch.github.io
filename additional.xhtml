@@ -75,6 +75,26 @@
   a correct value with the specified accuracy.
 </p>
 
+<br/>
+<br/>
+
+<p class="noindent">
+  <b>Q3:</b> What can I do to make sleef run faster?
+</p>
+
+<br/>
+
+<p class="noindent">
+  <b>A3:</b> The most important thing is to choose the fastest vector
+  extension. If you are not sure, use the dispatcher. It is not
+  slow. If you are not satisfied with this, try using LTO. By using
+  LTO, the compiler will mix the code within the library to the code
+  calling the library functions, and this sometimes results in
+  considerable performance boost. In this case, you should not use the
+  dispatcher, and you should use the same compiler with the same
+  version to build sleef and your application.
+</p>
+
 <h2 id="gnuabi">About the GNUABI version of the library</h2>
 
 <p class="noindent">
