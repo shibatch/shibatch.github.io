@@ -85,14 +85,17 @@
 <br/>
 
 <p class="noindent">
-  <b>A3:</b> The most important thing is to choose the fastest vector
-  extension. If you are not sure, use the dispatcher. It is not
-  slow. If you are not satisfied with this, try using LTO. By using
-  LTO, the compiler will mix the code within the library to the code
-  calling the library functions, and this sometimes results in
+  <b>A3:</b> The most important thing is to choose the fastest
+  available vector extension. SLEEF is not carefully optimized for
+  computers without FMA, and it runs slow on Ivy Bridge or older CPUs
+  and Atom. If you are not sure, use the dispatcher. Dispatcher is not
+  slow. If you want to further speed up computation, try using LTO. By
+  using LTO, the compiler fuses the code within the library to the
+  code calling the library functions, and this sometimes results in
   considerable performance boost. In this case, you should not use the
   dispatcher, and you should use the same compiler with the same
-  version to build sleef and your application.
+  version to build SLEEF and the program against which SLEEF is
+  linked.
 </p>
 
 <h2 id="gnuabi">About the GNUABI version of the library</h2>
