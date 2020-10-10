@@ -24,7 +24,7 @@
   <li>&nbsp;</li>
   <li><a class="underlined" href="quad.xhtml"> Quad-precision math library reference</a>
   <ul class="disc">
-    <li><a class="underlined" href="purec.xhtml">Data types and functions for all architectures</a></li>
+    <li><a class="underlined" href="quad.xhtml">Data types and functions for all architectures</a></li>
     <li><a class="underlined" href="quadx86.xhtml">Data types and functions for x86 architecture</a></li>
     <ul class="circle">
       <li><a href="quadx86.xhtml#datatypes">Data types</a></li>
@@ -33,7 +33,6 @@
       <li><a href="quadx86.xhtml#mathfunctions">Math functions</a></li>
     </ul>
     <li><a class="underlined" href="quadaarch64.xhtml">Data types and functions for AArch64 architecture</a></li>
-    <li><a class="underlined" href="quadaarch32.xhtml">Data types and functions for AArch32 architecture</a></li>
     <li><a class="underlined" href="quadppc64.xhtml">Data types and functions for PPC64 architecture</a></li>
     <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
   </ul>
@@ -63,8 +62,8 @@
 <p class="noindent">
   <b class="type">Sleef_quadx2</b> is a data type for retaining two QP
   FP numbers. Please
-  use <b class="func">Sleef_loadq2_sse2</b>, <b class="func">Sleef_storeq2_sse2</b>, <b class="func">Sleef_getq2_sse2</b>
-  and <b class="func">Sleef_setq2_sse2</b> functions to access the
+  use <a href="#load"><b class="func">Sleef_loadq2_sse2</b></a>, <a href="#store"><b class="func">Sleef_storeq2_sse2</b></a>, <a href="#get"><b class="func">Sleef_getq2_sse2</b></a>
+  and <a href="#set"><b class="func">Sleef_setq2_sse2</b></a> functions to access the
   data inside variables in this data type.
 </p>
 
@@ -77,8 +76,8 @@
 <p class="noindent">
   <b class="type">Sleef_quadx4</b> is a data type for retaining four QP
   FP numbers. Please
-  use <b class="func">Sleef_loadq4_avx</b>, <b class="func">Sleef_storeq4_avx</b>, <b class="func">Sleef_getq4_avx</b>
-  and <b class="func">Sleef_setq4_avx</b> functions to access the
+  use <a href="#load"><b class="func">Sleef_loadq4_avx</b></a>, <a href="#store"><b class="func">Sleef_storeq4_avx</b></a>, <a href="#get"><b class="func">Sleef_getq4_avx</b></a>
+  and <a href="#set"><b class="func">Sleef_setq4_avx</b></a> functions to access the
   data inside variables in this data type.
 </p>
 
@@ -91,8 +90,8 @@
 <p class="noindent">
   <b class="type">Sleef_quadx8</b> is a data type for retaining eight QP
   FP numbers. Please
-  use <b class="func">Sleef_loadq8_avx512f</b>, <b class="func">Sleef_storeq8_avx512f</b>, <b class="func">Sleef_getq8_avx512f</b>
-  and <b class="func">Sleef_setq8_avx512f</b> functions to access the
+  use <a href="#load"><b class="func">Sleef_loadq8_avx512f</b></a>, <a href="#store"><b class="func">Sleef_storeq8_avx512f</b></a>, <a href="#get"><b class="func">Sleef_getq8_avx512f</b></a>
+  and <a href="#set"><b class="func">Sleef_setq8_avx512f</b></a> functions to access the
   data inside variables in this data type.
 </p>
 
@@ -100,7 +99,7 @@
 
 <h2 id="conversion">Functions for accessing elements inside vector variable</h2>
 
-<p class="funcname">Load QP FP values into vector variable</p>
+<p id="load" class="funcname">Load QP FP values into vector variable</p>
 
 <p class="header">Synopsis</p>
 
@@ -124,7 +123,7 @@
 
 <hr/>
 
-<p class="funcname">Store QP FP values in a vector variable to memory</p>
+<p id="store" class="funcname">Store QP FP values in a vector variable to memory</p>
 
 <p class="header">Synopsis</p>
 
@@ -147,7 +146,7 @@
 
 <hr/>
 
-<p class="funcname">Extract one element from QP FP vector variable</p>
+<p id="get" class="funcname">Extract one element from QP FP vector variable</p>
 
 <p class="header">Synopsis</p>
 
@@ -171,7 +170,7 @@
 
 <hr/>
 
-<p class="funcname">Set one element in QP FP vector variable</p>
+<p id="set" class="funcname">Set one element in QP FP vector variable</p>
 
 <p class="header">Synopsis</p>
 
@@ -189,7 +188,7 @@
 <p class="header">Description</p>
 
 <p class="noindent">
-  These functions return a QP FP vector variable in which
+  These functions return a QP FP vector in which
   the <i class="var">index</i>-th element is <i class="var">e</i>, and
   other elements are the same as <i class="var">v</i>.
 </p>

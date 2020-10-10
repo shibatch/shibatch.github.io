@@ -24,7 +24,7 @@
   <li>&nbsp;</li>
   <li><a class="underlined" href="quad.xhtml"> Quad-precision math library reference</a>
   <ul class="disc">
-    <li><a class="underlined" href="purec.xhtml">Data types and functions for all architectures</a></li>
+    <li><a class="underlined" href="quad.xhtml">Data types and functions for all architectures</a></li>
     <ul class="circle">
       <li><a href="quad.xhtml#introduction">Introduction</a></li>
       <li><a href="quad.xhtml#datatypes">Data types</a></li>
@@ -35,7 +35,6 @@
     </ul>
     <li><a class="underlined" href="quadx86.xhtml">Data types and functions for x86 architecture</a></li>
     <li><a class="underlined" href="quadaarch64.xhtml">Data types and functions for AArch64 architecture</a></li>
-    <li><a class="underlined" href="quadaarch32.xhtml">Data types and functions for AArch32 architecture</a></li>
     <li><a class="underlined" href="quadppc64.xhtml">Data types and functions for PPC64 architecture</a></li>
     <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
   </ul>
@@ -53,10 +52,10 @@
   As of version 3.6, SLEEF includes a quad-precision math
   library. This library includes various functions for computing with
   IEEE 754 quadruple-precision(QP) floating-point numbers. If the
-  compiler natively supports IEEE-754 QP FP type, numbers in this
+  compiler natively supports IEEE 754 QP FP type, numbers in this
   natively supported QP data type can be directly passed to the
   library functions. Otherwise, the library defines a data type for
-  retaining numbers in IEEE-754 QP data type.
+  retaining numbers in IEEE 754 QP data type.
 </p>
 
 <p>
@@ -77,7 +76,7 @@
 
 <p class="noindent">
   <b class="type">Sleef_quad</b> is a data type for retaining a single
-  QP FP number. If the compiler natively supports IEEE-754 quad
+  QP FP number. If the compiler natively supports IEEE 754 quad
   precision FP type, then <b class="type">Sleef_quad</b> is an alias of
   that data type.
 </p>
@@ -86,7 +85,7 @@
 
 <p class="noindent">
   Otherwise, the library defines a 128-bit data type for retaining a number in
-  IEEE-754 QP data format.
+  IEEE 754 QP data format.
 </p>
 
 
@@ -337,9 +336,9 @@
 <p class="noindent">
   These functions compare two QP FP
   values. The <b>lt</b>, <b>le</b>, <b>gt</b>, <b>ge</b>, <b>eq</b>
-  and <b>ne</b> functions return 1 if and only
-  if <i class="var">a</i> is less than, less or equal, greather than,
-  greater or equal, equal and not equal, respectively. Otherwise, 0 is
+  and <b>ne</b> functions return 1 if and only if <i class="var">a</i>
+  is less than, less or equal, greather than, greater or equal, equal
+  and not equal to <i class="var">b</i>, respectively. Otherwise, 0 is
   returned.
 </p>
 
@@ -762,7 +761,7 @@
 
 <p class="noindent">
   These functions return the natural logarithm of
-  (1+<i class="var">a</i> ).  The error bound of the returned value is
+  ( 1 + <i class="var">a</i> ).  The error bound of the returned value is
   1.0 ULP.
 </p>
 
@@ -771,21 +770,23 @@
 
 <p class="noindent">
   I would like to show an example of how the vectorized QP functions
-  are used. Below is a source code for computing &pi;
+  can be used. Below is a source code for computing &pi;
   with <a class="underlined"
   href="https://en.wikipedia.org/wiki/Machin-like_formula">Machin's
   formula</a> on x86 computers. This formula has two terms with arc
   tangent which can be independently calculated. In this example,
-  these two terms are computed using vector functions. __float128 data
-  type is defined on x86, and you can just use values in this type in
-  the computation. Variable q0, q1, q2 and q3 retain two QP FP values
+  these two terms are computed using vector
+  functions. <b class="type">__float128</b> data type is defined on
+  x86, and you can use literals in this type to initialize the
+  variables. Variables q0, q1, q2 and q3 retain two QP FP values
   each. At line 7, 10 and 13, QP values in arrays are loaded into
   these variables. Vector operations are carried out from line 16 to
   18, and then each element of the vector variable q3 is extracted and
-  subtracted to obtain the result. This result is output to the
-  console using Sleef_printf function at line 22. Note that this
-  source code can be built with clang, on which libquadmath is not
-  available.
+  subtracted to obtain the result at line 20. This result is output to
+  the console
+  using <a href="#Sleef_printf"><b class="func">Sleef_printf</b></a>
+  function at line 22. Note that this source code can be built with
+  clang, on which libquadmath is not available.
 </p>
 
 <pre class="code">
@@ -820,12 +821,15 @@
 <br/>
 
 <p>
-  __float128 data type is not defined on AArch64 computers, and we
-  cannot rely on the compiler to initialize the variables. We can
-  still use various conversion function for this purpose. In the
-  following source code, Sleef_cast_from_doubleq1_purec function is
-  used to initialize the variables, and Sleef_subq1_u05purec function
-  is used to obtain the result.
+  <b class="type">__float128</b> data type is not defined on AArch64
+  computers, and thus we cannot use literals of this type to
+  initialize QP variables. Sleef provides various conversion functions
+  for this purpose. In the following source
+  code, <a href="#Sleef_cast_from_doubleq1_purec"><b class="func">Sleef_cast_from_doubleq1_purec</b></a>
+  function is used to initialize the variables, and
+  <a href="#basicArithmetic"><b class="func">Sleef_subq1_u05purec</b></a>
+  function is used to subtract a scalar value from another to obtain
+  the result.
 </p>
 
 <pre class="code">
