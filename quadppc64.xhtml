@@ -31,7 +31,7 @@
     <ul class="circle">
       <li><a href="#datatypes">Data types</a></li>
       <li><a href="#conversion">Conversion functions</a></li>
-      <li><a href="#comparison">Comparison functions</a></li>
+      <li><a href="#comparison">Comparison and selection functions</a></li>
       <li><a href="#mathfunctions">Math functions</a></li>
     </ul>
     <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
@@ -141,6 +141,27 @@
   These functions return a QP FP vector in which
   the <i class="var">index</i>-th element is <i class="var">e</i>, and
   other elements are the same as <i class="var">v</i>.
+</p>
+
+<hr/>
+
+<p id="splat" class="funcname">Set all elements in QP FP vector to the same value</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quadx2</b> <b class="func">Sleef_splatq2_vsx</b>( <b class="type">Sleef_quad</b> <i class="var">e</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions return a QP FP vector in which all elements are set
+  to <i class="var">e</i>.
 </p>
 
 
@@ -269,7 +290,7 @@
 </p>
 
 
-<h2 id="comparison">Comparison functions</h2>
+<h2 id="comparison">Comparison and selection functions</h2>
 
 <p class="funcname">QP comparison functions</p>
 
@@ -278,12 +299,12 @@
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpltq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpleq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpgtq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpgeq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpeqq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpneq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpltq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpleq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpgtq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpgeq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpeqq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpneq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -304,7 +325,7 @@
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
-<b class="type">vector int</b> <b class="func">Sleef_cmpq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_icmpq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -313,7 +334,7 @@
 
 <p class="noindent">
   These are the vectorized functions
-  of <a href="quad.xhtml#Sleef_cmpq1_purec"><b class="func">Sleef_cmpq1_purec</b></a>.
+  of <a href="quad.xhtml#Sleef_icmpq1_purec"><b class="func">Sleef_icmpq1_purec</b></a>.
 </p>
 
 <hr/>
@@ -325,7 +346,7 @@
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
-<b class="type">vector int</b> <b class="func">Sleef_unordq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b class="type">vector int</b> <b class="func">Sleef_iunordq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -334,9 +355,28 @@
 
 <p class="noindent">
   These are the vectorized functions
-  of <a href="quad.xhtml#Sleef_unordq1_purec"><b class="func">Sleef_unordq1_purec</b></a>.
+  of <a href="quad.xhtml#Sleef_iunordq1_purec"><b class="func">Sleef_iunordq1_purec</b></a>.
 </p>
 
+<hr/>
+
+<p class="funcname">Select elements</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quadx2</b> <b class="func">Sleef_iselectq2_vsx</b>( <b class="type">vector int</b> <i class="var">c</i>, <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These are the vectorized functions that operate in the same way as the ternary operator.
+</p>
 
 <h2 id="mathfunctions">Math functions</h2>
 
