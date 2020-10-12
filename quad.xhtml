@@ -813,12 +813,13 @@
   these two terms are computed using vector
   functions. <b class="type">__float128</b> data type is defined on
   x86, and you can use literals in this type to initialize the
-  variables. Variables q0, q1, q2 and q3 retain two QP FP values
-  each. At line 7, 10 and 13, QP values in arrays are loaded into
-  these variables. Vector operations are carried out from line 16 to
-  18, and then each element of the vector variable q3 is extracted and
-  subtracted to obtain the result at line 20. This result is output to
-  the console
+  variables. Variables <i class="var">q0</i>, <i class="var">q1</i>, <i class="var">q2</i>
+  and <i class="var">q3</i> retain two QP FP values each. At line 7,
+  10 and 13, QP values in arrays are loaded into these
+  variables. Vector operations are carried out from line 16 to 18, and
+  then each element of the vector variable <i class="var">q3</i> is
+  extracted and subtracted to obtain the result at line 20. This
+  result is output to the console
   using <a href="#Sleef_printf"><b class="func">Sleef_printf</b></a>
   function at line 22. Note that this source code can be built with
   clang, on which libquadmath is not available.
@@ -861,17 +862,21 @@
   initialize QP variables. Sleef provides various conversion functions
   for this purpose. In the following source
   code, <a href="#Sleef_cast_from_doubleq1_purec"><b class="func">Sleef_cast_from_doubleq1_purec</b></a>
-  function is used to initialize q0 at line 7. At line
-  9, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a> macro and
-  Sleef_splatq2_advsimd function are used to intialize
-  q1. Here, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a> is a
-  macro for defining a QP FP constant.  You can convert any QP FP
-  value to this representation using <b>qutil</b> utility
-  program. <a href="quadaarch64.xhtml#splat"><b class="func">Sleef_splatq2_advsimd</b></a>
+  function is used to initialize <i class="var">q0</i> at line 7. This
+  way of initializing variables calls the function for casting at
+  runtime, which may be waste of CPU time. At line
+  9, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a> macro is used
+  to intialize
+  <i class="var">q1</i>. Here, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a>
+  is a macro for defining a QP FP constant. This is a macro, and thus
+  an immediate value is available at runtime. You can convert any QP
+  FP value to this representation using <b>qutil</b> utility program.
+  <a href="quadaarch64.xhtml#splat"><b class="func">Sleef_splatq2_advsimd</b></a>
   function is a function for setting the specified QP FP value to all
-  elements in a vector.  At line
+  elements in a vector. At line
   11, <a href="quadaarch64.xhtml#load"><b class="func">Sleef_loadq2_advsimd</b></a>
-  function is used to initialize q2 with an anonymous array. At line
+  function is used to initialize <i class="var">q2</i> with an
+  anonymous array. At line
   22, <a href="#basicArithmetic"><b class="func">Sleef_subq1_u05purec</b></a>
   function is used to subtract a scalar value from another to obtain
   the result.
