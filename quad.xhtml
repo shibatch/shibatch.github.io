@@ -808,26 +808,28 @@
   can be used. Below is a source code for computing &pi;
   with <a class="underlined"
   href="https://en.wikipedia.org/wiki/Machin-like_formula">Machin's
-  formula</a> on x86 computers. This formula has two terms with arc
+  formula</a> on x86 GNU systems. This formula has two terms with arc
   tangent which can be independently calculated. In this example,
   these two terms are computed using vector
   functions. <b class="type">__float128</b> data type is defined on
   x86, and you can use literals in this type to initialize the
   variables. Variables <i class="var">q0</i>, <i class="var">q1</i>, <i class="var">q2</i>
-  and <i class="var">q3</i> retain two QP FP values each. At line 7,
-  10 and 13, QP values in arrays are loaded into these
-  variables. Vector operations are carried out from line 16 to 18, and
+  and <i class="var">q3</i> retain two QP FP values each. At line 5, 8
+  and 11, QP values in arrays are loaded into these variables with
+  <a href="quadx86.xhtml#load"><b class="func">Sleef_loadq2_sse2</b></a>
+  function. Vector operations are carried out from line 14 to 16, and
   then each element of the vector variable <i class="var">q3</i> is
-  extracted and subtracted to obtain the result at line 20. This
-  result is output to the console
+  extracted
+  with <a href="quadx86.xhtml#get"><b class="func">Sleef_getq2_sse2</b></a>
+  function and subtracted to obtain the result at line 18. Note that
+  the QP subtract function in the standard library is called to do
+  this subtraction.  This result is output to the console
   using <a href="#Sleef_printf"><b class="func">Sleef_printf</b></a>
   function at line 22. Note that this source code can be built with
   clang, on which libquadmath is not available.
 </p>
 
 <pre class="code">
-<code>#include &lt;stdio.h&gt;</code>
-<code>#include &lt;math.h&gt;</code>
 <code>#include &lt;sleefquad.h&gt;</code>
 <code></code>
 <code>int main(int argc, char **argv) {</code>
@@ -862,36 +864,33 @@
   initialize QP variables. Sleef provides various conversion functions
   for this purpose. In the following source
   code, <a href="#Sleef_cast_from_doubleq1_purec"><b class="func">Sleef_cast_from_doubleq1_purec</b></a>
-  function is used to initialize <i class="var">q0</i> at line 7. This
-  way of initializing variables calls the function for casting at
-  runtime, which may be waste of CPU time. At line
-  9, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a> macro is used
-  to intialize
-  <i class="var">q1</i>. Here, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a>
-  is a macro for defining a QP FP constant. This is a macro, and thus
-  an immediate value is available at runtime. You can convert any QP
-  FP value to this representation using <b>qutil</b> utility program.
-  <a href="quadaarch64.xhtml#splat"><b class="func">Sleef_splatq2_advsimd</b></a>
+  function is used to initialize <i class="var">q0</i> from line 4 to
+  5. <a href="#Sleef_strtoq"><b class="func">Sleef_strtoq</b></a>
+  function is used to initialize <i class="var">q1</i> at line 7.
+  Here, <a href="quadaarch64.xhtml#splat"><b class="func">Sleef_splatq2_advsimd</b></a>
   function is a function for setting the specified QP FP value to all
-  elements in a vector. At line
-  11, <a href="quadaarch64.xhtml#load"><b class="func">Sleef_loadq2_advsimd</b></a>
-  function is used to initialize <i class="var">q2</i> with an
-  anonymous array. At line
-  22, <a href="#basicArithmetic"><b class="func">Sleef_subq1_u05purec</b></a>
+  elements in a vector. Obtaining QP FP constants by calling these
+  functions may waste some CPU time. From line 9 and
+  12, <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a> macro is used
+  to intialize
+  <i class="var">q2</i>. <a href="#SLEEF_Q"><b class="func">SLEEF_Q</b></a>
+  is a macro for defining a QP FP constant, with which an immediate
+  value is available at runtime and there is no wasting of CPU
+  time. You can convert any QP FP value to this representation
+  using <b>qutil</b> utility program. At line
+  20, <a href="#basicArithmetic"><b class="func">Sleef_subq1_u05purec</b></a>
   function is used to subtract a scalar value from another to obtain
   the result.
 </p>
 
 <pre class="code">
-<code>#include &lt;stdio.h&gt;</code>
-<code>#include &lt;math.h&gt;</code>
 <code>#include &lt;sleefquad.h&gt;</code>
 <code></code>
 <code>int main(int argc, char **argv) {</code>
 <code>  Sleef_quad a0[] = { Sleef_cast_from_doubleq1_purec(5), Sleef_cast_from_doubleq1_purec(239) };</code>
 <code>  Sleef_quadx2 q0 = Sleef_loadq2_advsimd(a0);</code>
 <code></code>
-<code>  Sleef_quadx2 q1 = Sleef_splatq2_advsimd(SLEEF_Q(+0x1000000000000LL, 0x0000000000000000ULL, 0)); // 1.0</code>
+<code>  Sleef_quadx2 q1 = Sleef_splatq2_advsimd(Sleef_strtoq("1.0", NULL));</code>
 <code></code>
 <code>  Sleef_quadx2 q2 = Sleef_loadq2_advsimd((Sleef_quad[]) {</code>
 <code>      SLEEF_Q(+0x1000000000000LL, 0x0000000000000000ULL, 4), // 16.0</code>

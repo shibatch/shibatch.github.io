@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <math.h>
-
-#include "sleefquad.h"
+#include <sleefquad.h>
 
 int main(int argc, char **argv) {
   __float128 a0[] = { 5, 239 };
