@@ -853,15 +853,15 @@
 <br/>
 
 <p>
-  <b class="type">__float128</b> data type is not defined on AArch64
-  computers, and thus we cannot use literals of this type to
-  initialize QP variables. Sleef provides various conversion functions
-  for this purpose. In the following source
+  <b class="type">__float128</b> data type is not defined on
+  MSVC, and thus we cannot use literals of this
+  type to initialize QP variables. Sleef provides various conversion
+  functions for this purpose. In the following source
   code, <a href="#Sleef_cast_from_doubleq1_purec"><b class="func">Sleef_cast_from_doubleq1_purec</b></a>
   function is used to initialize <i class="var">q0</i> from line 4 to
   5. <a href="#Sleef_strtoq"><b class="func">Sleef_strtoq</b></a>
   function is used to initialize <i class="var">q1</i> at line 7.
-  Here, <a href="quadaarch64.xhtml#splat"><b class="func">Sleef_splatq2_advsimd</b></a>
+  Here, <a href="quadx86.xhtml#splat"><b class="func">Sleef_splatq2_sse2</b></a>
   function is a function for setting the specified QP FP value to all
   elements in a vector. Obtaining QP FP constants by calling these
   functions may waste some CPU time. From line 9 and
@@ -882,28 +882,28 @@
 <code></code>
 <code>int main(int argc, char **argv) {</code>
 <code>  Sleef_quad a0[] = { Sleef_cast_from_doubleq1_purec(5), Sleef_cast_from_doubleq1_purec(239) };</code>
-<code>  Sleef_quadx2 q0 = Sleef_loadq2_advsimd(a0);</code>
+<code>  Sleef_quadx2 q0 = Sleef_loadq2_sse2(a0);</code>
 <code></code>
-<code>  Sleef_quadx2 q1 = Sleef_splatq2_advsimd(Sleef_strtoq("1.0", NULL));</code>
+<code>  Sleef_quadx2 q1 = Sleef_splatq2_sse2(Sleef_strtoq("1.0", NULL));</code>
 <code></code>
-<code>  Sleef_quadx2 q2 = Sleef_loadq2_advsimd((Sleef_quad[]) {</code>
+<code>  Sleef_quadx2 q2 = Sleef_loadq2_sse2((Sleef_quad[]) {</code>
 <code>      SLEEF_Q(+0x1000000000000LL, 0x0000000000000000ULL, 4), // 16.0</code>
 <code>      SLEEF_Q(+0x1000000000000LL, 0x0000000000000000ULL, 2), // 4.0</code>
 <code>  });</code>
 <code></code>
 <code>  Sleef_quadx2 q3;</code>
 <code></code>
-<code>  q3 = Sleef_divq2_u05advsimd(q1, q0);</code>
-<code>  q3 = Sleef_atanq2_u10advsimd(q3);</code>
-<code>  q3 = Sleef_mulq2_u05advsimd(q3, q2);</code>
+<code>  q3 = Sleef_divq2_u05sse2(q1, q0);</code>
+<code>  q3 = Sleef_atanq2_u10sse2(q3);</code>
+<code>  q3 = Sleef_mulq2_u05sse2(q3, q2);</code>
 <code></code>
-<code>  Sleef_quad pi = Sleef_subq1_u05purec(Sleef_getq2_advsimd(q3, 0), Sleef_getq2_advsimd(q3, 1));</code>
+<code>  Sleef_quad pi = Sleef_subq1_u05purec(Sleef_getq2_sse2(q3, 0), Sleef_getq2_sse2(q3, 1));</code>
 <code></code>
 <code>  Sleef_printf("%.40Pg\n", &amp;pi);</code>
 <code>}</code>
 </pre>
 <p style="text-align:center;">
-  Fig. 4.2: <a href="machinaarch64.c">Example source code for AArch64 computers</a>
+  Fig. 4.2: <a href="machinmsvc.c">Example source code for MSVC</a>
 </p>
 
 
