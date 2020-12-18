@@ -800,8 +800,8 @@
 
 <p class="noindent">
   I would like to show an example of how the vectorized QP functions
-  can be used. Below is a source code for computing &pi;
-  with <a class="underlined"
+  can be used. Below is <a class="underlined" href="machinx86.c">a
+  source code</a> for computing &pi; with <a class="underlined"
   href="https://en.wikipedia.org/wiki/Machin-like_formula">Machin's
   formula</a> on x86 GNU systems. This formula has two terms with arc
   tangent which can be independently calculated. In this example,
@@ -848,17 +848,18 @@
 <code>}</code>
 </pre>
 <p style="text-align:center;">
-  Fig. 4.1: <a href="machinx86.c">Example source code for x86 computers</a>
+  Fig. 4.1: <a class="underlined" href="machinx86.c">Example source code for x86 computers</a>
 </p>
 
 <br/>
 
 <p>
-  <b class="type">__float128</b> data type is not defined on
-  MSVC, and thus we cannot use literals of this
-  type to initialize QP variables. Sleef provides various conversion
-  functions for this purpose. In the following source
-  code, <a href="#Sleef_cast_from_doubleq1_purec"><b class="func">Sleef_cast_from_doubleq1_purec</b></a>
+  <b class="type">__float128</b> data type is not defined on MSVC, and
+  thus we cannot use literals of this type to initialize QP
+  variables. Sleef provides various conversion functions for this
+  purpose. In <a class="underlined" href="machinx86.c">the following
+  source
+  code</a>, <a href="#Sleef_cast_from_doubleq1_purec"><b class="func">Sleef_cast_from_doubleq1_purec</b></a>
   function is used to initialize <i class="var">q0</i> from line 4 to
   5. <a href="#Sleef_strtoq"><b class="func">Sleef_strtoq</b></a>
   function is used to initialize <i class="var">q1</i> at line 7.
@@ -904,7 +905,7 @@
 <code>}</code>
 </pre>
 <p style="text-align:center;">
-  Fig. 4.2: <a href="machinmsvc.c">Example source code for MSVC</a>
+  Fig. 4.2: <a class="underlined" href="machinmsvc.c">Example source code for MSVC</a>
 </p>
 
 

@@ -99,7 +99,7 @@
   permissive open source license. The subroutines can utilize long
   vectors up to 2048 bits. The helper files for abstracting SIMD
   intrinsics are shared with SLEEF libm, and thus it is easy to port
-  DFT subroutines to other architectures. <a class="underlined"
+  the DFT subroutines to other architectures. <a class="underlined"
   href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
   results of benchmark</a> are now available.
 </p>
@@ -116,8 +116,8 @@
   <li><a href="x86.xhtml">x86 - SSE2, SSE4.1, AVX, AVX2+FMA3, AVX512F</a></li>
   <li><a href="aarch64.xhtml">AArch64 - Advanced SIMD, SVE</a></li>
   <li><a href="aarch32.xhtml">AArch32 - NEON</a></li>
-  <li><a href="ppc64.xhtml">PowerPC64 - VSX</a></li>
-  <li><a href="s390x.xhtml">System/390 - ZVECTOR2</a></li>
+  <li><a href="ppc64.xhtml">PowerPC64 - VSX (POWER8), VSX-3 (POWER9)</a></li>
+  <li><a href="s390x.xhtml">System/390 - VXE (z14), VXE2 (z15)</a></li>
   <li><a href="cuda.xhtml">CUDA</a></li>
 </ul>
 
@@ -126,9 +126,9 @@
 <p>
   In addition to the SIMD implementation, Pure C (scalar) version is
   provided. The library provides dispatchers that automatically choose
-  the best subroutines for the computer the library is executed
-  on. The supported combinations of the architecture, operating system
-  and compiler are shown in Table 1.1.
+  the best subroutines for the computer on which the library is
+  executed. The supported combinations of the architecture, operating
+  system and compiler are shown in Table 1.1.
 </p>
 
 <div style="margin-top: 1.0cm;"></div>
@@ -386,6 +386,10 @@ information about Boost Software License.
   <li>Inline header file for CUDA can be now generated
   (PR <a class="underlined"
   href="https://github.com/shibatch/sleef/pull/337">#337</a>)</li>
+  <li>System/390 z15 support is added  (PR <a class="underlined"
+  href="https://github.com/shibatch/sleef/pull/343">#343</a>)</li>
+  <li>POWER 9 support is added  (PR <a class="underlined"
+  href="https://github.com/shibatch/sleef/pull/360">#360</a>)</li>
   <li>The error functions are now faster
   (PR <a class="underlined"
   href="https://github.com/shibatch/sleef/pull/370">#370</a>)</li>
