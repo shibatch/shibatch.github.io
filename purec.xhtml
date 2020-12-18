@@ -25,20 +25,22 @@
   <ul class="disc">
     <li><a class="underlined" href="purec.xhtml">Data types and functions for all architectures</a></li>
     <ul class="circle">
-      <li><a href="purec.xhtml#datatypes">Data types</a></li>
-      <li><a href="purec.xhtml#trig">Trigonometric functions</a></li>
-      <li><a href="purec.xhtml#pow">Power, exponential, and logarithmic functions</a></li>
-      <li><a href="purec.xhtml#invtrig">Inverse trigonometric functions</a></li>
-      <li><a href="purec.xhtml#hyp">Hyperbolic functions and inverse hyperbolic functions</a></li>
-      <li><a href="purec.xhtml#eg">Error and gamma functions</a></li>
-      <li><a href="purec.xhtml#nearint">Nearest integer functions</a></li>
-      <li><a href="purec.xhtml#other">Other functions</a></li>
+      <li><a href="#naming">Function naming convention</a></li>
+      <li><a href="#datatypes">Data types</a></li>
+      <li><a href="#trig">Trigonometric functions</a></li>
+      <li><a href="#pow">Power, exponential, and logarithmic functions</a></li>
+      <li><a href="#invtrig">Inverse trigonometric functions</a></li>
+      <li><a href="#hyp">Hyperbolic functions and inverse hyperbolic functions</a></li>
+      <li><a href="#eg">Error and gamma functions</a></li>
+      <li><a href="#nearint">Nearest integer functions</a></li>
+      <li><a href="#other">Other functions</a></li>
     </ul>
     <li><a class="underlined" href="x86.xhtml">Data types and functions for x86 architecture</a></li>
     <li><a class="underlined" href="aarch64.xhtml">Data types and functions for AArch64 architecture</a></li>
     <li><a class="underlined" href="aarch32.xhtml">Data types and functions for AArch32 architecture</a></li>
     <li><a class="underlined" href="ppc64.xhtml">Data types and functions for PPC64 architecture</a></li>
     <li><a class="underlined" href="s390x.xhtml">Data types and functions for System/390 architecture</a></li>
+    <li><a class="underlined" href="cuda.xhtml">Data types and functions for CUDA</a></li>
   </ul>
   </li>
   <li>&nbsp;</li>
@@ -50,6 +52,18 @@
   </li>
 </ul>
 
+<h2 id="naming">Function naming convention</h2>
+
+<p class="noindent">
+The functions whose names end with "purecfma" and "purec" are
+implemented with/without using FMA instructions. Functions with FMA
+instructions are only available on architectures on which FMA
+instructions are available. The two digits after "_u" means 10 times
+the maximum error for typical input domain in ULP.  The functions
+whose names contain "finz" or "cinz" are functions that give bit-wise
+consistent results across all platforms. The "f" attribute means that
+it utilizes FMA instructions, while "c" means it does not.
+</p>
 
 <h2 id="datatypes">Data types</h2>
 
@@ -112,7 +126,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_sin_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_sinf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_sinl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sind1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sind1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sind1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sind1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sinf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sinf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sinf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sinf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -138,7 +161,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_sin_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_sinf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_sinl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sind1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sind1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sind1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sind1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sinf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sinf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sinf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sinf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -164,7 +196,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cos_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_cosf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_cosl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_cosd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cosd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_cosd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_cosd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_cosf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cosf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_cosf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_cosf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -190,7 +231,17 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cos_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_cosf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_cosl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_cosd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cosd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_cosd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_cosd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_cosf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cosf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_cosf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_cosf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -216,7 +267,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">Sleef_double2</b> <b class="func">Sleef_sincos_u10</b>(<b class="type">double</b> <i class="var">a</i>)<br/>
 <b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf_u10</b>(<b class="type">float</b> <i class="var">a</i>)<br/>
-<!--<b class="type">Sleef_longdouble2</b> <b class="func">Sleef_sincosl_u10</b>(<b class="type">long double</b> <i class="var">a</i>)<br/>-->
+<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincosd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincosd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_cinz_sincosd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_finz_sincosd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_cinz_sincosf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_finz_sincosf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -243,7 +303,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">Sleef_double2</b> <b class="func">Sleef_sincos_u35</b>(<b class="type">double</b> <i class="var">a</i>)<br/>
 <b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf_u35</b>(<b class="type">float</b> <i class="var">a</i>)<br/>
-<!--<b class="type">Sleef_longdouble2</b> <b class="func">Sleef_sincosl_u35</b>(<b class="type">long double</b> <i class="var">a</i>)<br/>-->
+<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincosd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincosd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_cinz_sincosd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_finz_sincosd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_cinz_sincosf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_finz_sincosf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -270,7 +339,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">Sleef_double2</b> <b class="func">Sleef_sincospi_u05</b>(<b class="type">double</b> <i class="var">a</i>)<br/>
 <b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif_u05</b>(<b class="type">float</b> <i class="var">a</i>)<br/>
-<b class="type">Sleef_longdouble2</b> <b class="func">Sleef_sincospil_u05</b>(<b class="type">long double</b> <i class="var">a</i>)<br/>
+<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincospid1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincospid1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_cinz_sincospid1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_finz_sincospid1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_cinz_sincospif1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_finz_sincospif1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -304,6 +382,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif_u35</b>(<b class="type">float</b> <i class="var">a</i>)<br/>
 <b class="type">Sleef_longdouble2</b> <b class="func">Sleef_sincospil_u35</b>(<b class="type">long double</b> <i class="var">a</i>)<br/>
 <br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincospid1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_sincospid1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_cinz_sincospid1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_finz_sincospid1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_cinz_sincospif1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_finz_sincospif1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -331,7 +419,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_sinpi_u05</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_sinpif_u05</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_sinpil_u05</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sinpid1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sinpid1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sinpid1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sinpid1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sinpif1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sinpif1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sinpif1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sinpif1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -361,7 +458,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cospi_u05</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_cospif_u05</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_cospil_u05</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_cospid1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cospid1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_cospid1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_cospid1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_cospif1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cospif1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_cospif1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_cospif1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -392,7 +498,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_tan_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_tanf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_tanl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_tand1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_tand1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_tand1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_tand1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_tanf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_tanf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_tanf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_tanf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -418,7 +533,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_tan_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_tanf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_tanl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_tand1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_tand1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_tand1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_tand1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_tanf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_tanf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_tanf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_tanf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -446,6 +570,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_pow_u10</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_powf_u10</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_powd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_powd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_powd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_powd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_powf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_powf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_powf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_powf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -470,7 +604,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_log_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_logf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_logd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_logd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_logd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_logd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_logf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_logf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_logf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_logf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -496,7 +639,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_log_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_logf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_logd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_logd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_logd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_logd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_logf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_logf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_logf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_logf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -522,7 +674,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_log10_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_log10f_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_log10d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_log10d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_log10d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_log10d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_log10f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_log10f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_log10f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_log10f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -548,7 +709,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_log2_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_log2f_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_log2d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_log2d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_log2d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_log2d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_log2f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_log2f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_log2f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_log2f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -574,7 +744,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_log1p_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_log1pf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_log1pd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_log1pd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_log1pd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_log1pd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_log1pf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_log1pf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_log1pf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_log1pf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -600,7 +779,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_exp_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_expf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_expl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_expd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_expd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_expd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_expd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_expf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_expf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_expf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_expf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -626,7 +814,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_exp2_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_exp2f_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_exp2l_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_exp2d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_exp2d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_exp2d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_exp2d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_exp2f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_exp2f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_exp2f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_exp2f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -652,7 +849,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_exp10_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_exp10f_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_exp10l_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_exp10d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_exp10d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_exp10d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_exp10d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_exp10f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_exp10f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_exp10f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_exp10f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -678,7 +884,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_expm1_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_expm1f_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_expm1l_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_expm1d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_expm1d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_expm1d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_expm1d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_expm1f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_expm1f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_expm1f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_expm1f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -705,6 +920,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_sqrt_u05</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_sqrtf_u05</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_sqrtd1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sqrtd1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sqrtd1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sqrtd1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sqrtf1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sqrtf1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sqrtf1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sqrtf1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -726,8 +951,18 @@ extended-precision (80-bit) floating point values, which is defined in
 <p class="synopsis">
 #include &lt;sleef.h&gt;<br/>
 <br/>
-<!--<b class="type">double</b> <b class="func">Sleef_sqrt_u05</b>(<b class="type">double</b> <i class="var">x</i>);<br/>-->
-<b class="type">float</b> <b class="func">Sleef_sqrt_u35</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sqrt_u35</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sqrtf_u35</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sqrtd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sqrtd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sqrtd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sqrtd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sqrtf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sqrtf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sqrtf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sqrtf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -752,7 +987,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cbrt_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_cbrtf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_cbrtd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cbrtd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_cbrtd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_cbrtd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_cbrtf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cbrtf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_cbrtf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_cbrtf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -778,7 +1022,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cbrt_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_cbrtf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_logl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_cbrtd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cbrtd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_cbrtd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_cbrtd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_cbrtf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cbrtf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_cbrtf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_cbrtf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -805,6 +1058,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_hypot_u05</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_hypotf_u05</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_hypotd1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_hypotd1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_hypotd1_u05purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_hypotd1_u05purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_hypotf1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_hypotf1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_hypotf1_u05purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_hypotf1_u05purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -829,6 +1092,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_hypot_u35</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_hypotf_u35</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_hypotd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_hypotd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_hypotd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_hypotd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_hypotf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_hypotf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_hypotf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_hypotf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -852,7 +1125,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_asin_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_asinf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_asinl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_asind1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_asind1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_asind1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_asind1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_asinf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_asinf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_asinf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_asinf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -878,7 +1160,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_asin_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_asinf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_asinl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_asind1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_asind1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_asind1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_asind1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_asinf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_asinf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_asinf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_asinf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -904,7 +1195,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_acos_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_acosf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_acosl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_acosd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_acosd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_acosd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_acosd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_acosf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_acosf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_acosf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_acosf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -930,7 +1230,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_acos_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_acosf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_acosl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_acosd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_acosd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_acosd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_acosd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_acosf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_acosf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_acosf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_acosf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -956,7 +1265,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_atan_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_atanf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_atanl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_atand1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_atand1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_atand1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_atand1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_atanf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_atanf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_atanf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_atanf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -982,7 +1300,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_atan_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_atanf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_atanl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_atand1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_atand1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_atand1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_atand1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_atanf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_atanf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_atanf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_atanf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1008,7 +1335,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_atan2_u10</b>(<b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_atan2f_u10</b>(<b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">x</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_atan2l_u10</b>(<b class="type">long double</b> <i class="var">y</i>, <b class="type">long double</b> <i class="var">x</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_atan2d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_atan2d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_atan2d1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_atan2d1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_atan2f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_atan2f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_atan2f1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_atan2f1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1037,7 +1373,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_atan2_u35</b>(<b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_atan2f_u35</b>(<b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">x</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_atan2l_u35</b>(<b class="type">long double</b> <i class="var">y</i>, <b class="type">long double</b> <i class="var">x</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_atan2d1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_atan2d1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_atan2d1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_atan2d1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>, <b class="type">double</b> <i class="var">b</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_atan2f1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_atan2f1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_atan2f1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_atan2f1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>, <b class="type">float</b> <i class="var">b</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1065,7 +1410,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_sinh_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_sinhf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_sinhl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sinhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sinhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sinhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sinhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sinhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sinhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sinhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sinhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1095,7 +1449,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_sinh_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_sinhf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_sinhl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_sinhd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_sinhd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_sinhd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_sinhd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_sinhf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_sinhf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_sinhf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_sinhf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1125,7 +1488,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cosh_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_coshf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_coshl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_coshd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_coshd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_coshd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_coshd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_coshf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_coshf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_coshf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_coshf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1155,7 +1527,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_cosh_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_coshf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_coshl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_coshd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_coshd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_coshd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_coshd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_coshf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_coshf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_coshf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_coshf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1185,7 +1566,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_tanh_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_tanhf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_tanhl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_tanhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_tanhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_tanhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_tanhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_tanhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_tanhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_tanhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_tanhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1212,7 +1602,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_tanh_u35</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_tanhf_u35</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_tanhl_u35</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_tanhd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_tanhd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_tanhd1_u35purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_tanhd1_u35purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_tanhf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_tanhf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_tanhf1_u35purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_tanhf1_u35purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1239,7 +1638,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_asinh_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_asinhf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_asinhl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_asinhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_asinhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_asinhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_asinhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_asinhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_asinhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_asinhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_asinhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1270,7 +1678,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_acosh_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_acoshf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_acoshl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_acoshd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_acoshd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_acoshd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_acoshd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_acoshf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_acoshf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_acoshf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_acoshf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1301,7 +1718,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_atanh_u10</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_atanhf_u10</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
-<!--<b class="type">long double</b> <b class="func">Sleef_atanhl_u10</b>(<b class="type">long double</b> <i class="var">a</i>);<br/>-->
+<br/>
+<b class="type">double</b> <b class="func">Sleef_atanhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_atanhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_atanhd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_atanhd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_atanhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_atanhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_atanhf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_atanhf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1330,6 +1756,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_erf_u10</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_erff_u10</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_erfd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_erfd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_erfd1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_erfd1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_erff1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_erff1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_erff1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_erff1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1353,6 +1789,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_erfc_u15</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_erfcf_u15</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_erfcd1_u15purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_erfcd1_u15purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_erfcd1_u15purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_erfcd1_u15purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_erfcf1_u15purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_erfcf1_u15purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_erfcf1_u15purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_erfcf1_u15purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1380,6 +1826,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_tgamma_u10</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_tgammaf_u10</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_tgammad1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_tgammad1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_tgammad1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_tgammad1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_tgammaf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_tgammaf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_tgammaf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_tgammaf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1403,6 +1859,16 @@ extended-precision (80-bit) floating point values, which is defined in
 <br/>
 <b class="type">double</b> <b class="func">Sleef_lgamma_u10</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_lgammaf_u10</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_lgammad1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_lgammad1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_lgammad1_u10purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_lgammad1_u10purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<br/>
+<b class="type">float</b> <b class="func">Sleef_lgammaf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_lgammaf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_lgammaf1_u10purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_lgammaf1_u10purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1433,6 +1899,15 @@ extended-precision (80-bit) floating point values, which is defined in
 <b class="type">double</b> <b class="func">Sleef_trunc</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_truncf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_truncd1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_truncd1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_truncd1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_truncd1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_truncf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_truncf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_truncf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_truncf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1456,6 +1931,16 @@ raise an exception.
 <b class="type">double</b> <b class="func">Sleef_floor</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_floorf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_floord1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_floord1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_floord1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_floord1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_floorf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_floorf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_floorf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_cinz_floorf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_floorf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_floorf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1478,6 +1963,15 @@ functions do not set errno nor raise an exception.
 <br/>
 <b class="type">double</b> <b class="func">Sleef_ceil</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_ceilf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_ceild1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_ceild1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_ceild1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_ceild1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_ceilf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_ceilf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_ceilf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_ceilf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1502,6 +1996,15 @@ do not set errno nor raise an exception.
 <b class="type">double</b> <b class="func">Sleef_round</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_roundf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_roundd1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_roundd1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_roundd1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_roundd1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_roundf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_roundf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_roundf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_roundf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1525,6 +2028,15 @@ do not set errno nor raise an exception.
 <b class="type">double</b> <b class="func">Sleef_rint</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_rintf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_rintd1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_rintd1_purec</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_rintd1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_rintd1_purecfma</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_rintf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_rintf1_purec</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_rintf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_rintf1_purecfma</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1547,6 +2059,15 @@ do not set errno nor raise an exception.
 <br/>
 <b class="type">double</b> <b class="func">Sleef_fma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">z</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_fmaf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">z</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_fmad1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">z</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_fmad1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">z</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_fmad1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">z</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_fmad1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>, <b class="type">double</b> <i class="var">z</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fmaf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">z</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_fmaf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">z</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fmaf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">z</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_fmaf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>, <b class="type">float</b> <i class="var">z</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1575,6 +2096,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <b class="type">double</b> <b class="func">Sleef_fmod</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_fmodf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_fmodd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_fmodd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_fmodd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_fmodd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fmodf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_fmodf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fmodf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_fmodf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1599,6 +2129,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <br/>
 <b class="type">double</b> <b class="func">Sleef_remainder</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_remainderf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_remainderd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_remainderd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_remainderd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_remainderd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_remainderf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_remainderf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_remainderf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_remainderf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1625,6 +2164,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <b class="type">double</b> <b class="func">Sleef_ldexp</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_ldexpf</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_ldexpd1_purec</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_ldexpd1_purec</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_ldexpd1_purecfma</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_ldexpd1_purecfma</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_ldexpf1_purec</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_ldexpf1_purec</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_ldexpf1_purecfma</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_ldexpf1_purecfma</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1650,6 +2198,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <b class="type">double</b> <b class="func">Sleef_frfrexp</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_frfrexpf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_frfrexpd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_frfrexpd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_frfrexpd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_frfrexpd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_frfrexpf1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_frfrexpf1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_frfrexpf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_frfrexpf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1672,6 +2229,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <br/>
 <b class="type">int</b> <b class="func">Sleef_expfrexp</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">int</b> <b class="func">Sleef_expfrexpf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
+<b class="type">int</b> <b class="func">Sleef_expfrexpd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_cinz_expfrexpd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_expfrexpd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_finz_expfrexpd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_expfrexpf1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_cinz_expfrexpf1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_expfrexpf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_finz_expfrexpf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1696,6 +2262,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <b class="type">int</b> <b class="func">Sleef_ilogb</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
 <b class="type">int</b> <b class="func">Sleef_ilogbf</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbd1_purec</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_cinz_ilogbd1_purec</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbd1_purecfma</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_finz_ilogbd1_purecfma</b>(<b class="type">double</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbf1_purec</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_cinz_ilogbf1_purec</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbf1_purecfma</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<b class="type">int</b> <b class="func">Sleef_finz_ilogbf1_purecfma</b>(<b class="type">float</b> <i class="var">m</i>, <b class="type">int</b> <i class="var">x</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1718,6 +2293,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <br/>
 <b class="type">Sleef_double2</b> <b class="func">Sleef_modf</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">Sleef_float2</b> <b class="func">Sleef_modff</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_modfd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_cinz_modfd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_modfd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_double2</b> <b class="func">Sleef_finz_modfd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_modff1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_cinz_modff1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_modff1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">Sleef_float2</b> <b class="func">Sleef_finz_modff1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1742,6 +2326,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <b class="type">double</b> <b class="func">Sleef_fabs</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_fabsf</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_fabsd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_fabsd1_purec</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_fabsd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_fabsd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fabsf1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_fabsf1_purec</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fabsf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_fabsf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1764,6 +2357,15 @@ max(0.50001 ULP, FLT_MIN), respectively.
 <br/>
 <b class="type">double</b> <b class="func">Sleef_fmax</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_fmaxf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_fmaxd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_fmaxd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_fmaxd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_fmaxd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fmaxf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_fmaxf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fmaxf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_fmaxf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1788,6 +2390,15 @@ do not set errno nor raise an exception.
 <b class="type">double</b> <b class="func">Sleef_fmin</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_fminf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_fmind1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_fmind1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_fmind1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_fmind1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fminf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_fminf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fminf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_fminf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1810,6 +2421,15 @@ do not set errno nor raise an exception.
 <br/>
 <b class="type">double</b> <b class="func">Sleef_fdim</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_fdimf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_fdimd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_fdimd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_fdimd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_fdimd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fdimf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_fdimf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_fdimf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_fdimf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
@@ -1834,6 +2454,15 @@ do not set errno nor raise an exception.
 <b class="type">double</b> <b class="func">Sleef_copysign</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_copysignf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_copysignd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_copysignd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_copysignd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_copysignd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_copysignf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_copysignf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_copysignf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_copysignf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
 
@@ -1856,6 +2485,15 @@ do not set errno nor raise an exception.
 <br/>
 <b class="type">double</b> <b class="func">Sleef_nextafter</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
 <b class="type">float</b> <b class="func">Sleef_nextafterf</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<br/>
+<b class="type">double</b> <b class="func">Sleef_nextafterd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_cinz_nextafterd1_purec</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_nextafterd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">double</b> <b class="func">Sleef_finz_nextafterd1_purecfma</b>(<b class="type">double</b> <i class="var">x</i>, <b class="type">double</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_nextafterf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_cinz_nextafterf1_purec</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_nextafterf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
+<b class="type">float</b> <b class="func">Sleef_finz_nextafterf1_purecfma</b>(<b class="type">float</b> <i class="var">x</i>, <b class="type">float</b> <i class="var">y</i>);<br/>
 <br/>
 <span class="normal">Link with</span> -lsleef.
 </p>
