@@ -29,12 +29,14 @@
     <li><a class="underlined" href="quadaarch64.xhtml">Data types and functions for AArch64 architecture</a></li>
     <ul class="circle">
       <li><a href="#datatypes">Data types</a></li>
+      <li><a href="#access">Functions for accessing elements inside vector variable</a></li>
       <li><a href="#conversion">Conversion functions</a></li>
       <li><a href="#comparison">Comparison and selection functions</a></li>
       <li><a href="#mathfunctions">Math functions</a></li>
     </ul>
     <li><a class="underlined" href="quadppc64.xhtml">Data types and functions for PPC64 architecture</a></li>
     <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
+    <li><a class="underlined" href="quadcuda.xhtml">Data types and functions for CUDA</a></li>
   </ul>
   </li>
   <li>&nbsp;</li>
@@ -73,7 +75,7 @@
 </p>
 
 
-<h2 id="conversion">Functions for accessing elements inside vector variable</h2>
+<h2 id="access">Functions for accessing elements inside vector variable</h2>
 
 <p id="load" class="funcname">Load QP FP values into vector variable</p>
 
@@ -477,7 +479,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_sinq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_sinq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_sinq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -499,7 +501,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_cosq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_cosq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_cosq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -521,7 +523,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_tanq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_tanq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_tanq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -543,7 +545,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_asinq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_asinq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_asinq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -565,7 +567,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_acosq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_acosq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_acosq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -587,7 +589,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_atanq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_atanq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_atanq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -609,7 +611,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_expq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_expq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_expq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -631,7 +633,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_exp2q2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_exp2q4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_exp2q4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -653,7 +655,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_exp10q2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_exp10q4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_exp10q4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -675,7 +677,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_expm1q2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_expm1q4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_expm1q4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -697,7 +699,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_logq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_logq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_logq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -719,7 +721,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_log2q2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_log2q4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_log2q4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -741,7 +743,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_log10q2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_log10q4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_log10q4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -763,7 +765,7 @@
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
 <b class="type">Sleef_quadx2</b> <b class="func">Sleef_log1pq2_u10advsimd</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
-<b class="type">Sleef_svquad</b> <b class="func">Sleef_log1pq4_u10avx</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_svquad</b> <b class="func">Sleef_log1pq4_u10sve</b>( <b class="type">Sleef_svquad</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>

@@ -10,10 +10,10 @@
 <link rel="stylesheet" type="text/css" href="texlike.css"/>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
 <link rel="stylesheet" type="text/css" href="sleef.css"/>
-<title>SLEEF - Quad-precision math library reference (POWER)</title>
+<title>SLEEF - Quad-precision math library reference (CUDA)</title>
 </head>
 <body translate="no" class="notranslate">
-<h1>SLEEF - Quad-precision math library reference (POWER)</h1>
+<h1>SLEEF - Quad-precision math library reference (CUDA)</h1>
 
 <h2>Table of contents</h2>
 
@@ -28,15 +28,13 @@
     <li><a class="underlined" href="quadx86.xhtml">Data types and functions for x86 architecture</a></li>
     <li><a class="underlined" href="quadaarch64.xhtml">Data types and functions for AArch64 architecture</a></li>
     <li><a class="underlined" href="quadppc64.xhtml">Data types and functions for PPC64 architecture</a></li>
+    <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
+    <li><a class="underlined" href="quadcuda.xhtml">Data types and functions for CUDA</a></li>
     <ul class="circle">
-      <li><a href="#datatypes">Data types</a></li>
-      <li><a href="#access">Functions for accessing elements inside vector variable</a></li>
       <li><a href="#conversion">Conversion functions</a></li>
       <li><a href="#comparison">Comparison and selection functions</a></li>
       <li><a href="#mathfunctions">Math functions</a></li>
     </ul>
-    <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
-    <li><a class="underlined" href="quadcuda.xhtml">Data types and functions for CUDA</a></li>
   </ul>
   </li>
   <li>&nbsp;</li>
@@ -46,126 +44,6 @@
   <li><a class="underlined" href="additional.xhtml">Additional notes</a></li>
 </ul>
 
-<h2 id="datatypes">Data types</h2>
-
-<p class="funcname"><b class="type">Sleef_quadx2</b></p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-  <b class="type">Sleef_quadx2</b> is a data type for retaining two QP
-  FP numbers. Please
-  use <a href="#load"><b class="func">Sleef_loadq2_vsx</b></a>, <a href="#store"><b class="func">Sleef_storeq2_vsx</b></a>, <a href="#get"><b class="func">Sleef_getq2_vsx</b></a>
-  and <a href="#set"><b class="func">Sleef_setq2_vsx</b></a> functions to access the
-  data inside variables in this data type.
-</p>
-
-
-<h2 id="access">Functions for accessing elements inside vector variable</h2>
-
-<p id="load" class="funcname">Load QP FP values into vector variable</p>
-
-<p class="header">Synopsis</p>
-
-<p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
-<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_loadq2_vsx</b>( <b class="type">Sleef_quad *</b> <i class="var">ptr</i> );<br/>
-<br/>
-<span class="normal">Link with</span> -lsleefquad.
-</p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-  These functions load QP FP values from memory and store the results
-  in a vector variable.
-</p>
-
-<hr/>
-
-<p id="store" class="funcname">Store QP FP values in a vector variable to memory</p>
-
-<p class="header">Synopsis</p>
-
-<p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
-<br/>
-<b class="type">void</b> <b class="func">Sleef_storeq2_vsx</b>( <b class="type">Sleef_quad *</b> <i class="var">ptr</i>, <b class="type">Sleef_quadx2</b> <i class="var">v</i> );<br/>
-<br/>
-<span class="normal">Link with</span> -lsleefquad.
-</p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-  These functions store QP FP values in the given variable to memory.
-</p>
-
-<hr/>
-
-<p id="get" class="funcname">Extract one element from QP FP vector variable</p>
-
-<p class="header">Synopsis</p>
-
-<p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
-<br/>
-<b class="type">Sleef_quad</b> <b class="func">Sleef_getq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">v</i>, <b class="type">int</b> <i class="var">index</i> );<br/>
-<br/>
-<span class="normal">Link with</span> -lsleefquad.
-</p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-  These functions extract the <i class="var">index</i>-th element from
-  a QP FP vector variable. 
-</p>
-
-<hr/>
-
-<p id="set" class="funcname">Set one element in QP FP vector variable</p>
-
-<p class="header">Synopsis</p>
-
-<p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
-<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_setq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">v</i>, <b class="type">int</b> <i class="var">index</i>, <b class="type">Sleef_quad</b> <i class="var">e</i> );<br/>
-<br/>
-<span class="normal">Link with</span> -lsleefquad.
-</p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-  These functions return a QP FP vector in which
-  the <i class="var">index</i>-th element is <i class="var">e</i>, and
-  other elements are the same as <i class="var">v</i>.
-</p>
-
-<hr/>
-
-<p id="splat" class="funcname">Set all elements in QP FP vector to the same value</p>
-
-<p class="header">Synopsis</p>
-
-<p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
-<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_splatq2_vsx</b>( <b class="type">Sleef_quad</b> <i class="var">e</i> );<br/>
-<br/>
-<span class="normal">Link with</span> -lsleefquad.
-</p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-  These functions return a QP FP vector in which all elements are set
-  to <i class="var">e</i>.
-</p>
-
 
 <h2 id="conversion">Conversion functions</h2>
 
@@ -174,9 +52,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">vector double</b> <b class="func">Sleef_cast_to_doubleq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">double</b> <b class="func">Sleef_cast_to_doubleq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -194,9 +72,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_cast_from_doubleq2_vsx</b>( <b class="type">vector double</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_cast_from_doubleq2_cuda</b>( <b class="type">double</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -215,9 +93,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">vector signed long long</b> <b class="func">Sleef_cast_to_int64q2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">int64x2_t</b> <b class="func">Sleef_cast_to_int64q2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -236,9 +114,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_cast_from_int64q2_vsx</b>( <b class="type">vector signed long long</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_cast_from_int64q2_cuda</b>( <b class="type">int64x2_t</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -257,9 +135,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">vector unsigned long long</b> <b class="func">Sleef_cast_to_uint64q2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">uint64x2_t</b> <b class="func">Sleef_cast_to_uint64q2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -278,9 +156,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_cast_from_uint64q2_vsx</b>( <b class="type">vector unsigned long long</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_cast_from_uint64q2_cuda</b>( <b class="type">uint64x2_t</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -299,14 +177,14 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpltq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpleq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpgtq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpgeq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpeqq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpneq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpltq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpleq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpgtq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpgeq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpeqq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpneq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -325,9 +203,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">vector int</b> <b class="func">Sleef_icmpq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_icmpq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -346,9 +224,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">vector int</b> <b class="func">Sleef_iunordq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">int32x2_t</b> <b class="func">Sleef_iunordq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -367,9 +245,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_iselectq2_vsx</b>( <b class="type">vector int</b> <i class="var">c</i>, <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_iselectq2_cuda</b>( <b class="type">int32x2_t</b> <i class="var">c</i>, <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -380,6 +258,7 @@
   These are the vectorized functions that operate in the same way as the ternary operator.
 </p>
 
+
 <h2 id="mathfunctions">Math functions</h2>
 
 <p class="funcname">QP functions for basic arithmetic operations</p>
@@ -387,13 +266,13 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_addq2_u05vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_subq2_u05vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_mulq2_u05vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_divq2_u05vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i>, <b class="type">Sleef_quadx2</b> <i class="var">b</i> );<br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_negq2_vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_addq2_u05cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_subq2_u05cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_mulq2_u05cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_divq2_u05cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i>, <b class="type">Sleef_quadx1</b> <i class="var">b</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_negq2_cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -412,9 +291,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_sqrtq2_u05vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_sqrtq2_u05cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -433,9 +312,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_sinq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_sinq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -454,9 +333,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_cosq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_cosq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -475,9 +354,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_tanq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_tanq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -496,9 +375,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_asinq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_asinq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -517,9 +396,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_acosq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_acosq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -538,9 +417,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_atanq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_atanq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -559,9 +438,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_expq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_expq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -580,9 +459,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_exp2q2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_exp2q2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -601,9 +480,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_exp10q2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_exp10q2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -622,9 +501,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_expm1q2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_expm1q2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -643,9 +522,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_logq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_logq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -664,9 +543,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_log2q2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_log2q2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -685,9 +564,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_log10q2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_log10q2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -706,9 +585,9 @@
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
-#include &lt;sleefquad.h&gt;<br/>
+#include &lt;sleefquadinline_cuda.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quadx2</b> <b class="func">Sleef_log1pq2_u10vsx</b>( <b class="type">Sleef_quadx2</b> <i class="var">a</i> );<br/>
+<b>__device__</b> <b class="type">Sleef_quadx1</b> <b class="func">Sleef_log1pq2_u10cuda</b>( <b class="type">Sleef_quadx1</b> <i class="var">a</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
