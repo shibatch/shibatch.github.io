@@ -31,7 +31,6 @@
     <li><a class="underlined" href="s390x.xhtml">Data types and functions for System/390 architecture</a></li>
     <li><a class="underlined" href="cuda.xhtml">Data types and functions for CUDA</a></li>
     <ul class="circle">
-      <li><a href="#datatypes">Data types</a></li>
       <li><a href="#trig">Trigonometric functions</a></li>
       <li><a href="#pow">Power, exponential, and logarithmic functions</a></li>
       <li><a href="#invtrig">Inverse trigonometric functions</a></li>
@@ -61,7 +60,6 @@
 <pre class="code">
 <code>#include &lt;iostream&gt;</code>
 <code>#include &lt;math.h&gt;</code>
-<code>#include &lt;float.h&gt;</code>
 <code></code>
 <code>#include "sleefinline_cuda.h"</code>
 <code></code>
@@ -99,8 +97,9 @@
 <code>    maxError = fmax(maxError, fabs(r[i]-pow(x[i], y[i])));</code>
 <code>  std::cout &lt;&lt; "Max error: " &lt;&lt; maxError &lt;&lt; std::endl;</code>
 <code></code>
-<code>  cudaFree(x);</code>
 <code>  cudaFree(y);</code>
+<code>  cudaFree(x);</code>
+<code>  cudaFree(r);</code>
 <code>  </code>
 <code>  return 0;</code>
 <code>}</code>
@@ -108,39 +107,6 @@
 <p style="text-align:center;">
   <a class="underlined" href="hellocuda.cu">Source code for testing CUDA functions</a>
 </p>
-
-
-<h2 id="datatypes">Data types for CUDA</h2>
-
-<p class="funcname"><b class="type">Sleef_float_2</b></p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-<b class="type">Sleef_float_2</b> is a data type for storing two <b class="type">float</b> values,
-which is defined in sleefinline_cuda.h as follows:
-</p>
-
-<pre class="white">typedef struct {
-  float x, y;
-} Sleef_float_2;
-</pre>
-
-<hr/>
-
-<p class="funcname"><b class="type">Sleef_double_2</b></p>
-
-<p class="header">Description</p>
-
-<p class="noindent">
-<b class="type">Sleef_double_2</b> is a data type for storing two <b class="type">double</b> values,
-which is defined in sleefinline_cuda.h as follows:
-</p>
-
-<pre class="white">typedef struct {
-  double x, y;
-} Sleef_double_2;
-</pre>
 
 
 <h2 id="trig">Trigonometric Functions</h2>
@@ -288,7 +254,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_cosf_u35"><b class="func
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_double2</b> <b class="func">Sleef_sincosd1_u10cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">double2</b> <b class="func">Sleef_sincosd1_u10cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -305,7 +271,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_sincos_u10"><b class="fu
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf1_u10cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">float2</b> <b class="func">Sleef_sincosf1_u10cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -322,7 +288,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_sincosf_u10"><b class="f
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_double2</b> <b class="func">Sleef_sincosd1_u35cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">double2</b> <b class="func">Sleef_sincosd1_u35cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -339,7 +305,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_sincos_u35"><b class="fu
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_float2</b> <b class="func">Sleef_sincosf1_u35cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">float2</b> <b class="func">Sleef_sincosf1_u35cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -424,7 +390,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_cospif_u05"><b class="fu
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_double2</b> <b class="func">Sleef_sincospid1_u05cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">double2</b> <b class="func">Sleef_sincospid1_u05cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -441,7 +407,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_sincospi_u05"><b class="
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif1_u05cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">float2</b> <b class="func">Sleef_sincospif1_u05cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -458,7 +424,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_sincospif_u05"><b class=
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_double2</b> <b class="func">Sleef_sincospid1_u35cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">double2</b> <b class="func">Sleef_sincospid1_u35cuda</b>(<b class="type">double</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>
@@ -475,7 +441,7 @@ This is the CUDA function of <a href="purec.xhtml#Sleef_sincospi_u35"><b class="
 <p class="synopsis">
 #include &lt;sleefinline_cuda.h&gt;<br/>
 <br/>
-<b>__device__</b> <b class="type">Sleef_float2</b> <b class="func">Sleef_sincospif1_u35cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
+<b>__device__</b> <b class="type">float2</b> <b class="func">Sleef_sincospif1_u35cuda</b>(<b class="type">float</b> <i class="var">a</i>);<br/>
 </p>
 
 <p class="header">Description</p>

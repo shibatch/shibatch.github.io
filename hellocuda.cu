@@ -1,6 +1,5 @@
 #include <iostream>
 #include <math.h>
-#include <float.h>
 
 #include "sleefinline_cuda.h"
 
@@ -38,8 +37,9 @@ int main(void)
     maxError = fmax(maxError, fabs(r[i]-pow(x[i], y[i])));
   std::cout << "Max error: " << maxError << std::endl;
 
-  cudaFree(x);
   cudaFree(y);
+  cudaFree(x);
+  cudaFree(r);
   
   return 0;
 }
