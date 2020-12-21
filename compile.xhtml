@@ -24,7 +24,6 @@
       <li><a href="compile.xhtml#preliminaries">Preliminaries</a></li>
       <li><a href="compile.xhtml#cmakevars">Common CMake variables</a></li>
       <li><a href="compile.xhtml#linux">Compiling and installing the library on Linux</a></li>
-      <li><a href="compile.xhtml#debian">Installing the library on Debian and Ubuntu</a></li>
       <li><a href="compile.xhtml#MSVC">Compiling the library with Microsoft Visual C++</a></li>
       <li><a href="compile.xhtml#hello">Compiling and running "Hello SLEEF"</a></li>
       <li><a href="compile.xhtml#import">Importing SLEEF into your project</a></li>
@@ -194,8 +193,14 @@ Below is the list of SLEEF-specific cmake variables.
   <li><b>DISABLE_VSX</b> : Disable support for PowerPC VSX</li>
   <li><b>ENFORCE_VSX</b> : Build fails if VSX is not
   supported by the compiler</li>
-  <li><b>DISABLE_ZVECTOR2</b> : Disable support for ZVECTOR2</li>
-  <li><b>ENFORCE_ZVECTOR2</b> : Build fails if ZVECTOR2 is not
+  <li><b>DISABLE_VSX3</b> : Disable support for PowerPC VSX-3</li>
+  <li><b>ENFORCE_VSX3</b> : Build fails if VSX-3 is not
+  supported by the compiler</li>
+  <li><b>DISABLE_VXE</b> : Disable support for System/390 VXE</li>
+  <li><b>ENFORCE_VXE</b> : Build fails if System/390 VXE is not
+  supported by the compiler</li>
+  <li><b>DISABLE_VXE2</b> : Disable support for System/390 VXE2</li>
+  <li><b>ENFORCE_VXE2</b> : Build fails if System/390 VXE2 is not
   supported by the compiler</li>
 
   <!-- Options for libm -->
@@ -205,8 +210,8 @@ Below is the list of SLEEF-specific cmake variables.
   tester3 cannot be built</li>
 
   <!-- Options for DFT -->
-  <li style="margin-top: 1em;"><b>BUILD_DFT</b> : Avoid building DFT
-  libraries if set to FALSE</li>
+  <li style="margin-top: 1em;"><b>BUILD_DFT</b> : Build DFT
+  libraries if set to TRUE</li>
   <li><b>SLEEFDFT_MAXBUTWIDTH</b> : This variable
   specifies the maximum length of combined butterfly block used in the
   DFT. Setting this value to 7 makes DFT faster but compilation takes
@@ -215,8 +220,8 @@ Below is the list of SLEEF-specific cmake variables.
   library.</li>
 
   <!-- Options for Quad -->
-  <li style="margin-top: 1em;"><b>BUILD_QUAD</b> : An <b>experimental</b> quad-precision
-  library will be built if set to TRUE</li>
+  <li style="margin-top: 1em;"><b>BUILD_QUAD</b> : Build
+  quad-precision libraries if set to TRUE</li>
 </ul>
 
 <h2 id="linux">Compiling and installing the library on Linux</h2>
@@ -280,17 +285,6 @@ $ sudo make install</pre>
 </p>
 
 <pre class="command">$ cmake -DBUILD_INLINE_HEADERS=TRUE ..</pre>
-
-<h2 id="debian">Installing the library on Debian and Ubuntu</h2>
-
-<p class="noindent">
-  If you are using Debian 10(Buster), Ubuntu 18.04(Bionic) or later,
-  then you can install the library through apt-get. The DFT library
-  will not be installed.
-
-  <pre class="command">$ sudo apt-get update
-$ sudo apt-get install libsleef-dev</pre>
-</p>
 
 <h2 id="MSVC">Compiling the library with Microsoft Visual C++</h2>
 
