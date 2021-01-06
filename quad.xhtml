@@ -186,8 +186,8 @@
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
-<b class="type">void</b> <b class="func">Sleef_registerPrintfHook</b>( <b class="type">void</b>);<br/>
-<b class="type">void</b> <b class="func">Sleef_unregisterPrintfHook</b>( <b class="type">void</b>);<br/>
+<b class="type">void</b> <b class="func">Sleef_registerPrintfHook</b>( <b class="type">void</b> );<br/>
+<b class="type">void</b> <b class="func">Sleef_unregisterPrintfHook</b>( <b class="type">void</b> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -615,6 +615,31 @@
 
 <hr/>
 
+<p class="funcname"><b id="Sleef_atan2q1_u10purec" class="func">Sleef_atan2q1_u10purec</b>, <b id="Sleef_atan2q1_u10purecfma" class="func">Sleef_atan2q1_u10purecfma</b> - arc tangent functions of two variables</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atan2q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atan2q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the arc tangent function of
+  ( <i class="var">y</i> / <i class="var">x</i> ).  The quadrant of
+  the result is determined according to the signs
+  of <i class="var">x</i> and <i class="var">y</i>. The error bound of
+  the returned value is 1.0 ULP.
+</p>
+
+<hr/>
+
 <p class="funcname"><b id="Sleef_expq1_u10purec" class="func">Sleef_expq1_u10purec</b>, <b id="Sleef_expq1_u10purecfma" class="func">Sleef_expq1_u10purecfma</b> - base-<i>e</i> exponential functions</p>
 
 <p class="header">Synopsis</p>
@@ -794,6 +819,485 @@
   ( 1 + <i class="var">a</i> ).  The error bound of the returned value is
   1.0 ULP.
 </p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_powq1_u10purec" class="func">Sleef_powq1_u10purec</b>, <b id="Sleef_powq1_u10purecfma" class="func">Sleef_powq1_u10purecfma</b> - power functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_powq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_powq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions return the value of <i class="var">x</i> raised to the power
+  of <i class="var">y</i>. The error bound of the returned value is 1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_sinhq1_u10purec" class="func">Sleef_sinhq1_u10purec</b>, <b id="Sleef_sinhq1_u10purecfma" class="func">Sleef_sinhq1_u10purecfma</b> - hyperbolic sine functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_sinhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_sinhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the hyperbolic sine function of a value
+  in <i class="var">a</i>. The error bound of the returned value is
+  1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_coshq1_u10purec" class="func">Sleef_coshq1_u10purec</b>, <b id="Sleef_coshq1_u10purecfma" class="func">Sleef_coshq1_u10purecfma</b> - hyperbolic cosine functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_coshq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_coshq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the hyperbolic cosine function of a value
+  in <i class="var">a</i>. The error bound of the returned value is
+  1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_tanhq1_u10purec" class="func">Sleef_tanhq1_u10purec</b>, <b id="Sleef_tanhq1_u10purecfma" class="func">Sleef_tanhq1_u10purecfma</b> - hyperbolic tangent functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_tanhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_tanhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the hyperbolic tangent function of a value
+  in <i class="var">a</i>. The error bound of the returned value is
+  1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_asinhq1_u10purec" class="func">Sleef_asinhq1_u10purec</b>, <b id="Sleef_asinhq1_u10purecfma" class="func">Sleef_asinhq1_u10purecfma</b> - inverse hyperbolic sine functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_asinhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_asinhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the inverse hyperbolic sine function of a value
+  in <i class="var">a</i>. The error bound of the returned value is
+  1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_acoshq1_u10purec" class="func">Sleef_acoshq1_u10purec</b>, <b id="Sleef_acoshq1_u10purecfma" class="func">Sleef_acoshq1_u10purecfma</b> - inverse hyperbolic cosine functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_acoshq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_acoshq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the inverse hyperbolic cosine function of a value
+  in <i class="var">a</i>. The error bound of the returned value is
+  1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_atanhq1_u10purec" class="func">Sleef_atanhq1_u10purec</b>, <b id="Sleef_atanhq1_u10purecfma" class="func">Sleef_atanhq1_u10purecfma</b> - inverse hyperbolic tangent functions</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atanhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atanhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  These functions evaluate the inverse hyperbolic tangent function of a value
+  in <i class="var">a</i>. The error bound of the returned value is
+  1.0 ULP.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_truncq1_purec" class="func">Sleef_truncq1_purec</b>, <b id="Sleef_truncq1_purecfma" class="func">Sleef_truncq1_purecfma</b> - round to integer towards zero</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_truncq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_truncq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions round their argument to the integer value, in floating
+format, nearest to but no larger in magnitude than the argument.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_floorq1_purec" class="func">Sleef_floorq1_purec</b>, <b id="Sleef_floorq1_purecfma" class="func">Sleef_floorq1_purecfma</b> - round to integer towards minus infinity</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_floorq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_floorq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the largest integer value not greater
+than <i class="var">a</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_ceilq1_purec" class="func">Sleef_ceilq1_purec</b>, <b id="Sleef_ceilq1_purecfma" class="func">Sleef_ceilq1_purecfma</b> - round to integer towards plus infinity</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_ceilq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_ceilq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the smallest integer value not less
+than <i class="var">a</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_roundq1_purec" class="func">Sleef_roundq1_purec</b>, <b id="Sleef_roundq1_purecfma" class="func">Sleef_roundq1_purecfma</b> - round to integer away from zero</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_roundq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_roundq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions round their argument to the nearest integer value,
+rounding halfway cases away from zero.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_rintq1_purec" class="func">Sleef_rintq1_purec</b>, <b id="Sleef_rintq1_purecfma" class="func">Sleef_rintq1_purecfma</b> - round to integer, ties round to even</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_rintq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_rintq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions round their argument to an integer value with the
+round-to-even method.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_fabsq1_purec" class="func">Sleef_fabsq1_purec</b>, <b id="Sleef_fabsq1_purecfma" class="func">Sleef_fabsq1_purecfma</b> - absolute value</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fabsq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fabsq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the absolute value of <i class="var">a</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_copysignq1_purec" class="func">Sleef_copysignq1_purec</b>, <b id="Sleef_copysignq1_purecfma" class="func">Sleef_copysignq1_purecfma</b> - copy sign of a number</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_copysignq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_copysignq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return a value with the magnitude
+of <i class="var">a</i> and the sign of <i class="var">b</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_fmaxq1_purec" class="func">Sleef_fmaxq1_purec</b>, <b id="Sleef_fmaxq1_purecfma" class="func">Sleef_fmaxq1_purecfma</b> - maximum of two numbers</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmaxq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmaxq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the larger value of <i class="var">a</i>
+and <i class="var">b</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_fminq1_purec" class="func">Sleef_fminq1_purec</b>, <b id="Sleef_fminq1_purecfma" class="func">Sleef_fminq1_purecfma</b> - minimum of two numbers</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fminq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fminq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the smaller value of <i class="var">a</i>
+and <i class="var">b</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_fdimq1_purec" class="func">Sleef_fdimq1_purec</b>, <b id="Sleef_fdimq1_purecfma" class="func">Sleef_fdimq1_purecfma</b> - positive difference</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the positive difference
+between <i class="var">a</i> and <i class="var">b</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_fmodq1_purec" class="func">Sleef_fmodq1_purec</b>, <b id="Sleef_fmodq1_purecfma" class="func">Sleef_fmodq1_purecfma</b> - floating point remainder</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmodq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmodq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return <i class="var">x</i>
+- <i>n</i> <i class="var">y</i>, where <i>n</i> is the quotient
+of <i class="var">x</i> / <i class="var">y</i>, rounded toward zero to
+an integer.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_remainderq1_purec" class="func">Sleef_remainderq1_purec</b>, <b id="Sleef_remainderq1_purecfma" class="func">Sleef_remainderq1_purecfma</b> - floatint point remainder</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return <i class="var">x</i>
+- <i>n</i> <i class="var">y</i>, where <i>n</i> is the quotient
+of <i class="var">x</i> / <i class="var">y</i>, rounded to an integer
+with the round-to-even method.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_frexpq1_purec" class="func">Sleef_frexpq1_purec</b>, <b id="Sleef_frexpq1_purecfma" class="func">Sleef_frexpq1_purecfma</b> - split a number to fractional and integral components</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_frexpq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">int *</b> <i class="var">ptr</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_frexpq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">int *</b> <i class="var">ptr</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions split the argument <i class="var">a</i> into a
+fraction <i>f</i> and an exponent <i>e</i>, where 0.5 &le; <i>f</i>
+&lt; 1 and <i class="var">a</i> = <i>f</i> 2<sup><i>e</i></sup>. The
+computed exponent <i>e</i> will be stored in <i class="var">*ptr</i>,
+and the functions return <i>f</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_modfq1_purec" class="func">Sleef_modfq1_purec</b>, <b id="Sleef_modfq1_purecfma" class="func">Sleef_modfq1_purecfma</b> - break a number into integral and fractional parts</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_modfq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad *</b> <i class="var">ptr</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_modfq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad *</b> <i class="var">ptr</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions split the argument <i class="var">a</i> into an
+integral part <i>k</i> and a fractional part
+<i>f</i>, where <i>k</i> and <i>f</i> have the same sign
+as <i class="var">a</i>. <i>k</i> will be stored
+in <i class="var">*ptr</i>, and the functions return <i>f</i>.
+</p>
+
+
 
 
 <h2 id="tutorial">Tutorial</h2>
