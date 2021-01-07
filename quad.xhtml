@@ -1232,8 +1232,8 @@ an integer.
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
-<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -1296,6 +1296,96 @@ integral part <i>k</i> and a fractional part
 as <i class="var">a</i>. <i>k</i> will be stored
 in <i class="var">*ptr</i>, and the functions return <i>f</i>.
 </p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_hypotq1_u05purec" class="func">Sleef_hypotq1_u05purec</b>, <b id="Sleef_hypotq1_u05purecfma" class="func">Sleef_hypotq1_u05purecfma</b> - 2D Euclidian distance</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_hypotq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_hypotq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the square root of the sum of the squares
+of <i class="var">x</i> and <i class="var">y</i>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_fmaq1_u05purec" class="func">Sleef_fmaq1_u05purec</b>, <b id="Sleef_fmaq1_u05purecfma" class="func">Sleef_fmaq1_u05purecfma</b> - fused multiply and accumulate</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmaq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">z</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmaq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">z</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return <i class="var">x</i><i class="var">y</i>
++ <i class="var">z</i> with a single rounding.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_ldexpq1_purec" class="func">Sleef_ldexpq1_purec</b>, <b id="Sleef_ldexpq1_purecldexp" class="func">Sleef_ldexpq1_purecfma</b> - multiply by integral power of 2</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_ldexpq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">int</b> <i class="var">e</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_ldexpq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">int</b> <i class="var">e</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return <i class="var">x</i> 2<sup><i class="var">e</i></sup>.
+</p>
+
+<hr/>
+
+<p class="funcname"><b id="Sleef_ilogbq1_purec" class="func">Sleef_ilogbq1_purec</b>, <b id="Sleef_ilogbq1_purecilogb" class="func">Sleef_ilogbq1_purecfma</b> - integer exponent of an FP number</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
+<br/>
+<span class="normal">Link with</span> -lsleefquad.
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+These functions return the exponent
+of <i class="var">x</i>. If <i class="var">x</i> is zero, infinite and
+a NaN, they return <b>SLEEF_FP_ILOGB0</b>, <b>INT_MAX</b>
+and <b>SLEEF_FP_ILOGBNAN</b>, respectively.
+</p>
+
 
 
 
