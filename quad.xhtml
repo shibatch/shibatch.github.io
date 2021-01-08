@@ -1179,15 +1179,15 @@ and <i class="var">b</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fdimq1_purec" class="func">Sleef_fdimq1_purec</b>, <b id="Sleef_fdimq1_purecfma" class="func">Sleef_fdimq1_purecfma</b> - positive difference</p>
+<p class="funcname"><b id="Sleef_fdimq1_u05purec" class="func">Sleef_fdimq1_u05purec</b>, <b id="Sleef_fdimq1_u05purecfma" class="func">Sleef_fdimq1_u05purecfma</b> - positive difference</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
-<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
-<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
 <span class="normal">Link with</span> -lsleefquad.
 </p>
@@ -1196,7 +1196,8 @@ and <i class="var">b</i>.
 
 <p class="noindent">
 These functions return the positive difference
-between <i class="var">a</i> and <i class="var">b</i>.
+between <i class="var">a</i> and <i class="var">b</i>. The error bound
+of these functions are 0.5000000001 ULP.
 </p>
 
 <hr/>
@@ -1316,7 +1317,8 @@ in <i class="var">*ptr</i>, and the functions return <i>f</i>.
 
 <p class="noindent">
 These functions return the square root of the sum of the squares
-of <i class="var">x</i> and <i class="var">y</i>.
+of <i class="var">x</i> and <i class="var">y</i>. The error bound of
+these functions are 0.5000000001 ULP.
 </p>
 
 <hr/>
@@ -1338,7 +1340,8 @@ of <i class="var">x</i> and <i class="var">y</i>.
 
 <p class="noindent">
 These functions return <i class="var">x</i><i class="var">y</i>
-+ <i class="var">z</i> with a single rounding.
++ <i class="var">z</i> with a single rounding. The error bound of
+these functions are 0.5000000001 ULP.
 </p>
 
 <hr/>
