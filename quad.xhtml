@@ -84,6 +84,7 @@
 </p>
 
 <pre class="white">typedef __float128 Sleef_quad;</pre>
+<pre class="white">typedef long double Sleef_quad;    // On AArch64 systems</pre>
 
 <p class="noindent">
   Otherwise, the library defines a 128-bit data type for retaining a number in
@@ -117,6 +118,28 @@
 </p>
 
 <hr/>
+
+<p class="funcname"><b id="SLEEF_QUAD_C" class="func">SLEEF_QUAD_C</b> - Macro for appending the correct suffix to a QP FP literal</p>
+
+<p class="header">Synopsis</p>
+
+<p class="synopsis">
+#include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b id="SLEEF_QUAD_C" class="func">SLEEF_QUAD_C</b>( <i>literal</i> );<br/>
+<br/>
+</p>
+
+<p class="header">Description</p>
+
+<p class="noindent">
+  This is a macro for appending the correct suffix to a QP FP
+  literal. The data type for representing a QP FP number is not
+  available on all systems, and the data type differs between
+  architectures. This macro can be used to append the correct suffix
+  regardless of the architecture. This macro is defined only if the
+  compiler supports a data type for representing a QP FP number.
+</p>
 
 
 <h2 id="conversion">Conversion and output functions</h2>
