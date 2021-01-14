@@ -31,6 +31,7 @@
     <li><a class="underlined" href="quads390x.xhtml">Data types and functions for System/390 architecture</a></li>
     <li><a class="underlined" href="quadcuda.xhtml">Data types and functions for CUDA</a></li>
     <ul class="circle">
+      <li><a href="#tutorial">Tutorial</a></li>
       <li><a href="#conversion">Conversion functions</a></li>
       <li><a href="#comparison">Comparison and selection functions</a></li>
       <li><a href="#mathfunctions">Math functions</a></li>
@@ -43,6 +44,73 @@
   <li><a class="underlined" href="benchmark.xhtml">Benchmark results</a></li>
   <li><a class="underlined" href="additional.xhtml">Additional notes</a></li>
 </ul>
+
+
+<h2 id="tutorial">Tutorial</h2>
+
+<p class="noindent">
+  Below is a <a class="underlined" href="hellocudaquad.cu">test
+  code</a> for the CUDA functions. CUDA devices cannot directly
+  compute with the QP FP data type. Thus, you have to
+  use <b class="type">Sleef_quadx1</b> data type to retain a QP FP
+  value inside CUDA device code. This data type has the same structure
+  as the QP FP data type, and thus you can directly access the number
+  by casting the pointer to the QP FP data type supported by the
+  compiler. Beware of the strict-aliasing rule in this case.
+</p>
+
+<pre class="code">
+<code>#include &lt;iostream&gt;</code>
+<code>#include &lt;quadmath.h&gt;</code>
+<code></code>
+<code>#include "sleefquadinline_cuda.h"</code>
+<code></code>
+<code>// Based on the tutorial code at https://developer.nvidia.com/blog/even-easier-introduction-cuda/</code>
+<code></code>
+<code>__global__ void pow_gpu(int n, Sleef_quadx1 *r, Sleef_quadx1 *x, Sleef_quadx1 *y)</code>
+<code>{</code>
+<code>  int index = threadIdx.x, stride = blockDim.x;</code>
+<code></code>
+<code>  for (int i = index; i &lt; n; i += stride)</code>
+<code>    r[i] = Sleef_powq1_u10cuda(x[i], y[i]);</code>
+<code>}</code>
+<code></code>
+<code>int main(void)</code>
+<code>{</code>
+<code>  int N = 1 &lt;&lt; 20;</code>
+<code></code>
+<code>  Sleef_quadx1 *rd, *xd, *yd;</code>
+<code>  cudaMallocManaged(&amp;rd, N*sizeof(Sleef_quadx1));</code>
+<code>  cudaMallocManaged(&amp;xd, N*sizeof(Sleef_quadx1));</code>
+<code>  cudaMallocManaged(&amp;yd, N*sizeof(Sleef_quadx1));</code>
+<code></code>
+<code>  __float128 *r = (__float128 *)rd, *x = (__float128 *)xd, *y = (__float128 *)yd;</code>
+<code></code>
+<code>  for (int i = 0; i &lt; N; i++) {</code>
+<code>    r[i] = 0.0;</code>
+<code>    x[i] = 1.00001Q;</code>
+<code>    y[i] = i;</code>
+<code>  }</code>
+<code></code>
+<code>  pow_gpu&lt;&lt;&lt;1, 256&gt;&gt;&gt;(N, rd, xd, yd);</code>
+<code></code>
+<code>  cudaDeviceSynchronize();</code>
+<code></code>
+<code>  double maxError = 0.0;</code>
+<code>  for (int i = 0; i &lt; N; i++)</code>
+<code>    maxError = fmax(maxError, fabsq(r[i]-powq(x[i], y[i])));</code>
+<code>  std::cout &lt;&lt; "Max error: " &lt;&lt; maxError &lt;&lt; std::endl;</code>
+<code></code>
+<code>  cudaFree(y);</code>
+<code>  cudaFree(x);</code>
+<code>  cudaFree(r);</code>
+<code>  </code>
+<code>  return 0;</code>
+<code>}</code>
+</pre>
+<p style="text-align:center;">
+  <a class="underlined" href="hellocudaquad.cu">Source code for testing CUDA functions</a>
+</p>
 
 
 <h2 id="conversion">Conversion functions</h2>

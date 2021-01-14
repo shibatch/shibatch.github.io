@@ -56,13 +56,14 @@
 
 <p class="noindent">
 The functions whose names end with "purecfma" and "purec" are
-implemented with/without using FMA instructions. Functions with FMA
-instructions are only available on architectures on which FMA
-instructions are available. The two digits after "_u" means 10 times
-the maximum error for typical input domain in ULP.  The functions
-whose names contain "finz" or "cinz" are functions that give bit-wise
-consistent results across all platforms. The "f" attribute means that
-it utilizes FMA instructions, while "c" means it does not.
+implemented with and without using FMA instructions,
+respectively. Functions with FMA instructions are only available on
+architectures with FMA instructions. The two digits number after "_u"
+is 10 times the maximum error for typical input domain in ULP. The
+functions whose names contain "finz" and "cinz" are functions that
+give bit-wise consistent results across all platforms. The "f"
+attribute indicates that it utilizes FMA instructions, while "c" means
+no FMA.
 </p>
 
 <h2 id="datatypes">Data types</h2>

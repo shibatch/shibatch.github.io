@@ -64,15 +64,15 @@ following items, in this order.
 <br/>
 
 <ul class="disc">
-  <li>String "Sleef_".</li>
-  <li>Name of the corresponding double precision function in math.h.</li>
-  <li>Data type specifier of a vector element, "d" and "f" for double and single precision functions, respectively.</li>
-  <li>The number of elements in a vector.</li>
-  <li>Accuracy specifier, a concatenation of string "_u" and 10 times
-    the maximum error for typical input domain in ULP(two digits).
-    There is no field in the name, if the function is expected to
-    always return the correctly rounded value.</li>
-  <li>Vector extension specifier.</li>
+  <li>String "Sleef_"</li>
+  <li>Name of the corresponding double precision function in math.h</li>
+  <li>Data type specifier of a vector element, "d" and "f" for double and single precision functions, respectively</li>
+  <li>The number of elements in a vector</li>
+  <li>Accuracy specifier, which is a concatenation of "_u" and 10
+    times the maximum error for typical input domain in ULP (two
+    digits). If the function is expected to always return the
+    correctly rounded value, its name has no accuracy specifier.</li>
+  <li>Vector extension specifier</li>
   <ul class="circle">
     <li>(Nothing) : <a href="additional.xhtml#dispatcher">Dispatcher</a>
     automatically chooses the fastest available vector extension</li>
@@ -80,11 +80,10 @@ following items, in this order.
     <li>sse4 : SSE4.1</li>
     <li>avx2128 : AVX2+FMA3 instructions utilized for 128 bit computation</li>
     <li>avx : AVX</li>
-    <li>fma4 : AMD FMA4</li>
     <li>avx2 : AVX2+FMA3</li>
     <li>avx512f : AVX512F</li>
   </ul>
-  <li>Attributes.</li>
+  <li>Attributes</li>
   <ul class="circle">
     <li>c : The function gives bit-wise consistent results across all platforms</li>
     <li>f : The function requires FMA support and gives bit-wise consistent results across all platforms</li>
