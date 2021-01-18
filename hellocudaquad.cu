@@ -5,16 +5,14 @@
 
 // Based on the tutorial code at https://developer.nvidia.com/blog/even-easier-introduction-cuda/
 
-__global__ void pow_gpu(int n, Sleef_quadx1 *r, Sleef_quadx1 *x, Sleef_quadx1 *y)
-{
+__global__ void pow_gpu(int n, Sleef_quadx1 *r, Sleef_quadx1 *x, Sleef_quadx1 *y) {
   int index = threadIdx.x, stride = blockDim.x;
 
   for (int i = index; i < n; i += stride)
     r[i] = Sleef_powq1_u10cuda(x[i], y[i]);
 }
 
-int main(void)
-{
+int main(void) {
   int N = 1 << 20;
 
   Sleef_quadx1 *rd, *xd, *yd;
@@ -39,9 +37,9 @@ int main(void)
     maxError = fmax(maxError, fabsq(r[i]-powq(x[i], y[i])));
   std::cout << "Max error: " << maxError << std::endl;
 
-  cudaFree(y);
-  cudaFree(x);
-  cudaFree(r);
+  cudaFree(yd);
+  cudaFree(xd);
+  cudaFree(rd);
   
   return 0;
 }

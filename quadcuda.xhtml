@@ -63,20 +63,18 @@
 <code>#include &lt;iostream&gt;</code>
 <code>#include &lt;quadmath.h&gt;</code>
 <code></code>
-<code>#include "sleefquadinline_cuda.h"</code>
+<code>#include &quot;sleefquadinline_cuda.h&quot;</code>
 <code></code>
 <code>// Based on the tutorial code at https://developer.nvidia.com/blog/even-easier-introduction-cuda/</code>
 <code></code>
-<code>__global__ void pow_gpu(int n, Sleef_quadx1 *r, Sleef_quadx1 *x, Sleef_quadx1 *y)</code>
-<code>{</code>
+<code>__global__ void pow_gpu(int n, Sleef_quadx1 *r, Sleef_quadx1 *x, Sleef_quadx1 *y) {</code>
 <code>  int index = threadIdx.x, stride = blockDim.x;</code>
 <code></code>
 <code>  for (int i = index; i &lt; n; i += stride)</code>
 <code>    r[i] = Sleef_powq1_u10cuda(x[i], y[i]);</code>
 <code>}</code>
 <code></code>
-<code>int main(void)</code>
-<code>{</code>
+<code>int main(void) {</code>
 <code>  int N = 1 &lt;&lt; 20;</code>
 <code></code>
 <code>  Sleef_quadx1 *rd, *xd, *yd;</code>
@@ -91,7 +89,6 @@
 <code>    x[i] = 1.00001Q;</code>
 <code>    y[i] = i;</code>
 <code>  }</code>
-<code></code>
 <code>  pow_gpu&lt;&lt;&lt;1, 256&gt;&gt;&gt;(N, rd, xd, yd);</code>
 <code></code>
 <code>  cudaDeviceSynchronize();</code>
@@ -99,17 +96,107 @@
 <code>  double maxError = 0.0;</code>
 <code>  for (int i = 0; i &lt; N; i++)</code>
 <code>    maxError = fmax(maxError, fabsq(r[i]-powq(x[i], y[i])));</code>
-<code>  std::cout &lt;&lt; "Max error: " &lt;&lt; maxError &lt;&lt; std::endl;</code>
+<code>  std::cout &lt;&lt; &quot;Max error: &quot; &lt;&lt; maxError &lt;&lt; std::endl;</code>
 <code></code>
-<code>  cudaFree(y);</code>
-<code>  cudaFree(x);</code>
-<code>  cudaFree(r);</code>
-<code>  </code>
+<code>  cudaFree(yd);</code>
+<code>  cudaFree(xd);</code>
+<code>  cudaFree(rd);</code>
+<code></code>
 <code>  return 0;</code>
 <code>}</code>
 </pre>
 <p style="text-align:center;">
   <a class="underlined" href="hellocudaquad.cu">Source code for testing CUDA functions</a>
+</p>
+
+<br/>
+<br/>
+<br/>
+
+<p>
+  You may want to use both CPU and GPU functions. This is possible, as
+  shown in <a class="underlined" href="hellocudaquad2.cu">the
+  following test code</a>. You cannot use the library version of the
+  SLEEF functions in CUDA source codes. Please include the header
+  files for inlineable functions along with the header file for CUDA
+  functions. The I/O functions are defined in
+  sleefquadinline_purec_scalar.h.  You cannot
+  use <b class="func">SLEEF_Q</b> or <b class="func">SLEEF_QUAD_C</b>
+  macro with nvcc.
+</p>
+
+<pre class="code">
+<code>// nvcc -O3 hellocudaquad2.cu -I./include --fmad=false -Xcompiler -ffp-contract=off</code>
+<code></code>
+<code>#include &lt;iostream&gt;</code>
+<code>#include &lt;stdio.h&gt;</code>
+<code>#include &lt;stdint.h&gt;</code>
+<code>#include &lt;stdarg.h&gt;</code>
+<code>#include &lt;ctype.h&gt;</code>
+<code>#include &lt;assert.h&gt;</code>
+<code>#include &lt;emmintrin.h&gt;</code>
+<code></code>
+<code>#include &quot;sleefquadinline_sse2.h&quot;</code>
+<code>#include &quot;sleefquadinline_purec_scalar.h&quot;</code>
+<code>#include &quot;sleefquadinline_cuda.h&quot;</code>
+<code>#include &quot;sleefinline_sse2.h&quot;</code>
+<code></code>
+<code>// Based on the tutorial code at https://developer.nvidia.com/blog/even-easier-introduction-cuda/</code>
+<code></code>
+<code>__global__ void pow_gpu(int n, Sleef_quadx1 *r, Sleef_quadx1 *x, Sleef_quadx1 *y) {</code>
+<code>  int index = threadIdx.x, stride = blockDim.x;</code>
+<code></code>
+<code>  for (int i = index; i &lt; n; i += stride)</code>
+<code>    r[i] = Sleef_powq1_u10cuda(x[i], y[i]);</code>
+<code>}</code>
+<code></code>
+<code>int main(void) {</code>
+<code>  int N = 1 &lt;&lt; 20;</code>
+<code></code>
+<code>  Sleef_quadx1 *rd, *xd, *yd;</code>
+<code>  cudaMallocManaged(&amp;rd, N*sizeof(Sleef_quadx1));</code>
+<code>  cudaMallocManaged(&amp;xd, N*sizeof(Sleef_quadx1));</code>
+<code>  cudaMallocManaged(&amp;yd, N*sizeof(Sleef_quadx1));</code>
+<code></code>
+<code>  Sleef_quad *r = (Sleef_quad *)rd, *x = (Sleef_quad *)xd, *y = (Sleef_quad *)yd;</code>
+<code></code>
+<code>  //</code>
+<code></code>
+<code>  for (int i = 0; i &lt; N; i++) {</code>
+<code>    r[i] = Sleef_cast_from_doubleq1_purec(0);</code>
+<code>    x[i] = Sleef_cast_from_doubleq1_purec(1.00001);</code>
+<code>    y[i] = Sleef_cast_from_doubleq1_purec(i);</code>
+<code>  }</code>
+<code></code>
+<code>  pow_gpu&lt;&lt;&lt;1, 256&gt;&gt;&gt;(N, rd, xd, yd);</code>
+<code></code>
+<code>  cudaDeviceSynchronize();</code>
+<code></code>
+<code>  Sleef_quadx2 maxError = Sleef_splatq2_sse2(Sleef_strtoq(&quot;0.0&quot;, NULL));</code>
+<code></code>
+<code>  for (int i = 0; i &lt; N; i += 2) {</code>
+<code>    Sleef_quadx2 r2 = Sleef_loadq2_sse2(&amp;r[i]);</code>
+<code>    Sleef_quadx2 x2 = Sleef_loadq2_sse2(&amp;x[i]);</code>
+<code>    Sleef_quadx2 y2 = Sleef_loadq2_sse2(&amp;y[i]);</code>
+<code></code>
+<code>    Sleef_quadx2 q = Sleef_fabsq2_sse2(Sleef_subq2_u05sse2(r2, Sleef_powq2_u10sse2(x2, y2)));</code>
+<code>    maxError = Sleef_fmaxq2_sse2(maxError, q);</code>
+<code>  }</code>
+<code></code>
+<code>  Sleef_printf(&quot;Max error: %Qg\n&quot;,</code>
+<code>               Sleef_fmaxq1_purec(Sleef_getq2_sse2(maxError, 0), Sleef_getq2_sse2(maxError, 1)));</code>
+<code></code>
+<code>  //</code>
+<code></code>
+<code>  cudaFree(yd);</code>
+<code>  cudaFree(xd);</code>
+<code>  cudaFree(rd);</code>
+<code></code>
+<code>  return 0;</code>
+<code>}</code>
+</pre>
+<p style="text-align:center;">
+  <a class="underlined" href="hellocudaquad2.cu">Source code for testing CUDA functions with CPU functions</a>
 </p>
 
 

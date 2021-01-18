@@ -7,8 +7,8 @@ int main(int argc, char **argv) {
   Sleef_quadx2 q1 = Sleef_splatq2_sse2(Sleef_strtoq("1.0", NULL));
 
   Sleef_quadx2 q2 = Sleef_loadq2_sse2((Sleef_quad[]) {
-      SLEEF_Q(+0x1000000000000LL, 0x0000000000000000ULL, 4), // 16.0
-      SLEEF_Q(+0x1000000000000LL, 0x0000000000000000ULL, 2), // 4.0
+      sleef_q(+0x1000000000000LL, 0x0000000000000000ULL, 4), // 16.0
+      sleef_q(+0x1000000000000LL, 0x0000000000000000ULL, 2), // 4.0
   });
 
   Sleef_quadx2 q3;
