@@ -53,9 +53,9 @@
   code</a> for the CUDA functions. CUDA devices cannot directly
   compute with the QP FP data type. Thus, you have to
   use <b class="type">Sleef_quadx1</b> data type to retain a QP FP
-  value inside CUDA device code. This data type has the same structure
-  as the QP FP data type, and thus you can directly access the number
-  by casting the pointer to the QP FP data type supported by the
+  value in CUDA device codes. This data type has the same structure as
+  the QP FP data type, and you can directly access the number by
+  casting the pointer to the QP FP data type supported by the
   compiler. Beware of the strict-aliasing rule in this case.
 </p>
 
@@ -114,15 +114,15 @@
 <br/>
 
 <p>
-  You may want to use both CPU and GPU functions. This is possible, as
-  shown in <a class="underlined" href="hellocudaquad2.cu">the
-  following test code</a>. You cannot use the library version of the
-  SLEEF functions in CUDA source codes. Please include the header
-  files for inlineable functions along with the header file for CUDA
-  functions. The I/O functions are defined in
-  sleefquadinline_purec_scalar.h.  You cannot
-  use <b class="func">SLEEF_Q</b> or <b class="func">SLEEF_QUAD_C</b>
-  macro with nvcc.
+  You may want to use both CPU and GPU functions in the same source
+  code. This is possible, as shown in <a class="underlined"
+  href="hellocudaquad2.cu">the following test code</a>. You cannot use
+  the library version of the SLEEF functions in CUDA source
+  codes. Please include the header files for inlineable functions
+  along with the header file for CUDA functions. The I/O functions are
+  defined in sleefquadinline_purec_scalar.h.  You cannot
+  use <b class="func">SLEEF_QUAD_C</b> or <b class="func">sleef_q</b>
+  in device functions.
 </p>
 
 <pre class="code">

@@ -109,10 +109,10 @@
 
 <p class="noindent">
   This is a function for defining any QP FP constant. This function
-  can be used to represent a QP FP constant on a compiler that does
-  not support <b class="type">__float128</b> data type. This function
-  is small and thus the code for casting is likely be optimized away
-  by the compiler. You can convert any QP FP value to this
+  can be used to represent a QP FP constant on compilers without
+  support for a QP FP data type. This function is small and thus the
+  code is likely be optimized so that the immediate QP FP value is
+  available at runtime. You can convert any QP FP value to this
   representation using <b>qutil</b> utility program.
 </p>
 
@@ -145,8 +145,10 @@
 <p class="header">Constants</p>
 
 <p class="noindent">
-Below is a table of constants defined in sleefquad.h. These are also
-defined in the inline headers.
+Below is the table of QP constants defined in sleefquad.h. These are
+also defined in the inline headers. These constants are defined as QP
+literals if the compiler supports them. Otherwise, they are defined
+with <b id="sleef_q" class="func">sleef_q</b> function.
 </p>
 
 <br/>
@@ -172,7 +174,7 @@ defined in the inline headers.
         </tr>
 	<tr>
 	  <td class="lt-r" align="left">SLEEF_M_Eq</td>
-	  <td class="lt-r" align="left">The base <i>e</i> of natural logarithms</td>
+	  <td class="lt-r" align="left">The base <i>e</i> of natural logarithm</td>
 	  <td class="lt-l" align="left">2.7182818284590452353...</td>
 	</tr>
 	<tr>
