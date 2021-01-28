@@ -343,7 +343,8 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
   format strings defined in the C standard. Beware
   of <a class="underlined"
   href="https://bugs.llvm.org/show_bug.cgi?id=47665">this bug</a> when
-  you use this function with clang.
+  you use this function with clang. These functions are neither
+  thread safe nor atomic.
 </p>
 
 <hr/>
@@ -375,13 +376,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_cast_to_doubleq1_purec" class="func">Sleef_cast_to_doubleq1_purec</b>, <b id="Sleef_cast_to_doubleq1_purecfma" class="func">Sleef_cast_to_doubleq1_purecfma</b> - Convert QP number to double-precision number</p>
+<p class="funcname"><b id="Sleef_cast_to_doubleq1_purec" class="func">Sleef_cast_to_doubleq1_purec</b>, <b id="Sleef_cast_to_doubleq1_purec" class="func">Sleef_cast_to_doubleq1_purec</b>, <b id="Sleef_cast_to_doubleq1_purecfma" class="func">Sleef_cast_to_doubleq1_purecfma</b> - Convert QP number to double-precision number</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">double</b> <b class="func">Sleef_cast_to_doubleq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">double</b> <b class="func">Sleef_cast_to_doubleq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">double</b> <b class="func">Sleef_cast_to_doubleq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -396,13 +398,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_cast_from_doubleq1_purec" class="func">Sleef_cast_from_doubleq1_purec</b>, <b id="Sleef_cast_from_doubleq1_purecfma" class="func">Sleef_cast_from_doubleq1_purecfma</b> - Convert double-precision number to QP number</p>
+<p class="funcname"><b id="Sleef_cast_from_doubleq1" class="func">Sleef_cast_from_doubleq1</b>, <b id="Sleef_cast_from_doubleq1_purec" class="func">Sleef_cast_from_doubleq1_purec</b>, <b id="Sleef_cast_from_doubleq1_purecfma" class="func">Sleef_cast_from_doubleq1_purecfma</b> - Convert double-precision number to QP number</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_doubleq1</b>( <b class="type">double</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_doubleq1_purec</b>( <b class="type">double</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_doubleq1_purecfma</b>( <b class="type">double</b> <i class="var">a</i> );<br/>
 <br/>
@@ -418,13 +421,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 <hr/>
 
 
-<p class="funcname"><b id="Sleef_cast_to_int64q1_purec" class="func">Sleef_cast_to_int64q1_purec</b>, <b id="Sleef_cast_to_int64q1_purecfma" class="func">Sleef_cast_to_int64q1_purecfma</b> - Convert QP number to 64-bit signed integer</p>
+<p class="funcname"><b id="Sleef_cast_to_int64q1" class="func">Sleef_cast_to_int64q1</b>, <b id="Sleef_cast_to_int64q1_purec" class="func">Sleef_cast_to_int64q1_purec</b>, <b id="Sleef_cast_to_int64q1_purecfma" class="func">Sleef_cast_to_int64q1_purecfma</b> - Convert QP number to 64-bit signed integer</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">int64_t</b> <b class="func">Sleef_cast_to_int64q1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">int64_t</b> <b class="func">Sleef_cast_to_int64q1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">int64_t</b> <b class="func">Sleef_cast_to_int64q1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -440,13 +444,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 <hr/>
 
 
-<p class="funcname"><b id="Sleef_cast_from_int64q1_purec" class="func">Sleef_cast_from_int64q1_purec</b>, <b id="Sleef_cast_from_int64q1_purecfma" class="func">Sleef_cast_from_int64q1_purecfma</b> - Convert 64-bit signed integer to QP number</p>
+<p class="funcname"><b id="Sleef_cast_from_int64q1" class="func">Sleef_cast_from_int64q1</b>, <b id="Sleef_cast_from_int64q1_purec" class="func">Sleef_cast_from_int64q1_purec</b>, <b id="Sleef_cast_from_int64q1_purecfma" class="func">Sleef_cast_from_int64q1_purecfma</b> - Convert 64-bit signed integer to QP number</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_int64q1</b>( <b class="type">int64_t</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_int64q1_purec</b>( <b class="type">int64_t</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_int64q1_purecfma</b>( <b class="type">int64_t</b> <i class="var">a</i> );<br/>
 <br/>
@@ -462,13 +467,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 <hr/>
 
 
-<p class="funcname"><b id="Sleef_cast_to_uint64q1_purec" class="func">Sleef_cast_to_uint64q1_purec</b>, <b id="Sleef_cast_to_uint64q1_purecfma" class="func">Sleef_cast_to_uint64q1_purecfma</b> - Convert QP number to 64-bit unsigned integer</p>
+<p class="funcname"><b id="Sleef_cast_to_uint64q1" class="func">Sleef_cast_to_uint64q1</b>, <b id="Sleef_cast_to_uint64q1_purec" class="func">Sleef_cast_to_uint64q1_purec</b>, <b id="Sleef_cast_to_uint64q1_purecfma" class="func">Sleef_cast_to_uint64q1_purecfma</b> - Convert QP number to 64-bit unsigned integer</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">uint64_t</b> <b class="func">Sleef_cast_to_uint64q1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">uint64_t</b> <b class="func">Sleef_cast_to_uint64q1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">uint64_t</b> <b class="func">Sleef_cast_to_uint64q1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -484,13 +490,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 <hr/>
 
 
-<p class="funcname"><b id="Sleef_cast_from_uint64q1_purec" class="func">Sleef_cast_from_uint64q1_purec</b>, <b id="Sleef_cast_from_uint64q1_purecfma" class="func">Sleef_cast_from_uint64q1_purecfma</b> - Convert 64-bit unsigned integer to QP number</p>
+<p class="funcname"><b id="Sleef_cast_from_uint64q1" class="func">Sleef_cast_from_uint64q1</b>, <b id="Sleef_cast_from_uint64q1_purec" class="func">Sleef_cast_from_uint64q1_purec</b>, <b id="Sleef_cast_from_uint64q1_purecfma" class="func">Sleef_cast_from_uint64q1_purecfma</b> - Convert 64-bit unsigned integer to QP number</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_uint64q1</b>( <b class="type">uint64_t</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_uint64q1_purec</b>( <b class="type">uint64_t</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cast_from_uint64q1_purecfma</b>( <b class="type">uint64_t</b> <i class="var">a</i> );<br/>
 <br/>
@@ -512,6 +519,13 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpltq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpleq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpgtq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpgeq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpeqq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpneq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
 <b class="type">int32_t</b> <b class="func">Sleef_icmpltq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">int32_t</b> <b class="func">Sleef_icmpleq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
@@ -543,13 +557,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_icmpq1_purec" class="func">Sleef_icmpq1_purec</b>, <b id="Sleef_icmpq1_purecfma" class="func">Sleef_icmpq1_purecfma</b> - QP comparison</p>
+<p class="funcname"><b id="Sleef_icmpq1" class="func">Sleef_icmpq1</b>, <b id="Sleef_icmpq1_purec" class="func">Sleef_icmpq1_purec</b>, <b id="Sleef_icmpq1_purecfma" class="func">Sleef_icmpq1_purecfma</b> - QP comparison</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">int32_t</b> <b class="func">Sleef_icmpq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">int32_t</b> <b class="func">Sleef_icmpq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">int32_t</b> <b class="func">Sleef_icmpq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
@@ -568,13 +583,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_iunordq1_purec" class="func">Sleef_iunordq1_purec</b>, <b id="Sleef_iunordq1_purecfma" class="func">Sleef_iunordq1_purecfma</b> - Check orderedness</p>
+<p class="funcname"><b id="Sleef_iunordq1" class="func">Sleef_iunordq1</b>, <b id="Sleef_iunordq1_purec" class="func">Sleef_iunordq1_purec</b>, <b id="Sleef_iunordq1_purecfma" class="func">Sleef_iunordq1_purecfma</b> - Check orderedness</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">int32_t</b> <b class="func">Sleef_iunordq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">int32_t</b> <b class="func">Sleef_iunordq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">int32_t</b> <b class="func">Sleef_iunordq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
@@ -596,6 +612,12 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
+<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_addq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_subq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_mulq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_divq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_negq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_addq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_subq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
@@ -623,13 +645,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_sqrtq1_u05purec" class="func">Sleef_sqrtq1_u05purec</b>, <b id="Sleef_sqrtq1_u05purecfma" class="func">Sleef_sqrtq1_u05purecfma</b> - square root functions</p>
+<p class="funcname"><b id="Sleef_sqrtq1_u05" class="func">Sleef_sqrtq1_u05</b>, <b id="Sleef_sqrtq1_u05purec" class="func">Sleef_sqrtq1_u05purec</b>, <b id="Sleef_sqrtq1_u05purecfma" class="func">Sleef_sqrtq1_u05purecfma</b> - square root functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_sqrtq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_sqrtq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_sqrtq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -646,13 +669,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_sinq1_u10purec" class="func">Sleef_sinq1_u10purec</b>, <b id="Sleef_sinq1_u10purecfma" class="func">Sleef_sinq1_u10purecfma</b> - sine functions</p>
+<p class="funcname"><b id="Sleef_sinq1_u10" class="func">Sleef_sinq1_u10</b>, <b id="Sleef_sinq1_u10purec" class="func">Sleef_sinq1_u10purec</b>, <b id="Sleef_sinq1_u10purecfma" class="func">Sleef_sinq1_u10purecfma</b> - sine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_sinq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_sinq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_sinq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -669,13 +693,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_cosq1_u10purec" class="func">Sleef_cosq1_u10purec</b>, <b id="Sleef_cosq1_u10purecfma" class="func">Sleef_cosq1_u10purecfma</b> - cosine functions</p>
+<p class="funcname"><b id="Sleef_cosq1_u10" class="func">Sleef_cosq1_u10</b>, <b id="Sleef_cosq1_u10purec" class="func">Sleef_cosq1_u10purec</b>, <b id="Sleef_cosq1_u10purecfma" class="func">Sleef_cosq1_u10purecfma</b> - cosine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_cosq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cosq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_cosq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -692,13 +717,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_tanq1_u10purec" class="func">Sleef_tanq1_u10purec</b>, <b id="Sleef_tanq1_u10purecfma" class="func">Sleef_tanq1_u10purecfma</b> - tangent functions</p>
+<p class="funcname"><b id="Sleef_tanq1_u10" class="func">Sleef_tanq1_u10</b>, <b id="Sleef_tanq1_u10purec" class="func">Sleef_tanq1_u10purec</b>, <b id="Sleef_tanq1_u10purecfma" class="func">Sleef_tanq1_u10purecfma</b> - tangent functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_tanq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_tanq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_tanq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -715,13 +741,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_asinq1_u10purec" class="func">Sleef_asinq1_u10purec</b>, <b id="Sleef_asinq1_u10purecfma" class="func">Sleef_asinq1_u10purecfma</b> - arc sine functions</p>
+<p class="funcname"><b id="Sleef_asinq1_u10" class="func">Sleef_asinq1_u10</b>, <b id="Sleef_asinq1_u10purec" class="func">Sleef_asinq1_u10purec</b>, <b id="Sleef_asinq1_u10purecfma" class="func">Sleef_asinq1_u10purecfma</b> - arc sine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_asinq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_asinq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_asinq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -738,13 +765,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_acosq1_u10purec" class="func">Sleef_acosq1_u10purec</b>, <b id="Sleef_acosq1_u10purecfma" class="func">Sleef_acosq1_u10purecfma</b> - arc cosine functions</p>
+<p class="funcname"><b id="Sleef_acosq1_u10" class="func">Sleef_acosq1_u10</b>, <b id="Sleef_acosq1_u10purec" class="func">Sleef_acosq1_u10purec</b>, <b id="Sleef_acosq1_u10purecfma" class="func">Sleef_acosq1_u10purecfma</b> - arc cosine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_acosq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_acosq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_acosq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -761,13 +789,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_atanq1_u10purec" class="func">Sleef_atanq1_u10purec</b>, <b id="Sleef_atanq1_u10purecfma" class="func">Sleef_atanq1_u10purecfma</b> - arc tangent functions</p>
+<p class="funcname"><b id="Sleef_atanq1_u10" class="func">Sleef_atanq1_u10</b>, <b id="Sleef_atanq1_u10purec" class="func">Sleef_atanq1_u10purec</b>, <b id="Sleef_atanq1_u10purecfma" class="func">Sleef_atanq1_u10purecfma</b> - arc tangent functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atanq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_atanq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_atanq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -784,13 +813,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_atan2q1_u10purec" class="func">Sleef_atan2q1_u10purec</b>, <b id="Sleef_atan2q1_u10purecfma" class="func">Sleef_atan2q1_u10purecfma</b> - arc tangent functions of two variables</p>
+<p class="funcname"><b id="Sleef_atan2q1_u10" class="func">Sleef_atan2q1_u10</b>, <b id="Sleef_atan2q1_u10purec" class="func">Sleef_atan2q1_u10purec</b>, <b id="Sleef_atan2q1_u10purecfma" class="func">Sleef_atan2q1_u10purecfma</b> - arc tangent functions of two variables</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atan2q1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_atan2q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_atan2q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
 <br/>
@@ -809,13 +839,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_expq1_u10purec" class="func">Sleef_expq1_u10purec</b>, <b id="Sleef_expq1_u10purecfma" class="func">Sleef_expq1_u10purecfma</b> - base-<i>e</i> exponential functions</p>
+<p class="funcname"><b id="Sleef_expq1_u10" class="func">Sleef_expq1_u10</b>, <b id="Sleef_expq1_u10purec" class="func">Sleef_expq1_u10purec</b>, <b id="Sleef_expq1_u10purecfma" class="func">Sleef_expq1_u10purecfma</b> - base-<i>e</i> exponential functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_expq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_expq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_expq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -832,13 +863,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_exp2q1_u10purec" class="func">Sleef_exp2q1_u10purec</b>, <b id="Sleef_exp2q1_u10purecfma" class="func">Sleef_exp2q1_u10purecfma</b> - base-2 exponential functions</p>
+<p class="funcname"><b id="Sleef_exp2q1_u10" class="func">Sleef_exp2q1_u10</b>, <b id="Sleef_exp2q1_u10purec" class="func">Sleef_exp2q1_u10purec</b>, <b id="Sleef_exp2q1_u10purecfma" class="func">Sleef_exp2q1_u10purecfma</b> - base-2 exponential functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_exp2q1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_exp2q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_exp2q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -854,13 +886,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_exp10q1_u10purec" class="func">Sleef_exp10q1_u10purec</b>, <b id="Sleef_exp10q1_u10purecfma" class="func">Sleef_exp10q1_u10purecfma</b> - base-10 exponentail</p>
+<p class="funcname"><b id="Sleef_exp10q1_u10" class="func">Sleef_exp10q1_u10</b>, <b id="Sleef_exp10q1_u10purec" class="func">Sleef_exp10q1_u10purec</b>, <b id="Sleef_exp10q1_u10purecfma" class="func">Sleef_exp10q1_u10purecfma</b> - base-10 exponentail</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_exp10q1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_exp10q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_exp10q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -876,13 +909,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_expm1q1_u10purec" class="func">Sleef_expm1q1_u10purec</b>, <b id="Sleef_expm1q1_u10purecfma" class="func">Sleef_expm1q1_u10purecfma</b> - base-<i>e</i> exponential functions minus 1</p>
+<p class="funcname"><b id="Sleef_expm1q1_u10" class="func">Sleef_expm1q1_u10</b>, <b id="Sleef_expm1q1_u10purec" class="func">Sleef_expm1q1_u10purec</b>, <b id="Sleef_expm1q1_u10purecfma" class="func">Sleef_expm1q1_u10purecfma</b> - base-<i>e</i> exponential functions minus 1</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_expm1q1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_expm1q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_expm1q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -899,13 +933,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_logq1_u10purec" class="func">Sleef_logq1_u10purec</b>, <b id="Sleef_logq1_u10purecfma" class="func">Sleef_logq1_u10purecfma</b> - natural logarithmic functions</p>
+<p class="funcname"><b id="Sleef_logq1_u10" class="func">Sleef_logq1_u10</b>, <b id="Sleef_logq1_u10purec" class="func">Sleef_logq1_u10purec</b>, <b id="Sleef_logq1_u10purecfma" class="func">Sleef_logq1_u10purecfma</b> - natural logarithmic functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_logq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_logq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_logq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -922,13 +957,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_log2q1_u10purec" class="func">Sleef_log2q1_u10purec</b>, <b id="Sleef_log2q1_u10purecfma" class="func">Sleef_log2q1_u10purecfma</b> - base-2 logarithmic functions</p>
+<p class="funcname"><b id="Sleef_log2q1_u10" class="func">Sleef_log2q1_u10</b>, <b id="Sleef_log2q1_u10purec" class="func">Sleef_log2q1_u10purec</b>, <b id="Sleef_log2q1_u10purecfma" class="func">Sleef_log2q1_u10purecfma</b> - base-2 logarithmic functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_log2q1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_log2q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_log2q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -945,13 +981,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_log10q1_u10purec" class="func">Sleef_log10q1_u10purec</b>, <b id="Sleef_log10q1_u10purecfma" class="func">Sleef_log10q1_u10purecfma</b> - base-10 logarithmic functions</p>
+<p class="funcname"><b id="Sleef_log10q1_u10" class="func">Sleef_log10q1_u10</b>, <b id="Sleef_log10q1_u10purec" class="func">Sleef_log10q1_u10purec</b>, <b id="Sleef_log10q1_u10purecfma" class="func">Sleef_log10q1_u10purecfma</b> - base-10 logarithmic functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_log10q1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_log10q1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_log10q1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -968,13 +1005,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_log1pq1_u10purec" class="func">Sleef_log1pq1_u10purec</b>, <b id="Sleef_log1pq1_u10purecfma" class="func">Sleef_log1pq1_u10purecfma</b> - logarithm of one plus argument</p>
+<p class="funcname"><b id="Sleef_log1pq1_u10" class="func">Sleef_log1pq1_u10</b>, <b id="Sleef_log1pq1_u10purec" class="func">Sleef_log1pq1_u10purec</b>, <b id="Sleef_log1pq1_u10purecfma" class="func">Sleef_log1pq1_u10purecfma</b> - logarithm of one plus argument</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_log1pq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_log1pq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_log1pq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -991,13 +1029,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_powq1_u10purec" class="func">Sleef_powq1_u10purec</b>, <b id="Sleef_powq1_u10purecfma" class="func">Sleef_powq1_u10purecfma</b> - power functions</p>
+<p class="funcname"><b id="Sleef_powq1_u10" class="func">Sleef_powq1_u10</b>, <b id="Sleef_powq1_u10purec" class="func">Sleef_powq1_u10purec</b>, <b id="Sleef_powq1_u10purecfma" class="func">Sleef_powq1_u10purecfma</b> - power functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_powq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_powq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_powq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <br/>
@@ -1013,13 +1052,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_sinhq1_u10purec" class="func">Sleef_sinhq1_u10purec</b>, <b id="Sleef_sinhq1_u10purecfma" class="func">Sleef_sinhq1_u10purecfma</b> - hyperbolic sine functions</p>
+<p class="funcname"><b id="Sleef_sinhq1_u10" class="func">Sleef_sinhq1_u10</b>, <b id="Sleef_sinhq1_u10purec" class="func">Sleef_sinhq1_u10purec</b>, <b id="Sleef_sinhq1_u10purecfma" class="func">Sleef_sinhq1_u10purecfma</b> - hyperbolic sine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_sinhq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_sinhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_sinhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1036,13 +1076,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_coshq1_u10purec" class="func">Sleef_coshq1_u10purec</b>, <b id="Sleef_coshq1_u10purecfma" class="func">Sleef_coshq1_u10purecfma</b> - hyperbolic cosine functions</p>
+<p class="funcname"><b id="Sleef_coshq1_u10" class="func">Sleef_coshq1_u10</b>, <b id="Sleef_coshq1_u10purec" class="func">Sleef_coshq1_u10purec</b>, <b id="Sleef_coshq1_u10purecfma" class="func">Sleef_coshq1_u10purecfma</b> - hyperbolic cosine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_coshq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_coshq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_coshq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1059,13 +1100,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_tanhq1_u10purec" class="func">Sleef_tanhq1_u10purec</b>, <b id="Sleef_tanhq1_u10purecfma" class="func">Sleef_tanhq1_u10purecfma</b> - hyperbolic tangent functions</p>
+<p class="funcname"><b id="Sleef_tanhq1_u10" class="func">Sleef_tanhq1_u10</b>, <b id="Sleef_tanhq1_u10purec" class="func">Sleef_tanhq1_u10purec</b>, <b id="Sleef_tanhq1_u10purecfma" class="func">Sleef_tanhq1_u10purecfma</b> - hyperbolic tangent functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_tanhq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_tanhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_tanhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1082,13 +1124,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_asinhq1_u10purec" class="func">Sleef_asinhq1_u10purec</b>, <b id="Sleef_asinhq1_u10purecfma" class="func">Sleef_asinhq1_u10purecfma</b> - inverse hyperbolic sine functions</p>
+<p class="funcname"><b id="Sleef_asinhq1_u10" class="func">Sleef_asinhq1_u10</b>, <b id="Sleef_asinhq1_u10purec" class="func">Sleef_asinhq1_u10purec</b>, <b id="Sleef_asinhq1_u10purecfma" class="func">Sleef_asinhq1_u10purecfma</b> - inverse hyperbolic sine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_asinhq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_asinhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_asinhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1105,13 +1148,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_acoshq1_u10purec" class="func">Sleef_acoshq1_u10purec</b>, <b id="Sleef_acoshq1_u10purecfma" class="func">Sleef_acoshq1_u10purecfma</b> - inverse hyperbolic cosine functions</p>
+<p class="funcname"><b id="Sleef_acoshq1_u10" class="func">Sleef_acoshq1_u10</b>, <b id="Sleef_acoshq1_u10purec" class="func">Sleef_acoshq1_u10purec</b>, <b id="Sleef_acoshq1_u10purecfma" class="func">Sleef_acoshq1_u10purecfma</b> - inverse hyperbolic cosine functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_acoshq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_acoshq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_acoshq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1128,13 +1172,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_atanhq1_u10purec" class="func">Sleef_atanhq1_u10purec</b>, <b id="Sleef_atanhq1_u10purecfma" class="func">Sleef_atanhq1_u10purecfma</b> - inverse hyperbolic tangent functions</p>
+<p class="funcname"><b id="Sleef_atanhq1_u10" class="func">Sleef_atanhq1_u10</b>, <b id="Sleef_atanhq1_u10purec" class="func">Sleef_atanhq1_u10purec</b>, <b id="Sleef_atanhq1_u10purecfma" class="func">Sleef_atanhq1_u10purecfma</b> - inverse hyperbolic tangent functions</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_atanhq1_u10</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_atanhq1_u10purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_atanhq1_u10purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1151,13 +1196,14 @@ with <b id="sleef_q" class="func">sleef_q</b> function.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_truncq1_purec" class="func">Sleef_truncq1_purec</b>, <b id="Sleef_truncq1_purecfma" class="func">Sleef_truncq1_purecfma</b> - round to integer towards zero</p>
+<p class="funcname"><b id="Sleef_truncq1" class="func">Sleef_truncq1</b>, <b id="Sleef_truncq1_purec" class="func">Sleef_truncq1_purec</b>, <b id="Sleef_truncq1_purecfma" class="func">Sleef_truncq1_purecfma</b> - round to integer towards zero</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_truncq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_truncq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_truncq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1173,13 +1219,14 @@ format, nearest to but no larger in magnitude than the argument.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_floorq1_purec" class="func">Sleef_floorq1_purec</b>, <b id="Sleef_floorq1_purecfma" class="func">Sleef_floorq1_purecfma</b> - round to integer towards minus infinity</p>
+<p class="funcname"><b id="Sleef_floorq1" class="func">Sleef_floorq1</b>, <b id="Sleef_floorq1_purec" class="func">Sleef_floorq1_purec</b>, <b id="Sleef_floorq1_purecfma" class="func">Sleef_floorq1_purecfma</b> - round to integer towards minus infinity</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_floorq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_floorq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_floorq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1195,13 +1242,14 @@ than <i class="var">a</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_ceilq1_purec" class="func">Sleef_ceilq1_purec</b>, <b id="Sleef_ceilq1_purecfma" class="func">Sleef_ceilq1_purecfma</b> - round to integer towards plus infinity</p>
+<p class="funcname"><b id="Sleef_ceilq1" class="func">Sleef_ceilq1</b>, <b id="Sleef_ceilq1_purec" class="func">Sleef_ceilq1_purec</b>, <b id="Sleef_ceilq1_purecfma" class="func">Sleef_ceilq1_purecfma</b> - round to integer towards plus infinity</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_ceilq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_ceilq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_ceilq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1217,13 +1265,14 @@ than <i class="var">a</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_roundq1_purec" class="func">Sleef_roundq1_purec</b>, <b id="Sleef_roundq1_purecfma" class="func">Sleef_roundq1_purecfma</b> - round to integer away from zero</p>
+<p class="funcname"><b id="Sleef_roundq1" class="func">Sleef_roundq1</b>, <b id="Sleef_roundq1_purec" class="func">Sleef_roundq1_purec</b>, <b id="Sleef_roundq1_purecfma" class="func">Sleef_roundq1_purecfma</b> - round to integer away from zero</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_roundq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_roundq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_roundq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1239,13 +1288,14 @@ rounding halfway cases away from zero.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_rintq1_purec" class="func">Sleef_rintq1_purec</b>, <b id="Sleef_rintq1_purecfma" class="func">Sleef_rintq1_purecfma</b> - round to integer, ties round to even</p>
+<p class="funcname"><b id="Sleef_rintq1" class="func">Sleef_rintq1</b>, <b id="Sleef_rintq1_purec" class="func">Sleef_rintq1_purec</b>, <b id="Sleef_rintq1_purecfma" class="func">Sleef_rintq1_purecfma</b> - round to integer, ties round to even</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_rintq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_rintq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_rintq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1261,13 +1311,14 @@ round-to-even method.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fabsq1_purec" class="func">Sleef_fabsq1_purec</b>, <b id="Sleef_fabsq1_purecfma" class="func">Sleef_fabsq1_purecfma</b> - absolute value</p>
+<p class="funcname"><b id="Sleef_fabsq1" class="func">Sleef_fabsq1</b>, <b id="Sleef_fabsq1_purec" class="func">Sleef_fabsq1_purec</b>, <b id="Sleef_fabsq1_purecfma" class="func">Sleef_fabsq1_purecfma</b> - absolute value</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fabsq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fabsq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fabsq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i> );<br/>
 <br/>
@@ -1282,13 +1333,14 @@ These functions return the absolute value of <i class="var">a</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_copysignq1_purec" class="func">Sleef_copysignq1_purec</b>, <b id="Sleef_copysignq1_purecfma" class="func">Sleef_copysignq1_purecfma</b> - copy sign of a number</p>
+<p class="funcname"><b id="Sleef_copysignq1" class="func">Sleef_copysignq1</b>, <b id="Sleef_copysignq1_purec" class="func">Sleef_copysignq1_purec</b>, <b id="Sleef_copysignq1_purecfma" class="func">Sleef_copysignq1_purecfma</b> - copy sign of a number</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_copysignq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_copysignq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_copysignq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
@@ -1304,13 +1356,14 @@ of <i class="var">a</i> and the sign of <i class="var">b</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fmaxq1_purec" class="func">Sleef_fmaxq1_purec</b>, <b id="Sleef_fmaxq1_purecfma" class="func">Sleef_fmaxq1_purecfma</b> - maximum of two numbers</p>
+<p class="funcname"><b id="Sleef_fmaxq1" class="func">Sleef_fmaxq1</b>, <b id="Sleef_fmaxq1_purec" class="func">Sleef_fmaxq1_purec</b>, <b id="Sleef_fmaxq1_purecfma" class="func">Sleef_fmaxq1_purecfma</b> - maximum of two numbers</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmaxq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fmaxq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fmaxq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
@@ -1326,13 +1379,14 @@ and <i class="var">b</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fminq1_purec" class="func">Sleef_fminq1_purec</b>, <b id="Sleef_fminq1_purecfma" class="func">Sleef_fminq1_purecfma</b> - minimum of two numbers</p>
+<p class="funcname"><b id="Sleef_fminq1" class="func">Sleef_fminq1</b>, <b id="Sleef_fminq1_purec" class="func">Sleef_fminq1_purec</b>, <b id="Sleef_fminq1_purecfma" class="func">Sleef_fminq1_purecfma</b> - minimum of two numbers</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fminq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fminq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fminq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
@@ -1348,13 +1402,14 @@ and <i class="var">b</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fdimq1_u05purec" class="func">Sleef_fdimq1_u05purec</b>, <b id="Sleef_fdimq1_u05purecfma" class="func">Sleef_fdimq1_u05purecfma</b> - positive difference</p>
+<p class="funcname"><b id="Sleef_fdimq1_u05" class="func">Sleef_fdimq1_u05</b>, <b id="Sleef_fdimq1_u05purec" class="func">Sleef_fdimq1_u05purec</b>, <b id="Sleef_fdimq1_u05purecfma" class="func">Sleef_fdimq1_u05purecfma</b> - positive difference</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fdimq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad</b> <i class="var">b</i> );<br/>
 <br/>
@@ -1371,13 +1426,14 @@ of these functions are 0.5000000001 ULP.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fmodq1_purec" class="func">Sleef_fmodq1_purec</b>, <b id="Sleef_fmodq1_purecfma" class="func">Sleef_fmodq1_purecfma</b> - floating point remainder</p>
+<p class="funcname"><b id="Sleef_fmodq1" class="func">Sleef_fmodq1</b>, <b id="Sleef_fmodq1_purec" class="func">Sleef_fmodq1_purec</b>, <b id="Sleef_fmodq1_purecfma" class="func">Sleef_fmodq1_purecfma</b> - floating point remainder</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmodq1</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fmodq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fmodq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <br/>
@@ -1395,13 +1451,14 @@ an integer.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_remainderq1_purec" class="func">Sleef_remainderq1_purec</b>, <b id="Sleef_remainderq1_purecfma" class="func">Sleef_remainderq1_purecfma</b> - floatint point remainder</p>
+<p class="funcname"><b id="Sleef_remainderq1" class="func">Sleef_remainderq1</b>, <b id="Sleef_remainderq1_purec" class="func">Sleef_remainderq1_purec</b>, <b id="Sleef_remainderq1_purecfma" class="func">Sleef_remainderq1_purecfma</b> - floatint point remainder</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_remainderq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <br/>
@@ -1419,13 +1476,14 @@ with the round-to-even method.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_frexpq1_purec" class="func">Sleef_frexpq1_purec</b>, <b id="Sleef_frexpq1_purecfma" class="func">Sleef_frexpq1_purecfma</b> - split a number to fractional and integral components</p>
+<p class="funcname"><b id="Sleef_frexpq1" class="func">Sleef_frexpq1</b>, <b id="Sleef_frexpq1_purec" class="func">Sleef_frexpq1_purec</b>, <b id="Sleef_frexpq1_purecfma" class="func">Sleef_frexpq1_purecfma</b> - split a number to fractional and integral components</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_frexpq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">int *</b> <i class="var">ptr</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_frexpq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">int *</b> <i class="var">ptr</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_frexpq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">int *</b> <i class="var">ptr</i> );<br/>
 <br/>
@@ -1444,13 +1502,14 @@ and the functions return <i>f</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_modfq1_purec" class="func">Sleef_modfq1_purec</b>, <b id="Sleef_modfq1_purecfma" class="func">Sleef_modfq1_purecfma</b> - break a number into integral and fractional parts</p>
+<p class="funcname"><b id="Sleef_modfq1" class="func">Sleef_modfq1</b>, <b id="Sleef_modfq1_purec" class="func">Sleef_modfq1_purec</b>, <b id="Sleef_modfq1_purecfma" class="func">Sleef_modfq1_purecfma</b> - break a number into integral and fractional parts</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_modfq1</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad *</b> <i class="var">ptr</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_modfq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad *</b> <i class="var">ptr</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_modfq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">a</i>, <b class="type">Sleef_quad *</b> <i class="var">ptr</i> );<br/>
 <br/>
@@ -1469,13 +1528,14 @@ in <i class="var">*ptr</i>, and the functions return <i>f</i>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_hypotq1_u05purec" class="func">Sleef_hypotq1_u05purec</b>, <b id="Sleef_hypotq1_u05purecfma" class="func">Sleef_hypotq1_u05purecfma</b> - 2D Euclidian distance</p>
+<p class="funcname"><b id="Sleef_hypotq1_u05" class="func">Sleef_hypotq1_u05</b>, <b id="Sleef_hypotq1_u05purec" class="func">Sleef_hypotq1_u05purec</b>, <b id="Sleef_hypotq1_u05purecfma" class="func">Sleef_hypotq1_u05purecfma</b> - 2D Euclidian distance</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_hypotq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_hypotq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_hypotq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i> );<br/>
 <br/>
@@ -1492,13 +1552,14 @@ these functions are 0.5000000001 ULP.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_fmaq1_u05purec" class="func">Sleef_fmaq1_u05purec</b>, <b id="Sleef_fmaq1_u05purecfma" class="func">Sleef_fmaq1_u05purecfma</b> - fused multiply and accumulate</p>
+<p class="funcname"><b id="Sleef_fmaq1_u05" class="func">Sleef_fmaq1_u05</b>, <b id="Sleef_fmaq1_u05purec" class="func">Sleef_fmaq1_u05purec</b>, <b id="Sleef_fmaq1_u05purecfma" class="func">Sleef_fmaq1_u05purecfma</b> - fused multiply and accumulate</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_fmaq1_u05</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">z</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fmaq1_u05purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">z</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_fmaq1_u05purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">Sleef_quad</b> <i class="var">y</i>, <b class="type">Sleef_quad</b> <i class="var">z</i> );<br/>
 <br/>
@@ -1515,13 +1576,14 @@ these functions are 0.5000000001 ULP.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_ldexpq1_purec" class="func">Sleef_ldexpq1_purec</b>, <b id="Sleef_ldexpq1_purecldexp" class="func">Sleef_ldexpq1_purecfma</b> - multiply by integral power of 2</p>
+<p class="funcname"><b id="Sleef_ldexpq1" class="func">Sleef_ldexpq1</b>, <b id="Sleef_ldexpq1_purec" class="func">Sleef_ldexpq1_purec</b>, <b id="Sleef_ldexpq1_purecldexp" class="func">Sleef_ldexpq1_purecfma</b> - multiply by integral power of 2</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">Sleef_quad</b> <b class="func">Sleef_ldexpq1</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">int</b> <i class="var">e</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_ldexpq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">int</b> <i class="var">e</i> );<br/>
 <b class="type">Sleef_quad</b> <b class="func">Sleef_ldexpq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i>, <b class="type">int</b> <i class="var">e</i> );<br/>
 <br/>
@@ -1536,13 +1598,14 @@ These functions return <i class="var">x</i> 2<sup><i class="var">e</i></sup>.
 
 <hr/>
 
-<p class="funcname"><b id="Sleef_ilogbq1_purec" class="func">Sleef_ilogbq1_purec</b>, <b id="Sleef_ilogbq1_purecilogb" class="func">Sleef_ilogbq1_purecfma</b> - integer exponent of an FP number</p>
+<p class="funcname"><b id="Sleef_ilogbq1" class="func">Sleef_ilogbq1</b>, <b id="Sleef_ilogbq1_purec" class="func">Sleef_ilogbq1_purec</b>, <b id="Sleef_ilogbq1_purecilogb" class="func">Sleef_ilogbq1_purecfma</b> - integer exponent of an FP number</p>
 
 <p class="header">Synopsis</p>
 
 <p class="synopsis">
 #include &lt;sleefquad.h&gt;<br/>
 <br/>
+<b class="type">int</b> <b class="func">Sleef_ilogbq1</b>( <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
 <b class="type">int</b> <b class="func">Sleef_ilogbq1_purec</b>( <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
 <b class="type">int</b> <b class="func">Sleef_ilogbq1_purecfma</b>( <b class="type">Sleef_quad</b> <i class="var">x</i> );<br/>
 <br/>
@@ -1557,9 +1620,6 @@ of <i class="var">x</i>. If <i class="var">x</i> is zero, infinite and
 a NaN, they return <b>SLEEF_FP_ILOGB0</b>, <b>INT_MAX</b>
 and <b>SLEEF_FP_ILOGBNAN</b>, respectively.
 </p>
-
-
-
 
 
 <h2 id="tutorial">Tutorial</h2>
