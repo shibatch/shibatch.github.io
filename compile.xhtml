@@ -21,12 +21,13 @@
   <li>&nbsp;</li>
   <li><a class="underlined" href="compile.xhtml">Compiling and installing the library</a></li>
     <ul class="disc">
-      <li><a href="compile.xhtml#preliminaries">Preliminaries</a></li>
-      <li><a href="compile.xhtml#cmakevars">Common CMake variables</a></li>
-      <li><a href="compile.xhtml#linux">Compiling and installing the library on Linux</a></li>
-      <li><a href="compile.xhtml#MSVC">Compiling the library with Microsoft Visual C++</a></li>
-      <li><a href="compile.xhtml#hello">Compiling and running "Hello SLEEF"</a></li>
-      <li><a href="compile.xhtml#import">Importing SLEEF into your project</a></li>
+      <li><a href="#preliminaries">Preliminaries</a></li>
+      <li><a href="#cmakevars">Common CMake variables</a></li>
+      <li><a href="#linux">Compiling and installing the library on Linux</a></li>
+      <li><a href="#MSVC">Compiling the library with Microsoft Visual C++</a></li>
+      <li><a href="#hello">Compiling and running "Hello SLEEF"</a></li>
+      <li><a href="#import">Importing SLEEF into your project</a></li>
+      <li><a href="#cross">Cross compilation for iOS and Android</a></li>
     </ul>
   <li>&nbsp;</li>
   <li><a class="underlined" href="purec.xhtml">Math library reference</a></li>
@@ -415,6 +416,49 @@ $ &block;</pre>
 <p style="text-align:center;">
   Fig. 2.3: <a href="CMakeLists.txt">Example CMakeLists.txt</a>
 </p>
+
+
+<h2 id="cross">Cross compilation for iOS and Android</h2>
+
+<p class="noindent">
+  SLEEF has preliminary support for iOS and Android. Here,
+  "preliminary" means that the library is only tested to be built, but
+  not tested to work correctly on the real devices. In order to cross
+  compile the library, you need a cmake tool chain file for the
+  corresponding OS. The tool chain file for iOS can be downloaded
+  from <a href="https://github.com/leetal/ios-cmake">https://github.com/leetal/ios-cmake</a>,
+  and the tool chain file for Android is included in the SDK. You
+  first need to build the library for the host computer, then for the
+  target OS. Below is an example sequence of commands for cross
+  compiling the library for iOS.
+</p>
+
+<pre class="command" style="margin-top: 2.0em; margin-bottom: 0.5cm;">$ mkdir build-native
+$ cd build-native
+$ cmake -GNinja ..
+$ ninja
+$ cd ..
+$ mkdir build-cross
+$ cd build-cross
+$ cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DNATIVE_BUILD_DIR=`pwd`/../build-native -DDISABLE_MPFR=TRUE -DDISABLE_SSL=TRUE ..
+$ ninja
+</pre>
+
+<p>
+Below is an example sequence of commands for cross compiling the library for Android.
+</p>
+
+<pre class="command" style="margin-top: 2.0em; margin-bottom: 0.5cm;">$ mkdir build-native
+$ cd build-native
+$ cmake -GNinja ..
+$ ninja
+$ cd ..
+$ mkdir build-cross
+$ cd build-cross
+$ cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=/opt/android-ndk-r21d/build/cmake/android.toolchain.cmake -DNATIVE_BUILD_DIR=`pwd`/../build-native -DANDROID_ABI=arm64-v8a ..
+$ ninja
+</pre>
+
 
 <p class="footer">
   Copyright &copy; 2021 SLEEF Project.<br/>
