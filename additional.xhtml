@@ -144,26 +144,48 @@ computers. With these pragmas, gcc can use its auto-vectorizer to
 vectorize calls to these scalar functions.
 </p>
 
+<p>
+For example, <a class="underlined" href="sophomore.c">the following code</a> can be vectorized by gcc-10.
+</p>
+
 <pre class="code">
-<code>#define SLEEF_ENABLE_OMP_SIMD</code>
-<code>#include &lt;sleef.h&gt;</code>
+<code>#include &lt;stdio.h&gt;</code>
 <code></code>
-<code>void func(double *a, double *b, double *c) {</code>
-<code>#pragma omp parallel for simd</code>
-<code>  for(int i=0;i&lt;1024;i++) a[i] = Sleef_pow_u10(b[i], c[i]);</code>
+<code>#define SLEEF_ENABLE_OMP_SIMD</code>
+<code>#include &quot;sleef.h&quot;</code>
+<code></code>
+<code>#define N 65536</code>
+<code>#define M (N + 3)</code>
+<code></code>
+<code>static double func(double x) { return Sleef_pow_u10(x, -x); }</code>
+<code></code>
+<code>double int_simpson(double a, double b) {</code>
+<code>   double h = (b - a) / M;</code>
+<code>   double sum_odd = 0.0, sum_even = 0.0;</code>
+<code>   for(int i = 1;i &lt;= M-3;i += 2) {</code>
+<code>     sum_odd  += func(a + h * i);</code>
+<code>     sum_even += func(a + h * (i + 1));</code>
+<code>   }</code>
+<code>   return h / 3 * (func(a) + 4 * sum_odd + 2 * sum_even + 4 * func(b - h) + func(b));</code>
+<code>}</code>
+<code></code>
+<code>int main() {</code>
+<code>  double sum = 0;</code>
+<code>  for(int i=1;i&lt;N;i++) sum += Sleef_pow_u10(i, -i);</code>
+<code>  printf(&quot;%g %g&#92;n&quot;, int_simpson(0, 1), sum);</code>
 <code>}</code>
 </pre>
 
-<p>
-For example, the above code is vectorized by gcc-10, as shown below.
-</p>
-
-<pre class="command">$ gcc-10 -fopenmp -mavx2 -O3 autovect.c -S
-$ grep _ZGV autovect.s
+<pre class="command">$ gcc-10 -fopenmp -ffast-math -mavx2 -O3 sophomore.c -lsleef -S -o- | grep _ZGV
+        call    _ZGVdN4vv_Sleef_pow_u10@PLT
+        call    _ZGVdN4vv_Sleef_pow_u10@PLT
+        call    _ZGVdN4vv_Sleef_pow_u10@PLT
+        call    _ZGVdN4vv_Sleef_pow_u10@PLT
+        call    _ZGVdN4vv_Sleef_pow_u10@PLT
+        call    _ZGVdN4vv_Sleef_pow_u10@PLT
         call    _ZGVdN4vv_Sleef_pow_u10@PLT
 $ &block;
 </pre>
-
 
 <h2 id="lto">Using link time optimization</h2>
 
@@ -176,10 +198,10 @@ the code calling the functions. The build system in SLEEF supports LTO
 and thus it can be built with LTO support by just
 specifying <b>-DENABLE_LTO=TRUE</b> cmake option. However, there are a
 few things to note in order to get the optimal performance. 1. You
-should not use the dispatcher with LTO. Dispatchers inhibit the
-functions to be fused by LTO. 2. You have to use the same compiler
-with the same version to build the library and your code. 3. You
-cannot build shared libs with LTO.
+should not use the dispatcher with LTO. Dispatchers prevent the
+functions from being fused by LTO. 2. You have to use the same
+compiler with the same version to build the library and your
+code. 3. You cannot build shared libs with LTO.
 </p>
 
 
@@ -227,11 +249,6 @@ and AVX2.
 <code>  printf(&quot;%g, %gn&quot;, d[0], d[1]);</code>
 <code>}</code>
 </pre>
-
-<p>
-Do not forget to specify <b>-ffp-contract=off</b> compiler option when
-you compile your code that includes the headers.
-</p>
 
 <pre class="command">$ gcc-10 -ffp-contract=off -O3 -march=native helloinline.c -I./include
 $ ./a.out
