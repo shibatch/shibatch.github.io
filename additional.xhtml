@@ -35,6 +35,7 @@
       <li><a href="#inline">Using header files of inlinable functions</a></li>
       <li><a href="#wasm">Utilizing SLEEF for WebAssembly</a></li>
       <li><a href="#dispatcher">How the dispatcher works</a></li>
+      <li><a href="#libsleefscalar">About libsleefscalar</a></li>
       <li><a href="#ulp">ULP, gradual underflow and flush-to-zero mode</a></li>
       <li><a href="#paynehanek">Explanatory source code for the modified Payne Hanek reduction method</a></li>
       <li><a href="#logo">About the logo</a></li>
@@ -106,28 +107,16 @@
 <h2 id="scalar">Vectorizing scalar functions</h2>
 
 <p class="noindent">
-Functions like <b class="func">Sleef_sin_u10</b> were originally built
-from sleefdp.c and sleefsp.c, but these functions are now moved to
-libsleefscalar. As of version 3.6, the scalar functions whose names do
-not end with <b>purec</b> or <b>purecfma</b> are dispathcers that
-choose from FMA or non-FMA functions, and thus these functions run
-faster than previous versions on computers that supports FMA. For
-example, <b class="func">Sleef_sin_u10</b> is an alias
-for <b class="func">Sleef_sind1_u10</b> that chooses
-from <b class="func">Sleef_sind1_u10purec</b>
-and <b class="func">Sleef_sind1_u10purecfma</b>.
-</p>
-
-<p>
-OpenMP SIMD pragmas can be added to declarations of scalar functions
+Recent x86_64 gcc can <a class="underlined"
+href="https://gcc.gnu.org/projects/tree-ssa/vectorization.html">auto-vectorize</a>
+calls to functions. In order to utilize this functionality, OpenMP
+SIMD pragmas can be added to declarations of scalar functions
 like <b class="func">Sleef_sin_u10</b> by defining
-<b>SLEEF_ENABLE_OMP_SIMD</b> macro before including sleef.h on x86_64
-computers. With these pragmas, gcc can use its auto-vectorizer to
-vectorize calls to these scalar functions.
-</p>
-
-<p>
-For example, <a class="underlined" href="sophomore.c">the following code</a> can be vectorized by gcc-10.
+<b>SLEEF_ENABLE_OMP_SIMD</b> macro before including <b>sleef.h</b> on
+x86_64 computers. With these pragmas, gcc can use its auto-vectorizer
+to vectorize calls to these scalar functions. For
+example, <a class="underlined" href="sophomore.c">the following
+code</a> can be vectorized by gcc-10.
 </p>
 
 <pre class="code">
@@ -182,11 +171,12 @@ $ &block;
   href="https://developer.arm.com/docs/101129/latest">AArch64 vector
   ABI</a> and <a class="underlined"
   href="https://github.com/power8-abi-doc/vector-function-abi/">Power
-  Vector ABI</a>. The auto-vectorizer in x86_64 gcc generates calls
+  Vector ABI</a>. The auto-vectorizer in x86_64 gcc is capable of
+  vectorizing calls to the standard math functions and generates calls
   to <a class="underlined"
   href="https://sourceware.org/glibc/wiki/libmvec">libmvec</a>. The
   GNUABI version of SLEEF library can be used as a substitute for
-  this.
+  libmvec.
 </p>
 
 <pre class="code">
@@ -449,6 +439,25 @@ $ &block;
 </pre>
 <p style="text-align:center; margin-bottom: 1.0cm;">
   Fig. 7.1: Simplified code of our dispatcher
+</p>
+
+
+<h2 id="libsleefscalar">About libsleefscalar</h2>
+
+<p class="noindent">
+Functions like <b class="func">Sleef_sin_u10</b> were originally built
+from sleefdp.c and sleefsp.c, but these functions are now moved to
+<b>libsleefscalar</b>. These functions are provided to make it easier
+to understand how each sleef function works. As of version 3.6, the
+functions with the same names, which are the functions whose names do
+not end with <b>purec</b> or <b>purecfma</b>, are dispathcers that
+choose from FMA or non-FMA functions. These dispatcher functions
+generally run faster than the functions built from sleefdp.c and
+sleefsp.c. For example, <b class="func">Sleef_sin_u10</b>
+in <b>libsleef</b> is now an alias
+for <b class="func">Sleef_sind1_u10</b> that chooses
+from <b class="func">Sleef_sind1_u10purec</b>
+and <b class="func">Sleef_sind1_u10purecfma</b>.
 </p>
 
 
