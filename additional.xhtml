@@ -94,17 +94,18 @@
 <p class="noindent">
   <b>A3:</b> The most important thing is to choose the fastest
   available vector extension. SLEEF is optimized for computers with
-  FMA instructions, and it runs slow on Ivy Bridge or older CPUs and
-  Atom, that do not have FMA instructions. If you are not sure, use
-  the dispatcher. <a class="underlined" href="#dispatcher">The
-  dispatcher in SLEEF is not slow</a>. If you want to further speed up
-  computation, try using <a class="underlined" href="#lto">LTO</a>. By
-  using LTO, the compiler fuses the code within the library to the
-  code calling the library functions, and this sometimes results in
-  considerable performance boost. In this case, you should not use the
-  dispatcher, and you should use the same compiler with the same
-  version to build SLEEF and the program against which SLEEF is
-  linked.
+  <a class="underlined"
+href="https://en.wikipedia.org/wiki/Multiply%E2%80%93accumulate_operation#Fused_multiply%E2%80%93add">FMA</a>
+instructions, and it runs slow on Ivy Bridge or older CPUs and Atom,
+that do not have FMA instructions. If you are not sure, use the
+dispatcher. <a class="underlined" href="#dispatcher">The dispatcher in
+SLEEF is not slow</a>. If you want to further speed up computation,
+try using <a class="underlined" href="#lto">LTO</a>. By using LTO, the
+compiler fuses the code within the library to the code calling the
+library functions, and this sometimes results in considerable
+performance boost. In this case, you should not use the dispatcher,
+and you should use the same compiler with the same version to build
+SLEEF and the program against which SLEEF is linked.
 </p>
 
 <h2 id="vectorizing">Vectorizing calls to scalar functions</h2>

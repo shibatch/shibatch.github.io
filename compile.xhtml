@@ -161,13 +161,15 @@ Below is the list of SLEEF-specific cmake variables.
   supported by the compiler</li>
 
   <!-- Options for LTO -->
-  <li><b>ENABLE_LTO</b> : Enable support for LTO with gcc, or thinLTO
-  with llvm</li>
+  <li><b>ENABLE_LTO</b> : Enable support for <a class="underlined"
+  href="additional.xhtml#lto">LTO</a> with gcc, or thinLTO with
+  llvm</li>
   <li><b>LLVM_AR_COMMAND</b> : Specify LLVM AR command when you build
   the library with thinLTO support with clang.</li>
   <li><b>SLEEF_ENABLE_LLVM_BITCODE</b> : Generate LLVM bitcode</li>
-  <li><b>BUILD_INLINE_HEADERS</b> : Generate header files for inlining
-  whole SLEEF functions</li>
+  <li><b>BUILD_INLINE_HEADERS</b> : Generate <a class="underlined"
+  href="additional.xhtml#inline">header files for inlining
+  whole SLEEF functions</a></li>
 
   <!-- Options regarding to vector extensions -->
   <li style="margin-top: 1em;"><b>DISABLE_SSE2</b> : Disable support for x86 SSE2</li>
@@ -206,13 +208,16 @@ Below is the list of SLEEF-specific cmake variables.
 
   <!-- Options for libm -->
   <li style="margin-top: 1em;"><b>BUILD_GNUABI_LIBS</b> : Avoid building
-  libraries with GNU ABI if set to FALSE</li>
+  <a class="underlined" href="additional.xhtml#gnuabi">libraries with
+  GNU ABI</a> if set to FALSE</li>
   <li><b>ENFORCE_TESTER3</b> : Build fails if
-  tester3 cannot be built</li>
+  <a class="underlined" href="misc.xhtml#testerlibm">tester3</a>
+  cannot be built</li>
 
   <!-- Options for DFT -->
-  <li style="margin-top: 1em;"><b>BUILD_DFT</b> : Build DFT
-  libraries if set to TRUE</li>
+  <li style="margin-top: 1em;"><b>BUILD_DFT</b> :
+  Build <a class="underlined" href="dft.xhtml">DFT libraries</a> if
+  set to TRUE</li>
   <li><b>SLEEFDFT_MAXBUTWIDTH</b> : This variable
   specifies the maximum length of combined butterfly block used in the
   DFT. Setting this value to 7 makes DFT faster but compilation takes
@@ -222,7 +227,8 @@ Below is the list of SLEEF-specific cmake variables.
 
   <!-- Options for Quad -->
   <li style="margin-top: 1em;"><b>BUILD_QUAD</b> : Build
-  quad-precision libraries if set to TRUE</li>
+  <a class="underlined" href="quad.xhtml">quad-precision libraries</a>
+  if set to TRUE</li>
 </ul>
 
 <h2 id="linux">Compiling and installing the library on Linux</h2>
@@ -258,7 +264,8 @@ $ sudo make install</pre>
 <h3 id="lto">Building the library with LTO support</h3>
 
 <p>
-  You can build the library with link time opimization(LTO) support
+  You can build the library with <a class="underlined"
+  href="additional.xhtml#lto">link time opimization(LTO)</a> support
   with the following commands. Note that you can only build static
   libraries with LTO support. You also have to use the same compiler
   with the same version to build the library and other source codes.
@@ -278,11 +285,12 @@ $ sudo make install</pre>
 <h3 id="inline">Building the header files for inlining the whole SLEEF functions</h3>
 
 <p>
-  Header files for inlining the whole SLEEF functions can be built
-  with the following commands. With these header files, it may be
-  easier to inline the whole SLEEF functions than using LTO. You have
-  to specify "-ffp-contract=off" compiler option when compiling a
-  source code that includes one of these header files.
+  <a class="underlined" href="additional.xhtml#inline">Header files
+  for inlining the whole SLEEF functions</a> can be built with the
+  following commands. With these header files, it may be easier to
+  inline the whole SLEEF functions than using LTO. You have to specify
+  "-ffp-contract=off" compiler option when compiling a source code
+  that includes one of these header files.
 </p>
 
 <pre class="command">$ cmake -DBUILD_INLINE_HEADERS=TRUE ..</pre>
@@ -426,11 +434,12 @@ $ &block;</pre>
   not tested to work correctly on the real devices. In order to cross
   compile the library, you need a cmake tool chain file for the
   corresponding OS. The tool chain file for iOS can be downloaded
-  from <a href="https://github.com/leetal/ios-cmake">https://github.com/leetal/ios-cmake</a>,
-  and the tool chain file for Android is included in the SDK. You
-  first need to build the library for the host computer, then for the
-  target OS. Below is an example sequence of commands for cross
-  compiling the library for iOS.
+  from <a class="underlined"
+  href="https://github.com/leetal/ios-cmake">https://github.com/leetal/ios-cmake</a>.
+  The tool chain file for Android is included in the SDK. You first
+  need to build the library for the host computer, then for the target
+  OS. Below is an example sequence of commands for cross compiling the
+  library for iOS.
 </p>
 
 <pre class="command" style="margin-top: 2.0em; margin-bottom: 0.5cm;">$ mkdir build-native

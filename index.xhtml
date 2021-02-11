@@ -52,20 +52,22 @@
 <h2 id="overview">Overview</h2>
 
 <p class="noindent">
-  SLEEF stands for SIMD Library for Evaluating Elementary
-  Functions. It implements vectorized versions of all C99 real
-  floating point math functions. It can utilize SIMD instructions that
-  are available on modern processors. SLEEF is designed to effciently
-  perform computation with SIMD instruction by reducing the use of
-  conditional branches and scatter/gather memory
+  SLEEF stands for <a class="underlined"
+  href="https://en.wikipedia.org/wiki/SIMD">SIMD</a> Library for
+  Evaluating Elementary Functions. It implements vectorized versions
+  of all C99 real floating point math functions. It can utilize SIMD
+  instructions that are available on modern processors. SLEEF is
+  designed to effciently perform computation with SIMD instructions by
+  reducing the use of conditional branches and scatter/gather memory
   access. Our <a class="underlined"
   href="benchmark.xhtml">benchmarks</a> show that the performance of
   SLEEF is comparable to that of the best commercial library. Unlike
   vendor-tuned assembly-optimized libraries, SLEEF can be easily
   ported to other architectures by writing a helper file, which is a
   thin abstraction layer of SIMD intrinsics. SLEEF is also designed to
-  work with various operating systems and compilers. Link time
-  optimization can be used to reduce the overhead of calling
+  work with various operating systems and
+  compilers. <a class="underlined" href="additional.xhtml#lto">Link
+  time optimization</a> can be used to reduce the overhead of calling
   functions.
 </p>
 
@@ -73,7 +75,8 @@
   The library contains implementations of all C99 real FP math
   functions in double precision and single precision. Different
   accuracy of the results can be chosen for a subset of the elementary
-  functions; for this subset there are versions with up to 1 ULP error
+  functions; for this subset there are versions with up to
+  1 <a class="underlined" href="additional.xhtml#ulp">ULP</a> error
   (which is the maximum error, not the average) and even faster
   versions with a few ULPs of error. For non-finite inputs and
   outputs, the functions return correct results as specified in the
@@ -95,11 +98,12 @@
   computation. It has an API similar to that of FFTW for easy
   migration, and distributed under
   <a class="underlined"
-  href="http://www.boost.org/users/license.html">BSL</a>, which is a
-  permissive open source license. The subroutines can utilize long
-  vectors up to 2048 bits. The helper files for abstracting SIMD
-  intrinsics are shared with SLEEF libm, and thus it is easy to port
-  the DFT subroutines to other architectures. <a class="underlined"
+  href="http://www.boost.org/users/license.html">the Boost Software
+  License</a>, which is a permissive open source license. The
+  subroutines can utilize long vectors up to 2048 bits. The helper
+  files for abstracting SIMD intrinsics are shared with SLEEF libm,
+  and thus it is easy to port the DFT subroutines to other
+  architectures. <a class="underlined"
   href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
   results of benchmark</a> are now available.
 </p>
@@ -113,22 +117,28 @@
 <div><br/></div>
 
 <ul class="disc">
-  <li><a href="x86.xhtml">x86 - SSE2, SSE4.1, AVX, AVX2+FMA3, AVX512F</a></li>
-  <li><a href="aarch64.xhtml">AArch64 - Advanced SIMD, SVE</a></li>
-  <li><a href="aarch32.xhtml">AArch32 - NEON</a></li>
-  <li><a href="ppc64.xhtml">PowerPC64 - VSX (POWER8), VSX-3 (POWER9)</a></li>
-  <li><a href="s390x.xhtml">System/390 - VXE (z14), VXE2 (z15)</a></li>
-  <li><a href="cuda.xhtml">CUDA</a></li>
+  <li><a class="underlined" href="x86.xhtml">x86</a>
+  - <a class="underlined"
+  href="https://en.wikipedia.org/wiki/SSE2">SSE2</a>,
+  SSE4.1, <a class="underlined"
+  href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX,
+  AVX2+FMA3, AVX512F</a></li>
+  <li><a class="underlined" href="aarch64.xhtml">AArch64</a> - Advanced SIMD, SVE</li>
+  <li><a class="underlined" href="aarch32.xhtml">AArch32</a> - NEON</li>
+  <li><a class="underlined" href="ppc64.xhtml">PowerPC64</a> - VSX (POWER8), VSX-3 (POWER9)</li>
+  <li><a class="underlined" href="s390x.xhtml">System/390</a> - VXE (z14), VXE2 (z15)</li>
+  <li><a class="underlined" href="cuda.xhtml">CUDA</a></li>
 </ul>
 
 <div><br/></div>
 
 <p>
   In addition to the SIMD implementation, Pure C (scalar) version is
-  provided. The library provides dispatchers that automatically choose
-  the best subroutines for the computer on which the library is
-  executed. The supported combinations of the architecture, operating
-  system and compiler are shown in Table 1.1.
+  provided. The library provides <a class="underlined"
+  href="additional.xhtml#dispatcher">dispatchers</a> that
+  automatically choose the best subroutines for the computer on which
+  the library is executed. The supported combinations of the
+  architecture, operating system and compiler are shown in Table 1.1.
 </p>
 
 <div style="margin-top: 1.0cm;"></div>
