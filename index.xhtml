@@ -52,13 +52,13 @@
 <h2 id="overview">Overview</h2>
 
 <p class="noindent">
-  SLEEF stands for <a class="underlined"
-  href="https://en.wikipedia.org/wiki/SIMD">SIMD</a> Library for
-  Evaluating Elementary Functions. It implements vectorized versions
-  of all C99 real floating point math functions. It can utilize SIMD
-  instructions that are available on modern processors. SLEEF is
-  designed to effciently perform computation with SIMD instructions by
-  reducing the use of conditional branches and scatter/gather memory
+  SLEEF stands for SIMD Library for Evaluating Elementary
+  Functions. It implements <a class="underlined"
+  href="purec.xhtml">vectorized versions of all C99 real floating
+  point math functions</a>. It can utilize SIMD instructions that are
+  available on modern processors. SLEEF is designed to effciently
+  perform computation with SIMD instructions by reducing the use of
+  conditional branches and scatter/gather memory
   access. Our <a class="underlined"
   href="benchmark.xhtml">benchmarks</a> show that the performance of
   SLEEF is comparable to that of the best commercial library. Unlike
@@ -81,22 +81,21 @@
   versions with a few ULPs of error. For non-finite inputs and
   outputs, the functions return correct results as specified in the
   C99 standard. All the functions in the library are thoroughly tested
-  and confirmed that the evaluation error is within the designed
-  limit, by comparing the returned values against high-precision
-  evaluation using <a class="underlined"
-  href="http://www.mpfr.org/">the GNU MPFR Library</a>. Especially, we
-  carefully checked the error of the trigonometric functions with
-  arguments close to an integral multiple
-  of <i class="math">&pi;</i>/2.
+  and confirmed that the evaluation error is within the designed limit
+  by comparing the returned values against high-precision evaluation
+  using the GNU MPFR Library. As of version 3.6, SLEEF also includes
+  a <a class="underlined" href="quad.xhtml">quad-precision math
+  library</a>. This library includes fully vectorized IEEE 754
+  quadruple-precision math functions.
 </p>
 
 <p>
-  SLEEF also includes subroutines for discrete Fourier
-  transform(DFT). These subroutines are fully vectorized, heavily
-  unrolled, and parallelized in such a way that modern SIMD
-  instructions and multiple cores can be utilized for efficient
-  computation. It has an API similar to that of FFTW for easy
-  migration, and distributed under
+  SLEEF also includes a library of <a class="underlined"
+  href="dft.xhtml">discrete Fourier transform(DFT)</a>. These
+  subroutines are fully vectorized, heavily unrolled, and parallelized
+  in such a way that modern SIMD instructions and multiple cores can
+  be utilized for efficient computation. It has an API similar to that
+  of FFTW for easy migration, and distributed under
   <a class="underlined"
   href="http://www.boost.org/users/license.html">the Boost Software
   License</a>, which is a permissive open source license. The
