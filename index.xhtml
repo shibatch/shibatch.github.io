@@ -61,13 +61,20 @@
   conditional branches and scatter/gather memory
   access. Our <a class="underlined"
   href="benchmark.xhtml">benchmarks</a> show that the performance of
-  SLEEF is comparable to that of the best commercial library. Unlike
-  vendor-tuned assembly-optimized libraries, SLEEF can be easily
-  ported to other architectures by writing a helper file, which is a
-  thin abstraction layer of SIMD intrinsics. SLEEF is also designed to
-  work with various operating systems and
-  compilers. <a class="underlined" href="additional.xhtml#lto">Link
-  time optimization</a> can be used to reduce the overhead of calling
+  SLEEF is comparable to that of the best commercial library.
+</p>
+
+<p>
+  Unlike closed-source commercial libraries, SLEEF is designed to work
+  with various architectures, operating systems and compilers. SLEEF
+  can be easily ported to other architectures by writing a helper
+  file, which is a thin abstraction layer of SIMD intrinsics. In order
+  to further optimize the application code that calls SLEEF functions,
+  <a class="underlined" href="additional.xhtml#lto">link time
+  optimization</a> can be used to reduce the overhead of functions
+  calls. The library also has a functionality to generate
+  <a class="underlined" href="additional.xhtml#inline">header
+  files</a> in which the library functions are all defined as inline
   functions.
 </p>
 
@@ -80,13 +87,20 @@
   (which is the maximum error, not the average) and even faster
   versions with a few ULPs of error. For non-finite inputs and
   outputs, the functions return correct results as specified in the
-  C99 standard. All the functions in the library are thoroughly tested
-  and confirmed that the evaluation error is within the designed limit
-  by comparing the returned values against high-precision evaluation
-  using the GNU MPFR Library. As of version 3.6, SLEEF also includes
-  a <a class="underlined" href="quad.xhtml">quad-precision math
-  library</a>. This library includes fully vectorized IEEE 754
-  quadruple-precision math functions.
+  C99 standard. All the functions in the library
+  are <a class="underlined" href="misc.xhtml#testerlibm">thoroughly
+  tested</a> and confirmed that the evaluation error is within the
+  designed limit by comparing the returned values against
+  high-precision evaluation using the GNU MPFR Library.
+</p>
+
+<p>
+  As of version 3.6, SLEEF also includes a <a class="underlined"
+  href="quad.xhtml">quad-precision math library</a>. This library
+  includes fully vectorized IEEE 754 quadruple-precision (QP)
+  functions that correspond to the standard C math functions. It also
+  includes I/O functions for converting between QP numbers and
+  strings.
 </p>
 
 <p>
