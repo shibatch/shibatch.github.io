@@ -29,7 +29,7 @@
   <li><a class="underlined" href="additional.xhtml">Additional notes</a></li>
     <ul class="disc">
       <li><a href="#faq">Frequently asked questions</a></li>
-      <li><a href="#scalar">Vectorizing scalar functions</a></li>
+      <li><a href="#vectorizing">Vectorizing calls to scalar functions</a></li>
       <li><a href="#gnuabi">About the GNUABI version of the library</a></li>
       <li><a href="#lto">Using link time optimization</a></li>
       <li><a href="#inline">Using header files of inlinable functions</a></li>
@@ -54,15 +54,15 @@
 <p class="noindent">
   <b>A1:</b> No. Todays standard C libraries are very well optimized,
   and there is small room for further optimization. The reason why
-  SLEEF is fast is that it carries out computation directly on SIMD
-  registers and ALUs. This is not simple as it sounds, because
-  conditional branches have to be eliminated in order to take full
-  advantage of SIMD computation. If the algorithm requires conditional
-  branches according to the argument, it must prepare for the case
-  where the elements in the input vector contain both values that
-  would make a branch happen and not happen. This would spoil the
-  advantage of SIMD computation, because each element in a vector
-  would require a different code path.
+  SLEEF is fast is that it computes directly with SIMD registers and
+  ALUs. This is not simple as it sounds, because conditional branches
+  have to be eliminated in order to take full advantage of SIMD
+  computation. If the algorithm requires conditional branches
+  according to the argument, it must prepare for the cases where the
+  elements in the input vector contain both values that would make a
+  branch happen and not happen. This would spoil the advantage of SIMD
+  computation, because each element in a vector would require a
+  different code path.
 </p>
 
 <br/>
@@ -76,9 +76,10 @@
 <br/>
 
 <p class="noindent">
-  <b>A2:</b> Yes. SLEEF does implement a vectorized version of Payne
-  Hanek range reduction, and all the trigonometric functions return
-  a correct value with the specified accuracy.
+  <b>A2:</b> Yes. SLEEF does implement a <a class="underlined"
+  href="#paynehanek">vectorized version of Payne Hanek range
+  reduction</a>, and all the trigonometric functions return a correct
+  value with the specified accuracy.
 </p>
 
 <br/>
@@ -92,10 +93,12 @@
 
 <p class="noindent">
   <b>A3:</b> The most important thing is to choose the fastest
-  available vector extension. SLEEF is not carefully optimized for
-  computers without FMA, and it runs slow on Ivy Bridge or older CPUs
-  and Atom. If you are not sure, use the dispatcher. Dispatcher is not
-  slow. If you want to further speed up computation, try using LTO. By
+  available vector extension. SLEEF is optimized for computers with
+  FMA instructions, and it runs slow on Ivy Bridge or older CPUs and
+  Atom, that do not have FMA instructions. If you are not sure, use
+  the dispatcher. <a class="underlined" href="#dispatcher">The
+  dispatcher in SLEEF is not slow</a>. If you want to further speed up
+  computation, try using <a class="underlined" href="#lto">LTO</a>. By
   using LTO, the compiler fuses the code within the library to the
   code calling the library functions, and this sometimes results in
   considerable performance boost. In this case, you should not use the
@@ -104,7 +107,7 @@
   linked.
 </p>
 
-<h2 id="scalar">Vectorizing scalar functions</h2>
+<h2 id="vectorizing">Vectorizing calls to scalar functions</h2>
 
 <p class="noindent">
 Recent x86_64 gcc can <a class="underlined"
@@ -228,12 +231,14 @@ $ &block;
 <h2 id="lto">Using link time optimization</h2>
 
 <p class="noindent">
-Link time optimization (LTO) is a functionality implemented in gcc,
+<a class="underlined"
+href="https://en.wikipedia.org/wiki/Interprocedural_optimization">Link
+time optimization (LTO)</a> is a functionality implemented in gcc,
 clang and other compilers for optimizing across translation units (or
-source files.) This can sometimes dramatically improve the performance
-of the code, because it is capable of fusing library functions into
-the code calling the functions. The build system in SLEEF supports LTO
-and thus it can be built with LTO support by just
+source files.)  This can sometimes dramatically improve the
+performance of the code, because it is capable of fusing library
+functions into the code calling those functions. The build system in
+SLEEF supports LTO and thus it can be built with LTO support by just
 specifying <b>-DENABLE_LTO=TRUE</b> cmake option. However, there are a
 few things to note in order to get the optimal performance. 1. You
 should not use the dispatcher with LTO. Dispatchers prevent the
@@ -361,8 +366,11 @@ $ &block;
 <h2 id="dispatcher">How the dispatchers work</h2>
 
 <p class="noindent">
-  The dispatchers in SLEEF are designed to have very low overhead. This
-  overhead is so small and cannot be observed by microbenchmarking.
+  SLEEF implements versions of functions that are implemented with
+  each vector extension of the architecture. A dispatcher is a
+  function that dynamically selects the fastest implementatation for
+  the computer it runs. The dispatchers in SLEEF are designed to have
+  very low overhead.
 </p>
 
 <p>
@@ -445,17 +453,16 @@ $ &block;
 <h2 id="libsleefscalar">About libsleefscalar</h2>
 
 <p class="noindent">
-Functions like <b class="func">Sleef_sin_u10</b> were originally built
-from sleefdp.c and sleefsp.c, but these functions are now moved to
-<b>libsleefscalar</b>. These functions are provided to make it easier
-to understand how each sleef function works. As of version 3.6, the
-functions with the same names, which are the functions whose names do
-not end with <b>purec</b> or <b>purecfma</b>, are dispathcers that
-choose from FMA or non-FMA functions. These dispatcher functions
-generally run faster than the functions built from sleefdp.c and
-sleefsp.c. For example, <b class="func">Sleef_sin_u10</b>
-in <b>libsleef</b> is now an alias
-for <b class="func">Sleef_sind1_u10</b> that chooses
+The scalar functions like <b class="func">Sleef_sin_u10</b> were the
+functions implemented in sleefdp.c and sleefsp.c. These functions are
+provided to make it easier to understand how each sleef function
+works. These functions are now moved to <b>libsleefscalar</b>, because
+they run slower than the scalar functions implemented in sleefsimddp.c
+and sleefsimdsp.c. As of version 3.6, the scalar functions whose names
+do not end with <b>purec</b> or <b>purecfma</b> are dispatchers that
+choose from the scalar functions whose names end with <b>purec</b>
+or <b>purecfma</b>. For example, <b class="func">Sleef_sin_u10</b>
+in <b>libsleef</b> is now a dispatcher that chooses
 from <b class="func">Sleef_sind1_u10purec</b>
 and <b class="func">Sleef_sind1_u10purecfma</b>.
 </p>
