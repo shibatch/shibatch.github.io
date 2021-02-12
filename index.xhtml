@@ -66,10 +66,13 @@
 
 <p>
   Unlike closed-source commercial libraries, SLEEF is designed to work
-  with various architectures, operating systems and compilers. SLEEF
-  can be easily ported to other architectures by writing a helper
-  file, which is a thin abstraction layer of SIMD intrinsics. In order
-  to further optimize the application code that calls SLEEF functions,
+  with various architectures, operating systems and compilers, and
+  distributed under <a class="underlined"
+  href="http://www.boost.org/users/license.html">the Boost Software
+  License</a>, which is a permissive open source license. SLEEF can be
+  easily ported to other architectures by writing a helper file, which
+  is a thin abstraction layer of SIMD intrinsics. In order to further
+  optimize the application code that calls SLEEF functions,
   <a class="underlined" href="additional.xhtml#lto">link time
   optimization</a> can be used to reduce the overhead of functions
   calls. The library also has a functionality to generate
@@ -109,14 +112,10 @@
   subroutines are fully vectorized, heavily unrolled, and parallelized
   in such a way that modern SIMD instructions and multiple cores can
   be utilized for efficient computation. It has an API similar to that
-  of FFTW for easy migration, and distributed under
-  <a class="underlined"
-  href="http://www.boost.org/users/license.html">the Boost Software
-  License</a>, which is a permissive open source license. The
-  subroutines can utilize long vectors up to 2048 bits. The helper
-  files for abstracting SIMD intrinsics are shared with SLEEF libm,
-  and thus it is easy to port the DFT subroutines to other
-  architectures. <a class="underlined"
+  of FFTW for easy migration. The subroutines can utilize long vectors
+  up to 2048 bits. The helper files for abstracting SIMD intrinsics
+  are shared with SLEEF libm, and thus it is easy to port the DFT
+  subroutines to other architectures. <a class="underlined"
   href="https://github.com/shibatch/sleef/wiki/DFT-Performance">Preliminary
   results of benchmark</a> are now available.
 </p>
@@ -130,12 +129,8 @@
 <div><br/></div>
 
 <ul class="disc">
-  <li><a class="underlined" href="x86.xhtml">x86</a>
-  - <a class="underlined"
-  href="https://en.wikipedia.org/wiki/SSE2">SSE2</a>,
-  SSE4.1, <a class="underlined"
-  href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX,
-  AVX2+FMA3, AVX512F</a></li>
+  <li><a class="underlined" href="x86.xhtml">x86</a> - SSE2, SSE4.1,
+  AVX, AVX2+FMA3, AVX512F</li>
   <li><a class="underlined" href="aarch64.xhtml">AArch64</a> - Advanced SIMD, SVE</li>
   <li><a class="underlined" href="aarch32.xhtml">AArch32</a> - NEON</li>
   <li><a class="underlined" href="ppc64.xhtml">PowerPC64</a> - VSX (POWER8), VSX-3 (POWER9)</li>
@@ -146,8 +141,11 @@
 <div><br/></div>
 
 <p>
-  In addition to the SIMD implementation, Pure C (scalar) version is
-  provided. The library provides <a class="underlined"
+  In addition to the vectorized functions, scalar functions are
+  provided. GCC can <a class="underlined"
+  href="additional.xhtml#vectorizing">auto-vectorize</a> calls to the
+  scalar SLEEF functions to utilize the vectorized SLEEF
+  functions. SLEEF provides <a class="underlined"
   href="additional.xhtml#dispatcher">dispatchers</a> that
   automatically choose the best subroutines for the computer on which
   the library is executed. The supported combinations of the
@@ -255,7 +253,7 @@
 	  <td class="lt-br" align="left">x86_64, Windows</td>
 	  <td class="lt-hl"></td>
 	  <td class="lt-blr" align="center">Supported(Cygwin)(*3)</td>
-	  <td class="lt-br" align="center">Supported(*3)</td>
+	  <td class="lt-br" align="center">Supported</td>
 	  <td class="lt-br" align="center"></td>
 	  <td class="lt-b" align="center">Supported</td>
 	</tr>
@@ -440,6 +438,12 @@ information about Boost Software License.
     <a class="underlined" href="https://github.com/shibatch/sleef/pull/385">#385</a>,
     <a class="underlined" href="https://github.com/shibatch/sleef/pull/386">#386</a>,
     <a class="underlined" href="https://github.com/shibatch/sleef/pull/387">#387</a>)</li>
+  <li>Added <a class="underlined" href="compile.xhtml#cross">preliminary support</a> for iOS and Android (PR
+    <a class="underlined" href="https://github.com/shibatch/sleef/pull/388">#388</a>,
+    <a class="underlined" href="https://github.com/shibatch/sleef/pull/389">#389</a>)</li>
+  <li>Added OpenMP pragmas to the function declarations in sleef.h to enable auto-vectorization by GCC (PR
+    <a class="underlined" href="https://github.com/shibatch/sleef/pull/404">#404</a>,
+    <a class="underlined" href="https://github.com/shibatch/sleef/pull/406">#406</a>)</li>
 </ul>
 
 <h4>3.5.1 (Released on Sep 15, 2020)</h4>
