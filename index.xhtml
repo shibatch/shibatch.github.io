@@ -19,8 +19,6 @@
   <li><a class="underlined" style="color:#a00000;" href="https://github.com/shibatch/sleef/releases">Download the latest version</a></li>
   <li><a class="underlined" href="https://sleef.org/">Latest documentation on the web</a></li>
   <li><a class="underlined" href="https://github.com/shibatch/sleef">GitHub repository</a></li>
-  <li><a class="underlined" href="https://sourceforge.net/p/sleef/mailman/">Mailing list</a></li>
-  <li><a class="underlined" href="https://sourceforge.net/p/sleef/discussion/general/">Discussion forum</a></li>
   <li><a class="underlined" href="https://github.com/shibatch/sleef/wiki">Wiki pages</a></li>
 </ul>
 
@@ -66,19 +64,30 @@
 
 <p>
   Unlike closed-source commercial libraries, SLEEF is designed to work
-  with various architectures, operating systems and compilers, and
+  with various architectures, operating systems and compilers. It is
   distributed under <a class="underlined"
   href="http://www.boost.org/users/license.html">the Boost Software
   License</a>, which is a permissive open source license. SLEEF can be
   easily ported to other architectures by writing a helper file, which
-  is a thin abstraction layer of SIMD intrinsics. In order to further
-  optimize the application code that calls SLEEF functions,
+  is a thin abstraction layer of SIMD intrinsics. SLEEF also
+  provides <a class="underlined"
+  href="additional.xhtml#dispatcher">dispatchers</a> that
+  automatically choose the best subroutines for the computer on which
+  the library is executed. In order to further optimize the
+  application code that calls SLEEF functions,
   <a class="underlined" href="additional.xhtml#lto">link time
-  optimization</a> can be used to reduce the overhead of functions
-  calls. The library also has a functionality to generate
+  optimization(LTO)</a> can be used to reduce the overhead of
+  functions calls, and the build system of SLEEF supports usage of
+  LTO. The library also has a functionality to generate
   <a class="underlined" href="additional.xhtml#inline">header
   files</a> in which the library functions are all defined as inline
-  functions.
+  functions. SLEEF can be used for <a class="underlined"
+  href="cuda.xhtml">GPGPU</a> and <a class="underlined"
+  href="additional.xhtml#wasm">WebAssembly</a> with these header
+  files. In addition to the vectorized functions, SLEEF provides
+  scalar functions. Calls to these scalar SLEEF functions can be
+  <a class="underlined"
+  href="additional.xhtml#vectorizing">auto-vectorized</a> by GCC.
 </p>
 
 <p>
@@ -141,15 +150,8 @@
 <div><br/></div>
 
 <p>
-  In addition to the vectorized functions, scalar functions are
-  provided. GCC can <a class="underlined"
-  href="additional.xhtml#vectorizing">auto-vectorize</a> calls to the
-  scalar SLEEF functions to utilize the vectorized SLEEF
-  functions. SLEEF provides <a class="underlined"
-  href="additional.xhtml#dispatcher">dispatchers</a> that
-  automatically choose the best subroutines for the computer on which
-  the library is executed. The supported combinations of the
-  architecture, operating system and compiler are shown in Table 1.1.
+  The supported combinations of the architecture, operating system and
+  compiler are shown in Table 1.1.
 </p>
 
 <div style="margin-top: 1.0cm;"></div>
