@@ -19,6 +19,7 @@
   <li><a class="underlined" style="color:#a00000;" href="https://github.com/shibatch/sleef/releases">Download the latest version</a></li>
   <li><a class="underlined" href="https://sleef.org/">Latest documentation on the web</a></li>
   <li><a class="underlined" href="https://github.com/shibatch/sleef">GitHub repository</a></li>
+  <li><a class="underlined" href="https://github.com/shibatch/sleef/discussions">Discussions</a></li>
   <li><a class="underlined" href="https://github.com/shibatch/sleef/wiki">Wiki pages</a></li>
 </ul>
 
@@ -132,7 +133,7 @@
 <h2 id="environment">Supported environments</h2>
 
 <p class="noindent">
-  This library currently supports several SIMD architectures :
+  This library supports the following architectures :
 </p>
 
 <div><br/></div>
@@ -145,6 +146,7 @@
   <li><a class="underlined" href="ppc64.xhtml">PowerPC64</a> - VSX (POWER8), VSX-3 (POWER9)</li>
   <li><a class="underlined" href="s390x.xhtml">System/390</a> - VXE (z14), VXE2 (z15)</li>
   <li><a class="underlined" href="cuda.xhtml">CUDA</a></li>
+  <li><a class="underlined" href="additional.xhtml#wasm">WebAssembly</a> - SSE2</li>
 </ul>
 
 <div><br/></div>
@@ -204,6 +206,22 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
+	  <td class="lt-r" align="left">x86_64, macOS</td>
+	  <td></td>
+	  <td class="lt-lr" align="center">Supported(*2)</td>
+	  <td class="lt-r" align="center">Supported(*2)</td>
+	  <td class="lt-r" align="center"></td>
+	  <td class="lt-" align="center">N/A</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="left">x86_64, Windows</td>
+	  <td></td>
+	  <td class="lt-lr" align="center">Supported(Cygwin)(*3)</td>
+	  <td class="lt-r" align="center"><a class="underlined" href="compile.xhtml#cow">Supported</a></td>
+	  <td class="lt-r" align="center"></td>
+	  <td class="lt-" align="center"><a class="underlined" href="compile.xhtml#MSVC">Supported</a></td>
+	</tr>
+	<tr>
 	  <td class="lt-r" align="left">AArch32, Linux</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported(*1)</td>
@@ -212,7 +230,7 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-r" align="left">PowerPC, Linux</td>
+	  <td class="lt-r" align="left">PowerPC (64 bit), Linux</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported</td>
 	  <td class="lt-r" align="center">Supported</td>
@@ -220,7 +238,7 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-r" align="left">System/390, Linux</td>
+	  <td class="lt-r" align="left">System/390 (64 bit), Linux</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported</td>
 	  <td class="lt-r" align="center">Supported</td>
@@ -236,14 +254,6 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-r" align="left">x86_64, OS X</td>
-	  <td></td>
-	  <td class="lt-lr" align="center">Supported(*2)</td>
-	  <td class="lt-r" align="center">Supported(*2)</td>
-	  <td class="lt-r" align="center"></td>
-	  <td class="lt-" align="center">N/A</td>
-	</tr>
-	<tr>
 	  <td class="lt-r" align="left">x86 (32 bit), Linux</td>
 	  <td></td>
 	  <td class="lt-lr" align="center">Supported</td>
@@ -252,12 +262,28 @@
 	  <td class="lt-" align="center">N/A</td>
 	</tr>
 	<tr>
-	  <td class="lt-br" align="left">x86_64, Windows</td>
+	  <td class="lt-r" align="left">AArch64, macOS</td>
+	  <td></td>
+	  <td class="lt-lr" align="center"></td>
+	  <td class="lt-r" align="center">Preliminary</td>
+	  <td class="lt-r" align="center">N/A</td>
+	  <td class="lt-" align="center">N/A</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="left">AArch64, Android</td>
+	  <td></td>
+	  <td class="lt-lr" align="center"></td>
+	  <td class="lt-r" align="center"><a class="underlined" href="compile.xhtml#cross">Preliminary</a></td>
+	  <td class="lt-r" align="center">N/A</td>
+	  <td class="lt-" align="center">N/A</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="left">AArch64, iOS</td>
 	  <td class="lt-hl"></td>
-	  <td class="lt-blr" align="center">Supported(Cygwin)(*3)</td>
-	  <td class="lt-br" align="center">Supported</td>
-	  <td class="lt-br" align="center"></td>
-	  <td class="lt-b" align="center">Supported</td>
+	  <td class="lt-blr" align="center"></td>
+	  <td class="lt-br" align="center"><a class="underlined" href="compile.xhtml#cross">Preliminary</a></td>
+	  <td class="lt-br" align="center">N/A</td>
+	  <td class="lt-b" align="center">N/A</td>
 	</tr>
       </table>
     </td>
