@@ -243,9 +243,9 @@ SLEEF supports LTO and thus it can be built with LTO support by just
 specifying <b>-DENABLE_LTO=TRUE</b> cmake option. However, there are a
 few things to note in order to get the optimal performance. 1. You
 should not use the dispatcher with LTO. Dispatchers prevent the
-functions from being fused by LTO. 2. You have to use the same
+functions from being fused with LTO. 2. You have to use the same
 compiler with the same version to build the library and your
-code. 3. You cannot build shared libs with LTO.
+code. 3. You cannot build shared libraries with LTO.
 </p>
 
 
@@ -262,7 +262,8 @@ In theory, inline functions should give similar performance to LTO,
 but in reality, inline functions are better. In order to generate
 those header files, specify <b>-DBUILD_INLINE_HEADERS=TRUE</b> cmake
 option. Below is an example code utilizing the generated header files
-for SSE2 and AVX2.
+for SSE2 and AVX2. You cannot use a dispatcher with these header
+files.
 </p>
 
 <pre class="code">
@@ -327,8 +328,10 @@ $ &block;
 <h2 id="wasm">Utilizing SLEEF for WebAssembly</h2>
 
 <p class="noindent">
-Since Emscripten supports SSE2 intrinsics, the SSE2 inlinable function
-header can be used for WebAssembly.
+Since <a class="underlined"
+href="https://emscripten.org/">Emscripten</a> supports SSE2
+intrinsics, the SSE2 inlinable function header can be used for
+<a class="underlined" href="https://webassembly.org/">WebAssembly</a>.
 </p>
 
 <pre class="code">
