@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class=" zcajqsx idc0_350"><script src="inject.js"></script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="Naoki Shibata, shibatch.sf.net@gmail.com" />
+<meta name="viewport" content="width=720" />
+<link rel="icon" href="https://shibata.naist.jp/~n-sibata/favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="https://shibata.naist.jp/~n-sibata/apple-touch-icon.png" />
+<link rel="stylesheet" type="text/css" href="default.css" />
+<title>BAUM : Library for Recognizing Blur-Resistant Markers</title>
+</head>
+<body>
+<h1>BAUM : Library for Recognizing Blur-Resistant Markers</h1>
+
+<p class="dir" style="position:relative; left:-1em;">
+by <a href="https://github.com/shibatch">Naoki Shibata</a>
+</p>
+
+<h2>Download</h2>
+
+<p>
+Please also see our <a href="https://github.com/shibatch/baum/">GitHub page</a>.
+</p>
+
+<h2>Overview</h2>
+
+<p>
+  Sometimes we want to use visual markers and cameras to track
+  movement of objects or the camera itself. However, motion blur can
+  be a problem in detecting markers when the camera or the object is
+  moving. BAUM is a software library for drawing and recognizing newly
+  designed circular barcodes that are relatively tolerant of linear
+  motion blur. With this library, circular barcodes can be recognized
+  in real time from Full HD videos utilizing a desktop GPU. With BAUM
+  library, <b>all recognition task is executed by an OpenCL
+  device</b>, and thus CPU load is very low if a GPU is used for
+  recognition.
+</p>
+
+<p>
+  An example of BAUM circular barcode is shown in Fig. 1. With linear
+  motion blur in the direction of top left to bottom right, this
+  barcode can be captured by a camera as shown in Fig. 2. The part
+  inside the red rectangle can be read as a 1-dimensional bar code.
+</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><img src="barcode.png" width="215" height="215" alt="" /></td>
+    <td><img src="blurred.png" width="237" height="237" alt="" /></td>
+  </tr>
+  <tr>
+    <td style="width: 350px;"><b>Fig. 1</b> BAUM circular barcode</td>
+    <td style="width: 380px;"><b>Fig. 2</b> Barcode with linear motion
+    blur. The part inside red rectangle can be read as a 1-dimensional
+    bar code.</td>
+  </tr>
+</table>
+
+
+
+<h2>Getting Started</h2>
+
+<p>
+  It would be easier to understand by running a demo program. In the
+  archive, precompiled executables for Windows OS (64 bit) are
+  included. Please prepare a decent web camera (like Logitech C920)
+  and an OpenCL-capable GPU to test them. nVidia GPUs work best, and
+  Intel GPUs are not supported. If you don't have a supported
+  OpenCL-capable GPU device, you can still try the software by
+  installing a CPU OpenCL driver
+  from <a href="https://software.intel.com/en-us/articles/opencl-drivers">here</a>. Please
+  print out exampleMarkers.pdf in the archive, or just open it on the
+  display. Then, please execute runDemo.bat. It will first
+  automatically make kernel execution plans for all available OpenCL
+  devices, and then start the demo program. After the program starts,
+  please select your camera from "Choose capture" list box, and your
+  GPU from "Choose device" list box. Then, point your camera at the
+  printed circular barcodes.  The program will show the detected
+  barcodes, as shown in Fig. 3. Shake the camera and see what
+  happens. Please note that the barcodes and the recognition algorithm
+  are tolerant of linear motion blur, but it is not very good at
+  handling warping of video frames caused
+  by <a href="https://en.wikipedia.org/wiki/Rolling_shutter">rolling
+  shutter</a>.
+</p>
+
+<p>
+  If you cannot run the demo program, please watch our
+  <a href="https://www.youtube.com/watch?v=KtO5TxG4T0M" style="color:#007000;"><b>YouTube video</b></a>.
+</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><img src="glbaumui.jpg" width="640" height="500" alt="Fig. 1" /></td>
+  </tr>
+  <tr>
+    <td style="width: 220px;"><b>Fig. 3</b> Screen shot</td>
+  </tr>
+</table>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<p>
+  You can also choose a video file as a video source. In order to
+  decode a video, the program needs FFmpeg DLL file which is not
+  included in the archive, but included in an OpenCV package. Try
+  opening a video file, and it will complain that the DLL is
+  missing. It also displays which version of DLL is required. Please
+  put opencv_ffmpegXXXX_64.dll in bin folder, where XXXX is the
+  version number. With the DLL, it can decode many video formats
+  including MOV video files recorded with an iPhone.
+</p>
+
+<p>
+  If the video is played/processed too fast, you can slow it down or
+  stop it by checking "Slow" or "Pause" check boxes.
+</p>
+
+<p>
+  You can also choose a still image file as a video source. In this
+  case, it decodes the image file only once when it is loaded, but the
+  recognition task is repeatedly run. You can check how much CPU and
+  GPU load it requires.
+</p>
+
+<p>
+  Each barcode can store 10 bits of data, which means that there are
+  500 different barcodes. 10 barcode images in PNG format are placed
+  in markers folder in the archive. You can make any barcode image in
+  SVG format with baummarker.exe in bin folder, or in PNG format with
+  DrawMarkerPNG java program in java folder.
+</p>
+
+
+<h2>Compiling on Ubuntu Linux</h2>
+
+<p>
+  It should be fairly easy to compile the source code on Ubuntu OS.
+  First, you need to
+  download <a href="http://sourceforge.net/projects/glui/">GLUI
+  Interface Library</a>. Please put glui-2.XX.zip under baum-1.XX
+  directory, and change the version number of GLUI in Makefile
+  accordingly. Then, please run apt-get to install the required
+  packages as shown below.
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">sudo apt-get install g++ ocl-icd-opencl-dev freeglut3-dev libxmu-dev libopencv-dev libgtk2.0-dev
+</pre>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<p>
+  You can now run make and all binaries should be built. Before
+  running the program, please check if your GPU is recognized as an
+  OpenCL device by the OS, by running clinfo.
+</p>
+
+
+
+<h2>Compiling on Windows with Visual Studio</h2>
+
+<p>
+  Below is a summary of the method for compiling the source code with
+  Microsoft Visual Studio.
+</p>
+
+<p>
+  First thing to consider is which runtime library we should use. If
+  you use the OpenCL.lib included
+  in <a href="https://developer.nvidia.com/cuda-downloads">nVidia GPU
+  Computing Toolkit</a>, it must be LIBCMT.lib (/MT option), since
+  this OpenCL.lib seems to be compiled with that option. Now, we need
+  to build the other libraries with /MT option.
+</p>
+
+<p>
+  You can use the static pre-built libraries in the OpenCV package,
+  which are compiled with /MT option, though I suggest rebuilding them
+  yourself with appropriate options. You need to uncheck
+  "BUILD_SHARED_LIBS" and check "BUILD_WITH_STATIC_CRT" on CMake GUI.
+</p>
+
+<p>
+  For freeglut, runtime library options can be changed with CMake GUI,
+  <b>by checking Advanced check box</b>. Please replace all /MD by /MT.
+</p>
+
+<p>
+  For GLUI, please do the following.
+</p>
+
+<ol style="list-style-type: decimal;">
+  <li> Open the project file under msvc folder.</li>
+  <li> Change solution configurations to "Release x64".</li>
+  <li> Change the runtime library option from Project → Properties →
+    C/C++ → Code Generation, from /MD to /MT.</li>
+  <li> Add freeglut include directory from Project → Properties →
+    C/C++ → General → Additional Include Directories.</li>
+  <li> Add preprocessor definition FREEGLUT_STATIC from
+    Project → Properties → C/C++ -&gt; Preprocessor.</li>
+  <li> Build the project.</li>
+  <li> If your build fails with Error C2252, it can be eliminated by
+  commenting out the corresponding two lines in glui.h.</li>
+</ol>
+
+<p>
+  GTK+ is not linked if the library is compiled for Windows. It is
+used to show a file chooser dialog and a message box on Linux.
+</p>
+
+<p>
+  In order to build Java JNI DLL files, you need to install
+  JDK. Please also set JAVA_HOME environment variable according to the
+  installation directory.
+</p>
+
+<p>
+  Please edit Makefile.vc under src folder to reflect the installation
+  directories of the above libraries. In order to compile the source
+  code, you need mingw32-make. Cygwin's make does not work. The actual
+  command may depend on the configuration of your computer, but it
+  would be like the following. Please execute the following commands
+  on cmd.exe.
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat"
+cd baum-1.00\src
+C:\MinGW\bin\mingw32-make.exe -f Makefile.vc exe dll
+</pre>
+
+
+
+
+<h2>Programs</h2>
+
+<p class="prog">
+<b>baummarker</b> &lt;data&gt; [&lt;radius&gt;] [&lt;X position&gt;] [&lt;Y position&gt;]
+</p>
+
+<p>
+This program writes HTML and SVG files containing a BAUM circular
+barcode image in SVG format to output.html and output.svg. The barcode
+carries an integer <i>data</i>. <i>data</i> is a value between 0 and
+500. The size and position of the barcode can be specified
+by <i>radius</i>, <i>posx</i> and <i>posy</i>.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+<b>baumcreateplan</b> &lt;device number&gt; &lt;file name&gt;
+</p>
+
+<p>
+This program creates an optimal execution plan for the recognition
+routines. An execution plan is a collection of local workgroup sizes
+for OpenCL kernels. The optimal execution plan is found by executing
+all kernels with various local workgroup sizes and measure the
+execution time of each kernel.
+</p>
+
+<p>
+  It uses a still image file specified by <i>file name</i> as an
+input. An OpenCL device can be specified by <i>device number</i>.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+<b>baumtest</b> &lt;device number&gt; &lt;file name&gt;
+</p>
+
+<p>
+  <i>baumtest</i> is a sample program for explaining how to use BAUM
+library. It recognizes circular barcodes from an image specified
+by <i>file name</i> using an OpenCL device specified by <i>device
+number</i>, and output the result to output.png. <i>device number</i>
+is an integer ID for conveniently specifying an OpenCL device
+available for the computer. Number 0 should specify the first device,
+1 specifies the second device, and so on. If less than two arguments
+are given, it prints available OpenCL devices and corresponding
+numbers, and exits.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+<b>glbaum</b> &lt;device number&gt; [&lt;file name&gt;]
+</p>
+
+<p>
+  <i>glbaum</i> is a sample program for using BAUM library to
+recognize circular barcodes from video, and display it using OpenGL.
+You can specify a video file or a still image file as the second
+argument.  If no file is specified, the first camera is selected as
+the video source.  You need to put ffmpeg DLL file on the same
+directory as the executable file to decode videos.
+</p>
+
+<p>
+  <i>glbaum</i> is a demo program of BAUM library.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+<b>glbaumui</b>
+</p>
+
+<p>
+  <i>glbaumui</i> is a demo program of BAUM library.
+</p>
+
+<h2>Java Programs</h2>
+
+<p class="prog">
+java <b>DrawMarkerPNG</b> &lt;data&gt; [&lt;magninifation&gt;]
+</p>
+
+<p>
+<i>DrawMarkerPNG</i> is a Java program that writes a PNG file
+containing a BAUM circular barcode image to output.png. The barcode
+carries an integer <i>data</i>. The size of the barcode can be
+specified by <i>magnification</i>.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+java <b>BaumTest</b> &lt;device id&gt; &lt;image file&gt;
+</p>
+
+<p>
+<i>BaumTest</i> is a sample Java program for explaining how to use
+BAUM library from Java. It recognizes circular barcodes from an image
+specified by <i>file name</i> using an OpenCL device specified
+by <i>device number</i>, and output the result to output.png. You need
+a BAUM JNI DLL file to execute this program.  The path of the DLL file
+can be specified by <font style="font-family: sansserif; font-weight: bold;">org.naokishibata.baum.jnilibpath</font> property.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+java <b>CamTest</b> [&lt;input video file&gt;] [&lt;output video file&gt;]
+</p>
+
+<p>
+<i>CamTest</i> is a sample Java program for capturing a video from a
+camera, decoding a video from a file, displaying it and writing the
+video to a file. If no argument is given, it just displays the
+captured video. If an input video file is given, it decodes and
+displays that video. If an output video file is given, it encodes the
+displayed video to the specified MPEG file. You need OpenCV JNI DLL
+file to execute this program. The path of the DLL file can be
+specified by <font style="font-family: sansserif; font-weight: bold;">org.naokishibata.ocvimgio.jnilibpath</font> property. You also
+need FFmpeg DLL file included in a OpenCV package to decode or encode
+a video.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="prog">
+java <b>BaumCamTest</b> &lt;device id&gt; [&lt;input video file&gt;] [&lt;output video file&gt;]
+</p>
+
+<p>
+<i>BaumCamTest</i> is a sample Java program for capturing a video from
+a camera, decoding a video from a file, recognizing circular barcodes
+from the video, displaying the video and recognized barcodes, and
+writing the video to a file.
+</p>
+
+
+  
+<h2>API Reference</h2>
+
+<p>
+  BAUM consists of a collection of functions for recognizing and
+creating BAUM circular barcodes, which are declared in baum.h. All of
+the functions can be called from C and C++ programs by including
+"baum.h" header.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+baum_t *<b>baum_init</b>(int did, int maxiw, int maxih)
+</p>
+
+<p>
+  A <i>baum_t</i> object is constructed for given device number and
+image size. A <i>baum_t</i> object contains an OpenCL command queue,
+kernels, memory objects, etc.
+</p>
+
+<p>
+  <i>did</i> is an integer ID for conveniently specifying an OpenCL
+device available for the computer. Number 0 should specify the first
+device, 1 specifies the second device, and so on. If the specified
+OpenCL device is available and no error occurs upon resource
+allocation, <i>baum_init</i> returns a pointer to a
+created <i>baum_t</i> object. If -1 is specified
+as <i>did</i>, <i>baum_init</i> prints information for available
+OpenCL devices and corresponding numbers to stdout, and returns
+NULL. If the OpenCL device specified by <i>did</i> is not
+available, <i>baum_init</i> returns NULL.
+</p>
+
+<p>
+  <i>maxiw</i> and <i>maxih</i> specify the maximum width and height
+of images for recognition. Subsequent API calls specifying the
+returned baum_t object can handle image sizes smaller or equal to the
+specified size.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+baum_t *<b>baum_init2</b>(cl_device_id device, cl_context context, int maxiw, int maxih)
+</p>
+
+<p>
+  A <i>baum_t</i> object is constructed for given OpenCL device ID and context.
+</p>
+
+<p>
+  <i>device</i> and <i>context</i> are OpenCL device ID and context
+for which a <i>baum_t</i> object is constructed. An OpenCL context
+that is associated with an OpenGL context can be specified as a
+parameter.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+void <b>baum_dispose</b>(baum_t *thiz)
+</p>
+
+<p>
+  A <i>baum_t</i> object is destructed, and all resources allocated
+upon construction of given <i>baum_t</i> object are released.
+</p>
+
+<p>
+  <i>thiz</i> is the pointer of a <i>baum_t</i> object to
+destruct. Subsequent API calls specifying a destructed <i>baum_t</i>
+object is undefined.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+char *<b>baum_getDeviceName</b>(baum_t *thiz)
+</p>
+
+<p>
+  A string for identifying the OpenCL device associated with
+the <i>baum_t</i> object specified by <i>thiz</i> is returned.  The
+returned string is concatenation of the vendor name string, ", " and
+version string of the device. The returned string is newly allocated
+with malloc and it has to be freed.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+int <b>baum_enqueueTask</b>(baum_t *thiz, void *resultPtr, size_t bufSize, const void *imgPtr, const int iw, const int ih, const int ws)
+</p>
+
+<p>
+  A series of commands for executing recognition task with given image
+is enqueued to the OpenCL command queue associated to
+given <i>baum_t</i> object.
+</p>
+
+<p>
+  <i>iw</i> and <i>ih</i> are pixel width and height of the given
+image. <i>ws</i> is the size of image row in bytes. <i>imgPtr</i> is
+the pointer of image data. The data format must be BGR, where each
+  pixel is represented by 3 unsigned bytes.
+</p>
+
+<p>
+  <i>resultPtr</i> and <i>bufSize</i> are the pointer and size of a
+buffer for receiving a result of recognition task. The format of the
+received data is shown below. <i>K</i> can be larger
+than <i>bufSize</i>/32. In this case, the first <i>bufSize</i> of data
+are store to the buffer specified by <i>resultPtr</i>. Each row
+indicates that a one-dimensional barcode is detected at 2D coordinates
+(<i>x</i><sub>0</sub>, <i>y</i><sub>0</sub>)-(<i>x</i><sub>1</sub>, <i>y</i><sub>1</sub>).
+</p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto; margin-top: 2em;">
+  <tr>
+    <td style="width: 220px;"><b>Table 1</b> Data structure in the received data</td>
+  </tr>
+  <tr>
+    <table class="lt" style="margin-left:auto; margin-right:auto; font-size: 80%;">
+      <tr>
+	<td class="lt-hl"></td>
+	<td class="lt-space"></td>
+	<td class="lt-hl" colspan="8"></td>
+      </tr>
+      <tr>
+	<td class="lt-blr" align="center"><b>Index<br />(bytes)</b></td>
+	<td class="lt-space"></td>
+	<td class="lt-blr" align="center" colspan="6"><b>Data format</b></td>
+      </tr>
+      <tr>
+	<td class="lt-hl"></td>
+	<td class="lt-space"></td>
+	<td class="lt-hl" colspan="8"></td>
+      </tr>
+      <tr>
+	<td class="lt-blr" align="center">0</td>
+	<td class="lt-space"></td>
+	<td class="lt-bl" align="center"><i>K</i> = (1 + Number of<br />decoded barcodes)<br />int, 4 bytes</td>
+	<td class="lt-blr" align="center" colspan="5" style="background-color:#e0e0e0;">Reserved<br />28 bytes</td>
+      </tr>
+      <tr>
+	<td class="lt-blr" align="center">32</td>
+	<td class="lt-space"></td>
+	<td class="lt-bl" align="center">x<sub>0</sub> for barcode 1<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">y<sub>0</sub> for barcode 1<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">x<sub>1</sub> for barcode 1<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">y<sub>1</sub> for barcode 1<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">Data for  barcode 1<br />int, 4 bytes</td>
+	<td class="lt-blr" align="center" style="background-color:#e0e0e0;">Reserved<br />12 bytes</td>
+      </tr>
+      <tr>
+	<td class="lt-blr" align="center">64</td>
+	<td class="lt-space"></td>
+	<td class="lt-bl" align="center">x<sub>0</sub> for barcode 2<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">y<sub>0</sub> for barcode 2<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">x<sub>1</sub> for barcode 2<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">y<sub>1</sub> for barcode 2<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">Data for  barcode 2<br />int, 4 bytes</td>
+	<td class="lt-blr" align="center" style="background-color:#e0e0e0;">Reserved<br />12 bytes</td>
+      </tr>
+      <tr>
+	<td class="lt-b" align="center" colspan="8"><b>· · ·</b></td>
+      </tr>
+      <tr>
+	<td class="lt-blr" align="center">32 * (<i>K</i>-1)</td>
+	<td class="lt-space"></td>
+	<td class="lt-bl" align="center">x<sub>0</sub> for  barcode (<i>K</i>-1)<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">y<sub>0</sub> for  barcode (<i>K</i>-1)<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">x<sub>1</sub> for  barcode (<i>K</i>-1)<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">y<sub>1</sub> for  barcode (<i>K</i>-1)<br />float, 4 bytes</td>
+	<td class="lt-bl" align="center">Data for  barcode (<i>K</i>-1)<br />int, 4 bytes</td>
+	<td class="lt-blr" align="center" style="background-color:#e0e0e0;">Reserved<br />12 bytes</td>
+      </tr>
+    </table>
+  </tr>
+</table>
+
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p>
+  <i>baum_enqueueTask</i> just enqueues a task, and the enqueued task is
+executed in the background by the OpenCL device after returning
+from <i>baum_enqueueTask</i>. The input image data specified
+by <i>imgPtr</i> are transferred to the device before returning
+from <i>baum_enqueueTask</i>, and users can modify the image data
+afterwards. The buffer specified by <i>resultPtr</i> is not filled
+until the queued task finishes.
+</p>
+
+<p>
+  <i>baum_enqueueTask</i> returns 0 upon successful completion.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+  int <b>baum_poll</b>(baum_t *thiz, int waitFlag)
+</p>
+
+<p>
+  <i>baum_poll</i> checks enqueued tasks, and returns 1 if there is a
+finished task. If <i>waitFlag</i> is not zero, <i>baum_poll</i> blocks
+until a task is finished. If <i>waitFlag</i> is zero and there is no
+finished tasks, <i>baum_poll</i> immediately returns 0. Enqueued tasks
+are processed in order.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+int <b>baum_queueLen</b>(baum_t *thiz)
+</p>
+
+<p>
+  <i>baum_queueLen</i> returns the number of tasks in the queue,
+including unfinished tasks.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+
+<p class="api">
+void <b>baum_createPlan</b>(baum_t *thiz, const char *path, void *resultPtr, size_t bufSize, const void *imgPtr, const int iw, const int ih, const int ws)
+</p>
+
+<p>
+  <i>baum_createPlan</i> finds optimal local workgroup sizes for
+kernels, and save the sizes to a file specified by <i>path</i>. 
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+
+<p class="api">
+int <b>baum_loadPlan</b>(baum_t *thiz, const char *path)
+</p>
+
+<p>
+  <i>baum_loadPlan</i> loads local workgroup sizes for kernels from a
+file specified by <i>path</i>. Subsequent tasks are executed with the
+loaded workgroup sizes. <i>baum_loadPlan</i> returns 0 upon successful
+completion.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+
+<p class="api">
+void *<b>baum_malloc</b>(baum_t *thiz, size_t size)
+</p>
+
+<p>
+  <i>baum_malloc</i> allocates <i>size</i> bytes
+of <a href="https://en.wikipedia.org/wiki/CUDA_Pinned_memory">pinned
+memory</a>, and returns a pointer to the allocated memory. Pinned
+memory is a special memory region that can be quickly accessed from
+GPU. Specifying memory regions allocated by <i>baum_malloc</i>
+as <i>resultPtr</i> and <i>imgPtr</i> could improve performance and
+reduce CPU usage when calling <i>baum_enqueueTask</i>. (More
+specifically, data transfer between a CPU and a GPU is a blocking
+operation if non-pinned memory is specified as a data buffer.) Pinned
+memory is a scarce resource and allocating too much pinned memory
+could degrade the overall system performance.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+<p class="api">
+void <b>baum_free</b>(baum_t *thiz, void *ptr)
+</p>
+
+<p>
+  <i>baum_free</i> frees the pinned memory region allocated
+by <i>baum_malloc</i>.
+</p>
+
+<p style="margin-bottom: 1em;"> </p>
+
+
+<p class="api">
+void <b>baum_fprintMarkerSVG</b>(FILE *fp, int data, double radius, double posx, double posy)
+</p>
+
+<p>
+  <i>baum_fprintMarkerSVG</i> prints a circular barcode recognizable
+by this software to a file specified by <i>fp</i>, in SVG
+format. <i>data</i> is a value between 0 and 500. The size and
+position of the barcode can be specified by <i>radius</i>, <i>posx</i>
+and <i>posy</i>.
+</p>
+
+
+<h2>License</h2>
+
+<p>
+BAUM is in public domain. You can use and modify this code for any
+purpose without any obligation.
+</p>
+
+<p>
+The archive contains the following software. Please refer to the
+distribution license of each software.
+</p>
+
+<ol style="list-style-type: disc;">
+<li><b><a href="http://opencv.org/license.html">OpenCV</a></b> library
+is statically linked to the windows binary files under bin and java
+folder.</li>
+<li><b><a href="http://freeglut.sourceforge.net/">freeglut</a></b> library
+is statically linked to the windows binary files under bin
+folder.</li>
+<li><b><a href="http://glui.sourceforge.net/">GLUI User Interface
+Library</a></b> is statically linked to the windows binary files under
+bin folder.</li>
+<li><b><a href="https://www.opengl.org/registry/api/GL/glext.h">glext.h</a></b>
+is in include directory under src folder.</li>
+</ol>
+
+
+<h2>Contact</h2>
+
+<p>
+Naoki Shibata<br />
+e-mail :   <img style="position:relative; top:4px;" src="../email.png" alt="Naoki Shibata's e-mail addresses" height="17" width="238" />
+</p>
+
+</body>
+</html>

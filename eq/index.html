@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="A way of compensating bad frequency response of speakers using the SuperEQ plugin is explained" />
+<meta name="keywords" content="Super EQ, compensation of frequency response for speakers" />
+<meta name="author" content="Naoki Shibata" />
+<meta name="robots" content="noarchive" />
+<meta name="google" content="notranslate" />
+<link rel="canonical" href="http://shibatch.sourceforge.net/eq/" />
+<link rel="icon" type="image/png" href="/speaker.png" />
+<link rel="stylesheet" type="text/css" href="../default.css" />
+<TITLE>How to compensate for suboptimal frequency response of your speaker using EQ</TITLE>
+</head>
+<body>
+
+<p class="nav">
+<a class="nav" href="../">Shibatch Audio Tools</a> &raquo; How to compensate your speaker
+</p>
+
+<H2>How to compensate for suboptimal frequency response of your speaker using EQ</H2>
+
+<p>
+Frequency response is one of the most important quality aspects in
+speakers. Suboptimal frequency response of speakers can be compensated
+for by an equalizer (EQ). In this article, I explain how to compensate
+for suboptimal frequency response, using the Super EQ plugin. This
+method is only effective if your speakers have a bad frequency
+response. There could be other reasons for bad quality sound produced
+by speakers.
+</p>
+
+<p>
+Before starting, you need a good pair of headphones as a reference. I
+recommend Sennheiser HD-600, or maybe Sennheiser PX 100-II if your
+budget is tight, for the reference. You need to use Super EQ when you
+listen to the music. You also need a good sound card. It would be even
+better if that card is not affected by the Windows kernel sampling
+rate converter, which potentially degrade the sound quality. I
+recommend the M-AUDIO Audiophile 2496 sound card.
+</p>
+
+<p>
+First of all, you have to get wav files of sine waves of various
+frequencies. Download from here <a href="eqtestset.zip">&lt;
+eqtestset.zip &gt;</a>, or make them yourself. Connect your headphones
+and speakers to your PC. It is better if volumes for the headphones
+and the speakers can be set independently. You need to install Super
+EQ plugin in your PC. Play the 880Hz sin wave on speakers and
+headphones in turn, and set the volumes so that they are heard in same
+loudness. Do not forget to turn off your speakers when you listen
+using headphones. Turn on the EQ and load <a href="flat.eq">&lt;
+flat.eq &gt;</a>. Next, turn off the EQ, play 880Hz and 55Hz
+successively on headphones, and remember their loudness. Turn on the
+EQ, play the 880Hz and the 55Hz successively on speakers and set 55Hz
+slider so that 55Hz sounds as loud as the headphones. Do not forget to
+press the Preview button after you change the slider setting. Repeat
+the same thing to 7040Hz. As for frequencies higher than 7040Hz, use
+the parametric EQ, and do the same thing. Always specify negative gain
+on the parametric equalizer since positive gain may introduce
+clipping. Note that even if you specify negative gain, clipping can
+happen. After all EQ parameters are set, your speakers should sound
+better, or closer to the reference headphones, than previously. If
+not, it is possible that there remains a very narrow frequency
+unflatness. You may use a cheap electrostatic microphone and a
+spectrum analyzer to detect these narrow areas of unflatness. You can
+use the EQ to compensate for them. Again, frequency response may not
+be the only reason that speakers sound badly.
+</p>
+
+<br><br>
+
+<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=42848&amp;type=8" width="80" height="15" alt="Get Shibatch Audio Tools at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=5583733; 
+var sc_invisible=1; 
+var sc_partition=60; 
+var sc_click_stat=1; 
+var sc_security="e1893788"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="myspace visitors "
+href="http://www.statcounter.com/myspace/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/5583733/0/e1893788/1/"
+alt="myspace visitors " ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17983074-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

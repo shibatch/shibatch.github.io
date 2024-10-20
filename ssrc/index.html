@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="canonical" href="http://shibatch.sourceforge.net/ssrc/" />
+<link rel="icon" type="image/png" href="/speaker.png" />
+<link rel="stylesheet" type="text/css" href="../default.css" />
+<meta name="description" content="This page shows the results on experiments to measure S/N, THD, impulse response and the dithering function of Shibatch Sampling Rate Converter (SSRC)" />
+<meta name="keywords" content="Shibatch Sampling Rate Converter, SSRC, performance, dithering, impulse response" />
+<meta name="author" content="Naoki Shibata" />
+<meta name="robots" content="noarchive" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=720, minimum-scale=0.1, maximum-scale=10.0, user-scalable=1" />
+<TITLE>Experimental Results on SSRC</TITLE>
+</HEAD>
+<BODY>
+
+<p class="nav">
+<a class="nav" href="../">Shibatch Audio Tools</a> &raquo; Experimental Results on SSRC
+</p>
+
+<H1>Experimental Results on SSRC</H1>
+
+<H2>S/N ratio and THD</H2>
+
+<p>
+In this experiment, the <a href="http://en.wikipedia.org/wiki/Signal-to-noise_ratio">signal-to-noise (S/N) ratio</a> and the <a href="http://en.wikipedia.org/wiki/Total_harmonic_distortion">total harmonic distortion (THD)</a> are measured by converting a 1kHz sine wave. A 1kHz sine wave in 24bit 44.1kHz format is converted into 24bit 48kHz using SSRC without dithering. 123.15dB of S/N ratio and less than 0.00001% of THD are observed.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="1kHz_44_48.png"><IMG SRC="t1kHz_44_48.png"></A>
+</div>
+<br>
+
+<p>
+A 1kHz sine wave with 24bit 48kHz format is converted into 24bit 44.1kHz using SSRC without dithering. 128.58dB of S/N ratio and less than 0.00001% of THD are observed.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="1kHz_48_44.png"><IMG SRC="t1kHz_48_44.png"></A>
+</div>
+<br>
+
+
+<H2>Impulse Response</H2>
+
+<p>
+Frequency characteristics are observed by converting impulse responses. An impulse in 24bit 44.1kHz format is converted into 24bit 48kHz with SSRC without dithering.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="impulse_44_48.png"><IMG SRC="timpulse_44_48.png"></A>
+</div>
+<br>
+
+<p>
+An impulse in 24bit 48kHz format is converted to 24bit 44.1kHz with SSRC without dithering.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="impulse_48_44.png"><IMG SRC="timpulse_48_44.png"></A>
+</div>
+<br>
+
+
+<H2>Dithering</H2>
+
+<p>
+In order to test the <a href="http://en.wikipedia.org/wiki/Dither#In_digital_processing_and_waveform_analysis">dithering</a> function, <A HREF="ftp://ftp.tnt.uni-hannover.de/pub/MPEG/audio/sqam/gspi35_1.wav">SQAM track 35</A> is converted into 8bit, 44.1kHz wav file with and without dithering. The spectrum of dithered sample at 468000 samples from the beginning is shown below. We can see that the <a href="http://en.wikipedia.org/wiki/Quantization_error">quantization noise</a> is <a href="http://en.wikipedia.org/wiki/Noise_shaping">shaped</a> to fit the <a href="http://en.wikipedia.org/wiki/Absolute_threshold_of_hearing">absolute threshold of hearing (ATH)</a> curve.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="gspi_dither.png"><IMG SRC="tgspi_dither.png"></A>
+</div>
+<br>
+
+<p>
+Here is the spectrum of the non-dithered output at the same point. We can see some harmonic distortions.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="gspi_nodither.png"><IMG SRC="tgspi_nodither.png"></A>
+</div>
+<br>
+
+
+<H2>New noise shapers</H2>
+
+<p>
+As of version 1.32, new noise shapers are available. Users can now
+choose from noise shapers with 7 different strengths made from 2
+different ATH curves, for 44.1kHz or 48kHz output fs.  New noise
+shapers are also available for other frequencies, i.e. 8k, 11k, 22k,
+88k, 96k, 192k, although not all strength/curve pairs are available
+for all frequencies.
+</p>
+
+<p>
+The following graph shows the frequency characteristics of the new
+shapers made from the first ATH curve, which is used for SSRC for long
+years.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="X1.png"><IMG SRC="X1thumb.jpg"></A>
+</div>
+<br>
+
+<p>
+The following graph shows the frequency characteristics of the new
+shapers made from another ATH curve.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="X2.png"><IMG SRC="X2thumb.jpg"></A>
+</div>
+<br>
+
+<p>
+The following graph compares the new shapers and the old shapers.  ID
+90, 91 and 92 are low, mid and high settings in the previous versions,
+respectively. As you see in the graph, the frequency characteritics
+for the new noise shapers are much smoother than the previous shapers.
+</p>
+
+<br>
+<div style="text-align:center">
+<A HREF="X3.png"><IMG SRC="X3thumb.jpg"></A>
+</div>
+<br>
+
+
+<br><br>
+
+<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=42848&amp;type=8" width="80" height="15" alt="Get Shibatch Audio Tools at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=5583733; 
+var sc_invisible=1; 
+var sc_partition=60; 
+var sc_click_stat=1; 
+var sc_security="e1893788"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="myspace visitors "
+href="http://www.statcounter.com/myspace/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/5583733/0/e1893788/1/"
+alt="myspace visitors " ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17983074-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</BODY>
+</HTML>

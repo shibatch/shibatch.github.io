@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Naoki Shibata" />
+<meta name="robots" content="noarchive" />
+<link rel="canonical" href="http://shibatch.sourceforge.net/latextable/" />
+<link rel="icon" type="image/png" href="/speaker.png" />
+<link rel="stylesheet" type="text/css" href="../default.css" />
+<TITLE>Writing LaTeX Style Table in HTML</TITLE>
+</head>
+<body>
+
+<p class="nav">
+<a class="nav" href="../">Shibatch Audio Tools</a> &raquo; Writing LaTeX Style Table in HTML
+</p>
+
+<H2>Writing LaTeX Style Table in HTML</H2>
+
+<p>
+Those who are familiar with writing documents with LaTeX would have
+wanted to reproduce the exact styles of tables written in LaTeX when
+making web pages. No? At least I have. Here is the way you can.
+</p>
+
+<p>
+First, add the following to your CSS file.
+</p>
+
+<pre class="code" style="font-size:75%;">
+table.lt { border-collapse: collapse; border-style: none; }
+td.lt- { margin: 0px; padding: 4px; border-width: 1px; border-style: none; }
+td.lt-r { margin: 0px; padding: 4px; border-style: none; border-right-style: solid; border-width: 1px; border-color: black; }
+td.lt-l { margin: 0px; padding: 4px; border-style: none; border-left-style: solid; border-width: 1px; border-color: black; }
+td.lt-lr { margin: 0px; padding: 4px; border-style: none; border-right-style: solid; border-left-style: solid; border-width: 1px; border-color: black; }
+td.lt-b { margin: 0px; padding: 4px; border-style: none; border-bottom-style: solid; border-width: 1px; border-color: black; }
+td.lt-hl { margin: 0px; border-style: none; border-bottom-style: solid; border-width: 1px; border-color: black; height: 2px; }
+td.lt-bl { margin: 0px; padding: 4px; border-style: none; border-bottom-style: solid; border-left-style: solid; border-width: 1px; border-color: black; }
+td.lt-br { margin: 0px; padding: 4px; border-style: none; border-bottom-style: solid; border-right-style: solid; border-width: 1px; border-color: black; }
+td.lt-blr { margin: 0px; padding: 4px; border-style: none; border-bottom-style: solid; border-left-style: solid; border-right-style: solid; border-width: 1px; border-color: black; }
+</pre>
+
+<p>
+Then, you can write a LaTeX style table by
+</p>
+
+<table style="margin-left:auto; margin-right:auto;">
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-blr" align="center">one</td>
+	  <td class="lt-br"  align="center">two</td>
+	  <td class="lt-br"  align="center">three</td>
+	</tr>
+	<tr>
+	  <td class="lt-blr" align="center">four</td>
+	  <td class="lt-br"  align="center">five</td>
+	  <td class="lt-br"  align="center">six</td>
+	</tr>
+	<tr>
+	  <td class="lt-blr" align="center">seven</td>
+	  <td class="lt-br"  align="center">eight</td>
+	  <td class="lt-br"  align="center">nine</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table style="margin-left:auto; margin-right:auto;">
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-blr" align="center">one</td>
+	  <td class="lt-br"  align="center">two</td>
+	  <td class="lt-br"  align="center">three</td>
+	</tr>
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-blr" align="center">four</td>
+	  <td class="lt-br"  align="center">five</td>
+	  <td class="lt-br"  align="center">six</td>
+	</tr>
+	<tr>
+	  <td class="lt-blr" align="center">seven</td>
+	  <td class="lt-br"  align="center">eight</td>
+	  <td class="lt-br"  align="center">nine</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table style="margin-left:auto; margin-right:auto;">
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl" style="padding: 1px;"></td>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-blr" align="center">one</td>
+	  <td class="lt-br" style="padding: 1px;"></td>
+	  <td class="lt-blr" align="center">two</td>
+	  <td class="lt-br"  align="center">three</td>
+	</tr>
+        <tr>
+          <td class="lt-hl"></td>
+	  <td class="lt-hl" style="padding: 0px;"></td>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-blr" align="center">four</td>
+	  <td class="lt-br" style="padding: 1px;"></td>
+	  <td class="lt-blr"  align="center">five</td>
+	  <td class="lt-br"  align="center">six</td>
+	</tr>
+	<tr>
+	  <td class="lt-blr" align="center">seven</td>
+	  <td class="lt-br" style="padding: 1px;"></td>
+	  <td class="lt-blr" align="center">eight</td>
+	  <td class="lt-br"  align="center">nine</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<br><br>
+
+<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=42848&amp;type=8" width="80" height="15" alt="Get Shibatch Audio Tools at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=5583733; 
+var sc_invisible=1; 
+var sc_partition=60; 
+var sc_click_stat=1; 
+var sc_security="e1893788"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="myspace visitors "
+href="http://www.statcounter.com/myspace/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/5583733/0/e1893788/1/"
+alt="myspace visitors " ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body>
+</html>

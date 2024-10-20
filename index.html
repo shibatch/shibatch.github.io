@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Shibatch's software project pages provide open source software made by Naoki Shibata" />
+<meta name="keywords" content="shibatch, naoki shibata, ssrc, sleef, sampling rate converter, resampler, simd" />
+<meta name="author" content="Naoki Shibata" />
+<meta name="google-site-verification" content="J-lQ26ikbyJdRlpcnAuxbwyO7ctQO373rSTz-xOE470" />
+<meta name="msvalidate.01" content="6B9312EA8E683D799F071D03B8730FAA" />
+<meta name="robots" content="noarchive" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=720, minimum-scale=0.1, maximum-scale=10.0, user-scalable=1" />
+<link rel="canonical" href="http://shibatch.sourceforge.net/" />
+<link rel="icon" type="image/png" href="/speaker.png" />
+<link rel="stylesheet" type="text/css" href="default.css" />
+<TITLE>Shibatch's Software Projects</TITLE>
+</HEAD>
+<BODY>
+<H1>Shibatch's Software Projects</H1>
+
+<p>
+This page provides free and open source software made by <a href="https://github.com/shibatch">Naoki Shibata</a>.
+</p>
+
+<H2>Actively maintained projects</H2>
+
+<H3 id="SLEEF">SLEEF - SIMD Library for Evaluating Elementary Functions</H3>
+
+<p>
+SLEEF is a vectorized math library used in numerous leading products
+and open source projects. SLEEF stands for SIMD Library for Evaluating
+Elementary Functions. It implements manually vectorized versions of
+all C99 real floating point math
+functions. Our <a href="https://sleef.org/5-performance/">benchmarks</a>
+show that the performance of SLEEF is comparable to that of the best
+commercial library.
+</p>
+
+<p>
+Please check out <a href="https://sleef.org">sleef.org</a>.
+</p>
+
+
+<H3 id="TLFloat">TLFloat - C++ template library for floating point operations</H3>
+
+<p>
+TLFloat is a true C++ template library that implements classes for
+operations with half, single, double, quadruple and octuple precision
+IEEE 754 floating point numbers.
+</p>
+
+<p>
+Internally, these classes are implemented as class templates on top of
+arbitrary-precision integer class templates so that the templates are
+expanded as arbitrary precision floating-point operations by just
+changing the template parameters, rather than implementing each
+floating-point operation for each precision. The arbitrary-precision
+integer class templates are also included in this library.
+</p>
+
+<p>
+<a href="tlfloat-doxygen/">Here</a> is a Doxygen-generated reference manual.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/tlfloat">GitHub page</a>.
+</p>
+
+
+<H3 id="nofreelunch">Community Guidelines for Sustainability of Open-Source Ecosystem</H3>
+
+<p>
+These are non-binding community guidelines intended to be used as a
+code of conduct for OSS projects. These guidelines aim to alleviate
+the burnout problems of OSS developers.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/nofreelunch">GitHub page</a>.
+</p>
+
+
+<H2>Useful tools</H2>
+
+<h3 id="oomstaller">OOMStaller - a tool for suppressing swap thrashing at build time</h3>
+
+<p>
+This small tool monitors the memory usage of each process when
+performing a build, and suspends processes as necessary to prevent
+swapping from occurring. This allows you to build using all CPU cores
+without worrying about swapping occurring on a Linux computer.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/oomstaller">GitHub page</a>.
+</p>
+
+<h3 id="cputemp">CPUTemp - a tool to keep CPU below specified temperature</h3>
+
+<p>
+This tool monitors CPU temperature and dynamically changes the clock
+frequency to keep the CPU below the specified temperature on a Linux
+computer. This is basically a simple alternative to thermald, but this
+tool controls the CPU temperature more aggressively than thermald.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/cputemp">GitHub page</a>.
+</p>
+
+
+<H3 id="octcalc">OctCalc - A portable octuple-precision calculator</H3>
+
+<p>
+This is a portable calculator application that runs on Windows,
+Linux, and Mac. It can perform calculations and output results in
+256-bit floating point numbers by utilizing computation with
+<a href="#TLFloat">TLFloat</a>. It can also evaluate C-like
+mathematical expressions.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/octcalc">GitHub page</a>.
+</p>
+
+<p>
+You can download an Windows installer from
+<a href="https://github.com/shibatch/octcalc/releases">here</a>.
+</p>
+
+
+<H3 id="cpuburn">CPUBurnAVX2</H3>
+
+<p>
+These tools maximize usage of the vector FMA units in the CPU with
+AVX2 and AVX512 instructions to produce as much heat as possible.
+</p>
+
+<p>
+Please check out
+our <a href="https://github.com/shibatch/cpuburnavx2">GitHub page</a>.
+</p>
+
+
+<H2>EOL projects</H2>
+
+<H3 id="SSRC">SSRC - High Quality Audio Sampling Rate Converter</H3>
+
+<p>
+This program converts the sampling rate of a PCM wav file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is hard, because the ratio beteen these two frequencies is 147:160, which are not small numbers. Accordingly, we need a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> in order not to degrade the sound quality during conversion. This program utilizes <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>s to apply the FIR filter in order to reduce the amount of computation.
+</p>
+
+<p>
+This program also has a function to apply dither to extend the perceived dynamic range. It is optimized for human's ear characteristics.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/SSRC">GitHub page</a>.
+</p>
+
+<p>
+Some experimental results are shown <a href="ssrc/">here</a>.
+</p>
+
+<p>
+Download link: <a href="download/ssrc-1.33.tar.gz">ssrc-1.33.tar.gz</a>.
+</p>
+
+
+<H3 id="xpass">An experimental LLVM pass</H3>
+
+<p>
+This is an experimental optimizing pass for LLVM, named
+MathPeephole. This pass performs the following transforms.
+</p>
+
+<ul class="disc">
+<li>a/b + c/d -> (ad + bc) / (bd)</li>
+<li>x/y + z > a/b + c -> (xb - ay) / (yb) + z > c</li>
+<li>a/b + c > d -> b < 0 ? (a - b * (d - c) < 0) : (-(a - b * (d - c)) < 0)</li>
+<li>w sqrt(x) + y > z -> w >= 0 ? ((z < y) | (wwx > (z-y)(z-y))) : ((z <= y) & (wwx < (z-y)(z-y)))</li>
+</ul>
+
+<p>
+Please see our <a href="https://github.com/shibatch/xpass/wiki">wiki
+pages</a> for more details.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/xpass">GitHub page</a>.
+</p>
+
+
+<H3 id="rectdetect">A rectangle detector</H3>
+
+<p>This program detects ALL rectangular shapes viewed from 3D
+perspective in real time, utilizing a GPU. The program is purely
+rule-based. Please check out
+our <a href="https://www.youtube.com/watch?v=HpaY0HOomAI">YouTube</a>
+<a href="https://www.youtube.com/watch?v=BLJEYui0XcY">video</a>. We
+  also have a <a href="https://github.com/shibatch/rectdetect">GitHub
+  page</a>.
+</p>
+
+<H3 id="baum">BAUM : Software Package for Recognizing Blur-Resistant Markers</H3>
+
+<p>
+  Motion blur can be a problem in detecting markers when the camera or
+  the object is moving. BAUM is a software library for drawing and
+  recognizing circular barcodes that are designed to be relatively
+  tolerant of linear motion blur. With this library, those circular
+  barcodes can be recognized from video in real time from Full HD
+  videos utilizing a desktop GPU. <a href="baum/">Here</a> is the main
+  page. We also have a <a href="https://github.com/shibatch/baum">GitHub
+  page</a>.
+</p>
+
+<H3 id="CCL">Connected Component Labeling Algorithm for GPGPU</H3>
+
+<p>Connected Component Labeling(CCL) is a well known technique for
+assigning a unique label to each of connected components in a given
+binary image. This program implements an efficient CCL algorithm
+suitable for GPGPU execution. <a href="cclarticle/">Here</a> is the
+main page. We also have a
+<a href="https://github.com/shibatch/cclopencl">GitHub page</a>.
+</p>
+
+<br><br>
+
+<p class="contact">Contact :  <img style="position:relative; top:4px;" src="email.png" width="238" height="17" alt="e-mail address"></p>
+
+<br>
+
+<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=42848&amp;type=8" width="80" height="15" alt="Get Shibatch Audio Tools at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=5583733; 
+var sc_invisible=1; 
+var sc_partition=60; 
+var sc_click_stat=1; 
+var sc_security="e1893788"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="myspace visitors "
+href="http://www.statcounter.com/myspace/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/5583733/0/e1893788/1/"
+alt="myspace visitors " ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17983074-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</BODY>
+</HTML>

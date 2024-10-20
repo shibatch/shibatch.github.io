@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class=" rhdhzuari idc0_350"><script src="inject.js"></script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Explanation of a parallel algorithm for connected component labeling suitable for GPGPU execution." />
+<meta name="author" content="Naoki Shibata, shibatch.sf.net@gmail.com" />
+<meta name="viewport" content="width=720" />
+<link rel="icon" href="https://shibata.naist.jp/~n-sibata/favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="https://shibata.naist.jp/~n-sibata/apple-touch-icon.png" />
+<link rel="stylesheet" type="text/css" href="default.css" />
+<title>Connected Component Labeling Algorithm for GPGPU</title>
+</head>
+<body>
+<h1>Connected Component Labeling Algorithm for GPGPU</h1>
+
+<p class="dir" style="position:relative; left:-1em;">
+by <a href="https://github.com/shibatch">Naoki Shibata</a>
+</p>
+
+<h3>1 Connected Component Labeling</h3>
+
+<p>
+Connected Component Labeling (CCL) is a well known technique for
+assigning a unique label to each of connected components in a given
+binary image(Fig. 1). It can be used for many purposes including
+<b><a href="http://ito-lab.naist.jp/~n-sibata/software/">marker
+detection</a></b>.
+</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<p style="text-align: center;">
+<img src="whatcclis.png" width="606" height="363" alt="What CCL is" />
+<br />
+<b>Fig. 1</b> What CCL is
+</p>
+
+<h3>2 Overview of the algorithm</h3>
+
+<p>
+In this article, I will explain a CCL algorithm[1, 2] suitable for
+execution on GPGPU.  In the algorithm, the kernel is applied to each
+of the pixels in the frame buffer several times. The kernel does not
+have a loop, and thus it finishes execution within a constant number
+of steps. The label propagates exponentially as the kernel is applied
+to the frame buffer. The kernel is designed so that it can be applied
+to the pixels in parallel.
+</p>
+
+<p>
+The proposed CCL algorithm takes a pointer <i>fb</i> to the frame
+buffer as its input. We assume that each element (pixel) of the frame
+buffer can store one 32-bit integer value. Each pixel has a unique
+address <i>p</i>, and it can be accessed by <i>fb</i>[<i>p</i>]. We
+also assume that the given image initially stored in the frame buffer
+is a binary image. If <i>fb</i>[<i>p</i>] is 0, the pixel is in the
+background color. Otherwise the pixel is in the foreground color. For
+the sake of simplicity, we assume that the pixels in the most
+perimeter including <i>fb</i>[<i>0</i>] are in the background
+color. We will explain the proposed algorithm using the example input
+image shown in Fig. 2. After executing the CCL algorithm, each pixel
+in the foreground color will be substituted with the label, which is
+the smallest address of the pixels in the same connected component, as
+shown in Fig. 9.
+</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<p>
+[1] Naoki Shibata, Shinya Yamamoto: GPGPU-Assisted Subpixel Tracking
+Method for Fiducial Markers, Journal of Information Processing,
+Vol.22(2014), No.1, pp.19-28,
+2014-01. <a href="http://dx.doi.org/10.2197/ipsjjip.22.19">DOI:10.2197/ipsjjip.22.19</a>
+<b><a href="http://ito-lab.naist.jp/mediawiki/images/7/7e/140115ipsjjip.pdf">[PDF]</a></b>
+</p>
+
+<p>
+[2] Naoki Shibata, Shinya Yamamoto:
+SumiTag : Inconspicuous Fiducial Marker and GPGPU-Assisted Tracking Method,
+IPSJ SIG Technical Reports, Nov 2011.
+<b><a href="http://id.nii.ac.jp/1001/00078526/">[PDF]</a></b>
+</p>
+
+<h3>3 Preparation kernel</h3>
+
+<p>
+The algorithm consists of the preparation kernel and the propagation
+kernel. The preparation kernel is first applied to all the pixels once
+at the initial stage. As a result of, the pixels in the foreground
+color are substituted with the address of itself(Fig. 3).
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">
+kernel void preparation(global int *fb) {
+  const int x = get_global_id(0), y = get_global_id(1);
+  if (x == 0 || y == 0 || x &gt;= WIDTH-1 || y &gt;= HEIGHT-1) return;
+  int ptr = y * WIDTH + x;
+
+  fb[ptr] = (fb[ptr] == 0) ? 0 : ptr;
+}
+
+</pre>
+<p style="text-align: center;"><b>Algorithm 1</b> Preparation kernel</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><img src="tr11_0.png" width="220" height="220" alt="Fig. 2" /></td>
+    <td><img src="tr11_1.png" width="220" height="220" alt="Fig. 3" /></td>
+  </tr>
+  <tr>
+    <td style="width: 220px;"><b>Fig. 2</b> Input image</td>
+    <td style="width: 220px;"><b>Fig. 3</b> After preparation</td> 
+  </tr>
+</table>
+
+<h3>4 Naive label propagation</h3>
+
+<p>
+The kernel below implements a naive label propagation
+algorithm. Function CCLSub returns the smallest label stored in the
+connected adjacent pixels. By applying the naive algorithm once to the
+all pixels, the labels can be propagated by one pixel as shown in
+Fig. 4.
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">
+kernel void naive(global int *fb) {
+  const int x = get_global_id(0), y = get_global_id(1);
+  if (x == 0 || y == 0 || x &gt;= WIDTH-1 || y &gt;= HEIGHT-1) return;
+  int ptr = y * WIDTH + x;
+
+  int g = CCLSub(fb, ptr);
+
+  if (g != 0) {
+    fb[ptr] = g;
+  }
+}
+
+int CCLSub(global int *fb, int ptr) { // returns the smallest label stored in the connected adjacent pixels.
+  int g = fb[ptr];
+
+  for(int y=-1;y&lt;=1;y++) {
+    for(int x=-1;x&lt;=1;x++) {
+      int q = ptr + y*WIDTH + x;
+      if (fb[q] != 0 &amp;&amp; fb[q] &lt; g) g = fb[q];
+    }
+  }
+
+  return g;
+}
+
+</pre>
+<p style="text-align: center;"><b>Algorithm 2</b> Naive label propagation</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><img src="tr11_2.png" width="220" height="220" alt="Fig. 4" /></td>
+  </tr>
+  <tr>
+    <td style="width: 220px;"><b>Fig. 4</b> After 1st pass</td>
+  </tr>
+</table>
+
+<h3>5 Device to make the algorithm quicker</h3>
+
+<p>
+The algorithm below propagates labels faster. Applying this algorithm
+to Fig. 3 results in Fig. 4. At this step, We see no difference between
+the naive algorithm and the faster algorithm.  However, after we apply
+the algorithm again, the faster algorithm gives the result shown in
+Fig. 5. By the effect of line 9 in the algorithm below, labels are
+propagated further than 1 pixel. However, if we apply the algorithm
+once or twice more, we get the results shown in Fig. 6 and 7,
+respectively. We see that after the labels are once propagated
+vertically to the ends, the algorithm propagates labels by only
+constant pixels with each kernel application.
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">
+kernel void slow(global int *fb) {
+  const int x = get_global_id(0), y = get_global_id(1);
+  if (x == 0 || y == 0 || x &gt;= WIDTH-1 || y &gt;= HEIGHT-1) return;
+  int ptr = y * WIDTH + x;
+
+  int g = CCLSub(fb, ptr);
+
+  if (g != 0) {
+    fb[ptr] = fb[fb[fb[fb[g]]]];
+  }
+}
+
+</pre>
+<p style="text-align: center;"><b>Algorithm 3</b> Faster, but still not fast enough</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><img src="figd.png" width="220" height="220" alt="Fig. 5" /></td>
+    <td><img src="fige.png" width="220" height="220" alt="Fig. 6" /></td>
+    <td><img src="figf.png" width="220" height="220" alt="Fig. 7" /></td>
+  </tr>
+  <tr>
+    <td style="width: 220px;"><b>Fig. 5</b> After 2nd pass</td>
+    <td style="width: 220px;"><b>Fig. 6</b> After 3rd pass using the Slow Algorithm</td> 
+    <td style="width: 220px;"><b>Fig. 7</b> After 4th pass using the Slow Algorithm</td>
+  </tr>
+</table>
+
+<h3>6 The fast algorithm</h3>
+
+<p>
+The fast CCL algorithm is shown below. This algorithm propagates
+labels fast after the labels propagate vertically to the
+ends. Applying this algorithm to the pixels in Fig. 5 gives the pixels
+in Fig. 8. In the next application of the kernel, label 11 propagates
+to the all pixels that have labels 15 or 18 (Fig. 9).
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">
+kernel void fastCCL(global int *fb) {
+  const int x = get_global_id(0), y = get_global_id(1);
+  if (x == 0 || y == 0 || x &gt;= WIDTH-1 || y &gt;= HEIGHT-1) return;
+  int ptr = y * WIDTH + x;
+
+  int h = fb[ptr];
+  int g = CCLSub(fb, ptr);
+
+  if (g != 0) {
+    g = fb[fb[fb[fb[g]]]];
+    atomic { fb[h] = min(fb[h], g); }
+    atomic { fb[ptr] = min(fb[ptr], g); }
+  }
+}
+
+</pre>
+<p style="text-align: center;"><b>Algorithm 4</b> The fast CCL kernel</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><img src="figg.png" width="220" height="220" alt="Fig. 8" /></td>
+    <td><img src="figh.png" width="220" height="220" alt="Fig. 9" /></td>
+  </tr>
+  <tr>
+    <td style="width: 220px;"><b>Fig. 8</b> After 3rd pass using the Fast Algorithm</td>
+    <td style="width: 220px;"><b>Fig. 9</b> After 4th pass using the Fast Algorithm</td> 
+  </tr>
+</table>
+
+
+<h3>7 Real implementation</h3>
+
+<p>
+The following is <a href="https://shibata.naist.jp/~n-sibata/cclarticle/Label8.java">a non-parallel implementation in Java</a>, that is provided to help understanding.
+</p>
+
+<pre class="code" style="margin-bottom:0cm;">
+// http://ito-lab.naist.jp/~n-sibata/cclarticle/index.xhtml
+
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
+
+public class Label8 {
+    static final int NPASS = 11;
+
+    static void preparation(int[][] fb, int iw, int ih) {
+        for(int y=0;y &lt; ih;y++) {
+            for(int x=0;x &lt; iw;x++) {
+		int ptr = y * iw + x;
+		fb[0][ptr] = (fb[0][ptr] == 0) ? -1 : ptr;
+            }
+        }
+    }
+
+    static int CCLSub(int[][] fb, int pass, int x0, int y0, int iw, int ih) {
+	int g = fb[pass-1][y0 * iw + x0];
+
+	for(int y=-1;y&lt;=1;y++) {
+	    if (y + y0 &lt; 0 || y + y0 &gt;= ih) continue;
+	    for(int x=-1;x&lt;=1;x++) {
+		if (x + x0 &lt; 0 || x + x0 &gt;= iw) continue;
+		int q = (y + y0)*iw + x + x0;
+		if (fb[pass-1][q] != -1 &amp;&amp; fb[pass-1][q] &lt; g) g = fb[pass-1][q];
+	    }
+	}
+
+	return g;
+    }
+
+    static void propagation(int[][] fb, int pass, int iw, int ih) {
+	for(int y=0;y &lt; ih;y++) {
+	    for(int x=0;x &lt; iw;x++) {
+		int ptr = y * iw + x;
+
+		fb[pass][ptr] = fb[pass-1][ptr];
+
+		int h = fb[pass-1][ptr];
+		int g = CCLSub(fb, pass, x, y, iw, ih);
+
+		if (g != -1) {
+		    for(int i=0;i&lt;6;i++) g = fb[pass-1][g];
+
+		    fb[pass][h  ] = fb[pass][h  ] &lt; g ? fb[pass][h  ] : g; // !! Atomic, referring result of current pass
+		    fb[pass][ptr] = fb[pass][ptr] &lt; g ? fb[pass][ptr] : g; // !! Atomic
+		}
+	    }
+	}
+    }
+
+    static void label8(int[][] fb, int iw, int ih) {
+	preparation(fb, iw, ih);
+
+        for(int pass=1;pass&lt;NPASS;pass++) {
+	    propagation(fb, pass, iw, ih);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+	System.setProperty("java.awt.headless", "true"); 
+	BufferedImage inImage = ImageIO.read(new File(args[0]));
+	int iw = inImage.getWidth(), ih = inImage.getHeight();
+
+	int[][] fb = new int[NPASS][iw * ih];
+
+        for(int y = 0;y &lt; ih;y++) {
+            for(int x = 0;x &lt; iw;x++) {
+		fb[0][y * iw + x] = ((inImage.getRGB(x, y) &gt;&gt; 8) &amp; 255) &gt; 127 ? 1 : 0;
+            }
+        }
+
+	label8(fb, iw, ih);
+
+	BufferedImage outImage = new BufferedImage(iw, ih, BufferedImage.TYPE_3BYTE_BGR);
+        for(int y = 0;y &lt; ih;y++) {
+            for(int x = 0;x &lt; iw;x++) {
+		outImage.setRGB(x, y, fb[NPASS-1][y * iw + x] == -1 ? 0 : (fb[NPASS-1][y * iw + x]  * 1103515245 + 12345));
+            }
+        }
+	ImageIO.write(outImage, "png", new File("output.png"));
+    }
+}
+
+</pre>
+<p style="text-align: center;">Java implementation</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<p>
+You can also try <a href="https://shibata.naist.jp/~n-sibata/cclarticle/cclopenclDec2015.tgz">an OpenCL implementation</a>. You can browse the source codes at <a href="https://github.com/shibatch/cclopencl/">github</a>.
+</p>
+
+<p>
+Example input and output images are shown below.
+</p>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/test.png"><img src="test.png" width="160" height="160" alt="Fig. 10" /></a></td>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/out.test.png"><img src="out.test.png" width="160" height="160" alt="Fig. 11" /></a></td>
+  </tr>
+  <tr>
+    <td style="width: 240px;"><b>Fig.</b> 10 Simple example input image</td>
+    <td style="width: 240px;"><b>Fig.</b> 11 Corresponding output image</td> 
+  </tr>
+  <tr>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/dryearth.jpg"><img src="dryearth.jpg" width="160" height="160" alt="Fig. 12" /></a></td>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/out.dryearth.png"><img src="out.dryearth.png" width="160" height="160" alt="Fig. 13" /></a></td>
+  </tr>
+  <tr>
+    <td style="width: 240px;"><b>Fig.</b> 12 Dry earth image</td>
+    <td style="width: 240px;"><b>Fig.</b> 13 Corresponding output image</td> 
+  </tr>
+  <tr>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/spiral1280.png"><img src="spiral1280.png" width="160" height="160" alt="Fig. 14" /></a></td>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/out.spiral1280.png"><img src="out.spiral1280.png" width="160" height="160" alt="Fig. 15" /></a></td>
+  </tr>
+  <tr>
+    <td style="width: 240px;"><b>Fig.</b> 14 Spiral image</td>
+    <td style="width: 240px;"><b>Fig.</b> 15 Corresponding output image</td> 
+  </tr>
+  <tr>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/zspiral1280.png"><img src="zspiral1280.png" width="160" height="160" alt="Fig. 16" /></a></td>
+    <td><a href="https://shibata.naist.jp/~n-sibata/cclarticle/out.zspiral1280.png"><img src="out.zspiral1280.png" width="160" height="160" alt="Fig. 17" /></a></td>
+  </tr>
+  <tr>
+    <td style="width: 240px;"><b>Fig.</b> 16 Zigzag spiral image</td>
+    <td style="width: 240px;"><b>Fig.</b> 17 Corresponding output image</td> 
+  </tr>
+</table>
+
+<p style="margin-bottom: 2em;"> </p>
+
+<p>
+The following tables show kernel execution time obtained by OpenCL profiling information.
+</p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+<tr>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 1 OpenCL execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/dryearth.jpg">dryearth.jpg</a> on GeForce GTX 960)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (nano sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">79,904</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">353,152</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">333,952</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">269,056</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">4</td>
+	  <td class="lt-" align="right">211,392</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">5</td>
+	  <td class="lt-" align="right">188,384</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">6</td>
+	  <td class="lt-" align="right">173,760</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">7</td>
+	  <td class="lt-" align="right">173,792</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">8</td>
+	  <td class="lt-" align="right">24,096</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">9</td>
+	  <td class="lt-" align="right">23,392</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">10</td>
+	  <td class="lt-b" align="right">23,552</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">1,854,432</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 2 OpenCL execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/zspiral1280.png">zspiral1280.png</a> on GeForce GTX 960)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (nano sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">218,912</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">931,712</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">860,480</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">838,400</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">4</td>
+	  <td class="lt-" align="right">796,064</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">5</td>
+	  <td class="lt-" align="right">642,528</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">6</td>
+	  <td class="lt-" align="right">935,328</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">7</td>
+	  <td class="lt-" align="right">905,568</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">8</td>
+	  <td class="lt-" align="right">578,496</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">9</td>
+	  <td class="lt-" align="right">69,632</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">10</td>
+	  <td class="lt-b" align="right">69,664</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">6,846,784</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+<tr>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 3 OpenCL execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/dryearth.jpg">dryearth.jpg</a> on GeForce GTX 670)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (nano sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">55,456</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">361,440</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">359,968</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">343,008</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">4</td>
+	  <td class="lt-" align="right">314,624</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">5</td>
+	  <td class="lt-" align="right">298,816</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">6</td>
+	  <td class="lt-" align="right">288,160</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">7</td>
+	  <td class="lt-" align="right">284,608</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">8</td>
+	  <td class="lt-" align="right">31,936</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">9</td>
+	  <td class="lt-" align="right">31,456</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">10</td>
+	  <td class="lt-b" align="right">30,816</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">2,400,288</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 4 OpenCL execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/zspiral1280.png">zspiral1280.png</a> on GeForce GTX 670)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (nano sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">154,336</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">1,032,544</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">1,123,424</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">1,150,528</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">4</td>
+	  <td class="lt-" align="right">991,488</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">5</td>
+	  <td class="lt-" align="right">1,033,760</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">6</td>
+	  <td class="lt-" align="right">1,115,808</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">7</td>
+	  <td class="lt-" align="right">882,464</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">8</td>
+	  <td class="lt-" align="right">93,696</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">9</td>
+	  <td class="lt-" align="right">93,728</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">10</td>
+	  <td class="lt-b" align="right">94,048</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">7,765,824</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+<tr>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 5 OpenCL execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/dryearth.jpg">dryearth.jpg</a> on GeForce GTX 570)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (nano sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">78,720</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">583,168</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">782,272</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">477,280</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">4</td>
+	  <td class="lt-" align="right">449,440</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">5</td>
+	  <td class="lt-" align="right">316,768</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">6</td>
+	  <td class="lt-" align="right">138,272</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">7</td>
+	  <td class="lt-" align="right">23,232</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">8</td>
+	  <td class="lt-" align="right">22,944</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">9</td>
+	  <td class="lt-" align="right">22,912</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">10</td>
+	  <td class="lt-b" align="right">23,008</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">2,918,016</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 6 OpenCL execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/zspiral1280.png">zspiral1280.png</a> on GeForce GTX 570)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (nano sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">194,400</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">851,136</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">993,728</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">1,097,440</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">4</td>
+	  <td class="lt-" align="right">821,056</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">5</td>
+	  <td class="lt-" align="right">2,005,184</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">6</td>
+	  <td class="lt-" align="right">3,852,416</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">7</td>
+	  <td class="lt-" align="right">364,960</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">8</td>
+	  <td class="lt-" align="right">63,776</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">9</td>
+	  <td class="lt-" align="right">63,264</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">10</td>
+	  <td class="lt-b" align="right">63,456</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">10,370,816</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p>
+The archive also includes a single-threaded CPU implementation that utilizes AVX2 instructions.
+The following tables show execution times of this implementation.
+</p>
+
+<p>
+Please note that the value labeled to each connected component by the
+AVX2 implementation differs from the value labeled by the OpenCL
+implementation. This is due to difference in data alignment.
+</p>
+
+<table style="text-align: center; margin-left:auto; margin-right:auto;">
+<tr>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 7 AVX2 execution time
+    (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/dryearth.jpg">dryearth.jpg</a> on Core
+    i7-4770@3.4GHz)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (milli sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">1.86</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">2.13</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">1.46</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">3</td>
+	  <td class="lt-" align="right">1.22</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">4</td>
+	  <td class="lt-b" align="right">1.15</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">7.82</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+<td>
+<table class="figure">
+  <tr align="center">
+    <td class="caption">Table 8 AVX2 execution time (<a href="https://shibata.naist.jp/~n-sibata/cclarticle/zspiral1280.png">zspiral1280.png</a> on Core i7-4770@3.4GHz)</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <table class="lt">
+        <tr>
+          <td class="lt-hl"></td>
+          <td class="lt-hl"></td>
+        </tr>
+	<tr>
+	  <td class="lt-br" align="center">Pass</td>
+	  <td class="lt-b" align="center">Time (milli sec.)</td>
+	</tr>
+	<tr>
+	  <td class="lt-hl"></td>
+	  <td class="lt-hl"></td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">0</td>
+	  <td class="lt-" align="right">5.13</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">1</td>
+	  <td class="lt-" align="right">6.23</td>
+	</tr>
+	<tr>
+	  <td class="lt-r" align="center">2</td>
+	  <td class="lt-" align="right">3.62</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">3</td>
+	  <td class="lt-b" align="right">6.40</td>
+	</tr>
+	<tr>
+	  <td class="lt-br" align="center">Total</td>
+	  <td class="lt-b" align="right">21.38</td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<h3>Contact</h3>
+
+<p>
+Naoki Shibata<br />
+e-mail :   <img style="position:relative; top:4px;" src="../email.png" alt="Naoki Shibata's e-mail addresses" height="17" width="238" />
+</p>
+
+</body>
+</html>
