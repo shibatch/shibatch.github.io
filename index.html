@@ -87,8 +87,8 @@ Please check out our <a href="https://github.com/shibatch/nofreelunch">GitHub pa
 <p>
 This small tool monitors the memory usage of each process when
 performing a build, and suspends processes as necessary to prevent
-swapping from occurring. This allows you to build using all CPU cores
-without worrying about swapping occurring on a Linux computer.
+swap thrashing. This allows you to build using all CPU cores
+without worrying about swap thrashing on a Linux computer.
 </p>
 
 <p>
@@ -175,10 +175,10 @@ MathPeephole. This pass performs the following transforms.
 </p>
 
 <ul class="disc">
-<li>a/b + c/d -> (ad + bc) / (bd)</li>
-<li>x/y + z > a/b + c -> (xb - ay) / (yb) + z > c</li>
-<li>a/b + c > d -> b < 0 ? (a - b * (d - c) < 0) : (-(a - b * (d - c)) < 0)</li>
-<li>w sqrt(x) + y > z -> w >= 0 ? ((z < y) | (wwx > (z-y)(z-y))) : ((z <= y) & (wwx < (z-y)(z-y)))</li>
+<li>a/b + c/d &nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp; (ad + bc) / (bd)</li>
+<li>x/y + z > a/b + c &nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp; (xb - ay) / (yb) + z > c</li>
+<li>a/b + c > d &nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp; b < 0 ? (a - b * (d - c) < 0) : (-(a - b * (d - c)) < 0)</li>
+<li>w sqrt(x) + y > z &nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp; w >= 0 ? ((z < y) | (wwx > (z-y)(z-y))) : ((z <= y) & (wwx < (z-y)(z-y)))</li>
 </ul>
 
 <p>
@@ -193,13 +193,20 @@ Please check out our <a href="https://github.com/shibatch/xpass">GitHub page</a>
 
 <H3 id="rectdetect">A rectangle detector</H3>
 
-<p>This program detects ALL rectangular shapes viewed from 3D
+<p>
+This program detects ALL rectangular shapes viewed from 3D
 perspective in real time, utilizing a GPU. The program is purely
-rule-based. Please check out
-our <a href="https://www.youtube.com/watch?v=HpaY0HOomAI">YouTube</a>
-<a href="https://www.youtube.com/watch?v=BLJEYui0XcY">video</a>. We
-  also have a <a href="https://github.com/shibatch/rectdetect">GitHub
-  page</a>.
+rule-based.
+</p>
+
+<p>
+Please check out our <a href="https://www.youtube.com/watch?v=HpaY0HOomAI">YouTube</a>
+<a href="https://www.youtube.com/watch?v=BLJEYui0XcY">video</a>.
+</p>
+
+<p>
+We also have a <a href="https://github.com/shibatch/rectdetect">GitHub
+page</a>.
 </p>
 
 <H3 id="baum">BAUM : Software Package for Recognizing Blur-Resistant Markers</H3>
@@ -210,19 +217,34 @@ our <a href="https://www.youtube.com/watch?v=HpaY0HOomAI">YouTube</a>
   recognizing circular barcodes that are designed to be relatively
   tolerant of linear motion blur. With this library, those circular
   barcodes can be recognized from video in real time from Full HD
-  videos utilizing a desktop GPU. <a href="baum/">Here</a> is the main
-  page. We also have a <a href="https://github.com/shibatch/baum">GitHub
+  videos utilizing a desktop GPU.
+</p>
+
+<p>
+  See <a href="baum/">here</a> for more explanation.
+</p>
+
+<p>
+  We also have a <a href="https://github.com/shibatch/baum">GitHub
   page</a>.
 </p>
 
 <H3 id="CCL">Connected Component Labeling Algorithm for GPGPU</H3>
 
-<p>Connected Component Labeling(CCL) is a well known technique for
+<p>
+Connected Component Labeling(CCL) is a well known technique for
 assigning a unique label to each of connected components in a given
 binary image. This program implements an efficient CCL algorithm
-suitable for GPGPU execution. <a href="cclarticle/">Here</a> is the
-main page. We also have a
-<a href="https://github.com/shibatch/cclopencl">GitHub page</a>.
+suitable for GPGPU execution.
+</p>
+
+<p>
+See <a href="cclarticle/">here</a> for more explanation.
+</p>
+
+<p>
+ We also have a <a href="https://github.com/shibatch/cclopencl">GitHub
+ page</a>.
 </p>
 
 <br><br>
