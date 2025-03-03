@@ -14,11 +14,10 @@ var searchData=
   ['m_5fpiq_11',['M_PIq',['../tlfloat_8h.html#a379a41b3d3da48aac8add39f01b293a2',1,'tlfloat.h']]],
   ['m_5fsqrt1_5f2q_12',['M_SQRT1_2q',['../tlfloat_8h.html#aa8d11fd810ce07fa753e59ee1ed57e95',1,'tlfloat.h']]],
   ['m_5fsqrt2q_13',['M_SQRT2q',['../tlfloat_8h.html#a534806e5782a8d8ff3e20cc7cf172270',1,'tlfloat.h']]],
-  ['misc_2ecpp_14',['misc.cpp',['../misc_8cpp.html',1,'']]],
-  ['mod_15',['mod',['../classtlfloat_1_1BigUInt.html#ae176aa2e8c22a9d2908b996371fe35bc',1,'tlfloat::BigUInt']]],
-  ['modf_16',['modf',['../classtlfloat_1_1TLFloat.html#a40795e4aea25e8f1ae004f6150b50ea5',1,'tlfloat::TLFloat']]],
-  ['modfq_17',['modfq',['../tlfloat_8h.html#aabcceaeb10f253f0a82466519f75fbe2',1,'tlfloat.h']]],
-  ['montgomery_18',['montgomery',['../classtlfloat_1_1BigUInt_1_1Montgomery.html#a295376fcd21883150185b5daf3840ab7',1,'tlfloat::BigUInt::Montgomery::Montgomery(Montgomery &amp;)=delete'],['../classtlfloat_1_1BigUInt_1_1Montgomery.html#a52cf9a3ea148c3f3dc23fe551567640f',1,'tlfloat::BigUInt::Montgomery::Montgomery(BigUInt&lt; N &gt; n)'],['../classtlfloat_1_1BigUInt_1_1Montgomery.html',1,'tlfloat::BigUInt&lt; N &gt;::Montgomery']]],
-  ['msb_19',['msb',['../classtlfloat_1_1BigUInt.html#aac400c8a705737446cb9c8fb5e355b4d',1,'tlfloat::BigUInt']]],
-  ['mul_20',['mul',['../classtlfloat_1_1BigUInt_1_1Montgomery.html#a498ac1e1dfcee7af80589cab12248e2b',1,'tlfloat::BigUInt::Montgomery']]]
+  ['mod_14',['mod',['../classtlfloat_1_1BigUInt.html#ae176aa2e8c22a9d2908b996371fe35bc',1,'tlfloat::BigUInt']]],
+  ['modf_15',['modf',['../classtlfloat_1_1TLFloat.html#a40795e4aea25e8f1ae004f6150b50ea5',1,'tlfloat::TLFloat']]],
+  ['modfq_16',['modfq',['../tlfloat_8h.html#aabcceaeb10f253f0a82466519f75fbe2',1,'tlfloat.h']]],
+  ['montgomery_17',['montgomery',['../classtlfloat_1_1BigUInt_1_1Montgomery.html',1,'tlfloat::BigUInt&lt; N &gt;::Montgomery'],['../classtlfloat_1_1BigUInt_1_1Montgomery.html#a52cf9a3ea148c3f3dc23fe551567640f',1,'tlfloat::BigUInt::Montgomery::Montgomery(BigUInt&lt; N &gt; n)'],['../classtlfloat_1_1BigUInt_1_1Montgomery.html#a295376fcd21883150185b5daf3840ab7',1,'tlfloat::BigUInt::Montgomery::Montgomery(Montgomery &amp;)=delete']]],
+  ['msb_18',['msb',['../classtlfloat_1_1BigUInt.html#aac400c8a705737446cb9c8fb5e355b4d',1,'tlfloat::BigUInt']]],
+  ['mul_19',['mul',['../classtlfloat_1_1BigUInt_1_1Montgomery.html#a498ac1e1dfcee7af80589cab12248e2b',1,'tlfloat::BigUInt::Montgomery']]]
 ];
