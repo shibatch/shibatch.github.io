@@ -73,7 +73,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> Original distribution site : <a href="https://github.com/shibatch/tlfloat">https://github.com/shibatch/tlfloat</a></p>
-<p>Doxygen-generated reference : <a href="https://shibatch.sourceforge.net/tlfloat-doxygen/">https://shibatch.sourceforge.net/tlfloat-doxygen/</a></p>
+<p>Doxygen-generated reference : <a href="https://shibatch.github.io/tlfloat-doxygen/">https://shibatch.github.io/tlfloat-doxygen/</a></p>
+<p>Some more documataion is available at : <a href="https://github.com/shibatch/tlfloat/wiki">https://github.com/shibatch/tlfloat/wiki</a></p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Introduction</h2>
 <p>This library implements C++ classes with which half, single, double, quadruple and octuple precision IEEE 754 floating point numbers can be operated.</p>
@@ -244,51 +245,54 @@ Benchmark results</h2>
 <p>CPU: AMD Ryzen 9 7950X (running at 4.5GHz)</p>
 <p>Compiler: gcc version 12.3.0 (Ubuntu 12.3.0-17ubuntu1)</p>
 <p>TLFloat Quad</p>
-<div class="fragment"><div class="line">TLFloat version      : 1.10.0</div>
+<div class="fragment"><div class="line">TLFloat version      : 1.11.0</div>
 <div class="line">Config               : tlfloat quad</div>
 <div class="line">Measurement time     : 10 sec</div>
-<div class="line">Addition             : 124.091 Mops/second</div>
-<div class="line">Multiplication       : 99.8746 Mops/second</div>
-<div class="line">Division             : 50.3795 Mops/second</div>
-<div class="line">Cast to/from double  : 163.924 Mops/second</div>
-<div class="line">Compare              : 296.318 Mops/second</div>
-<div class="line">FMA                  : 67.8103 Mops/second</div>
-<div class="line">Square root          : 15.7953 Mops/second</div>
-<div class="line">Rint                 : 192.819 Mops/second</div>
-<div class="line">Sin                  : 2.11886 Mops/second</div>
-<div class="line">Atan                 : 1.30871 Mops/second</div>
-<div class="line">Exp                  : 1.46121 Mops/second</div>
-<div class="line">Log                  : 1.58222 Mops/second</div>
-<div class="line">Pow                  : 0.887895 Mops/second</div>
+<div class="line">Addition             : 124.25 Mops/second</div>
+<div class="line">Multiplication       : 102.486 Mops/second</div>
+<div class="line">Division             : 50.7983 Mops/second</div>
+<div class="line">Cast to/from double  : 168.078 Mops/second</div>
+<div class="line">Compare              : 299.502 Mops/second</div>
+<div class="line">FMA                  : 68.4656 Mops/second</div>
+<div class="line">Square root          : 15.9095 Mops/second</div>
+<div class="line">Rint                 : 191.323 Mops/second</div>
+<div class="line">Sin                  : 2.13261 Mops/second</div>
+<div class="line">Atan                 : 1.30394 Mops/second</div>
+<div class="line">Exp                  : 1.49075 Mops/second</div>
+<div class="line">Log                  : 1.58123 Mops/second</div>
+<div class="line">Pow                  : 0.88467 Mops/second</div>
 </div><!-- fragment --><p>GNU libquadmath</p>
-<div class="fragment"><div class="line">TLFloat version      : 1.10.0</div>
+<div class="fragment"><div class="line">TLFloat version      : 1.11.0</div>
 <div class="line">Config               : Libquadmath</div>
 <div class="line">Measurement time     : 10 sec</div>
-<div class="line">Addition             : 87.8567 Mops/second</div>
-<div class="line">Multiplication       : 74.334 Mops/second</div>
-<div class="line">Division             : 70.8784 Mops/second</div>
-<div class="line">Cast to/from double  : 64.6601 Mops/second</div>
-<div class="line">Compare              : 222.737 Mops/second</div>
-<div class="line">FMA                  : 1.92256 Mops/second</div>
-<div class="line">Square root          : 9.58719 Mops/second</div>
-<div class="line">Rint                 : 40.1336 Mops/second</div>
-<div class="line">Sin                  : 1.72235 Mops/second</div>
-<div class="line">Atan                 : 2.87544 Mops/second</div>
-<div class="line">Exp                  : 1.78155 Mops/second</div>
-<div class="line">Log                  : 1.77996 Mops/second</div>
-<div class="line">Pow                  : 1.27151 Mops/second</div>
+<div class="line">Addition             : 87.7199 Mops/second</div>
+<div class="line">Multiplication       : 78.2958 Mops/second</div>
+<div class="line">Division             : 72.6179 Mops/second</div>
+<div class="line">Cast to/from double  : 63.7482 Mops/second</div>
+<div class="line">Compare              : 222.788 Mops/second</div>
+<div class="line">FMA                  : 1.93365 Mops/second</div>
+<div class="line">Square root          : 9.50421 Mops/second</div>
+<div class="line">Rint                 : 37.6146 Mops/second</div>
+<div class="line">Sin                  : 1.77002 Mops/second</div>
+<div class="line">Atan                 : 3.02089 Mops/second</div>
+<div class="line">Exp                  : 1.78973 Mops/second</div>
+<div class="line">Log                  : 1.8479 Mops/second</div>
+<div class="line">Pow                  : 1.29873 Mops/second</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 Development plan</h2>
 <ul>
 <li>The following features will be added in future releases<ul>
 <li>Further documentation</li>
+<li>Add C/CPP11 API for float16/bfloat16</li>
+<li>Add support for conversion between string and float16/bfloat16</li>
+<li>Remaining math functions in math.h<ul>
+<li>Complex functions</li>
+</ul>
+</li>
 <li>More testing<ul>
 <li>Add more testers for I/O functions</li>
 </ul>
 </li>
-<li>Interoperability with SLEEF</li>
-<li>Remaining math functions in math.h</li>
-<li>BF16 support</li>
 <li>Further optimization</li>
 </ul>
 </li>
@@ -297,8 +301,7 @@ Development plan</h2>
 License</h2>
 <p>The software is distributed under the Boost Software License, Version 1.0. See accompanying file LICENSE.txt or copy at : <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a>.</p>
 <p>Contributions to this project are accepted under the same license.</p>
-<p>The fact that this software is released under an open source license only means that you can use the current version of the software for free. If you want this software to be maintained, you need to financially support the project. Please see <a href="https://github.com/shibatch/nofreelunch?tab=coc-ov-file">CODE_OF_CONDUCT.md</a>.</p>
-<p>Copyright Naoki Shibata 2024. </p>
+<p>Copyright <a href="https://shibatch.github.io/">Naoki Shibata</a> and contributors 2024-2025. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
