@@ -77,6 +77,29 @@ Please check out our <a href="https://github.com/shibatch/tlfloat">GitHub page</
 </p>
 
 
+<H3 id="SSRC"><a href="https://github.com/shibatch/SSRC" style="text-decoration: none;">SSRC - High Quality Audio Sampling Rate Converter</a></H3>
+
+<p>
+This program converts the sampling rate of a PCM wav file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is hard, because the ratio beteen these two frequencies is 147:160, which are not small numbers. Accordingly, we need a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> in order not to degrade the sound quality during conversion. This program utilizes <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>s to apply the FIR filter in order to reduce the amount of computation.
+</p>
+
+<p>
+This program also has a function to apply dither to extend the perceived dynamic range. It is optimized for human's ear characteristics.
+</p>
+
+<p>
+Please check out our <a href="https://github.com/shibatch/SSRC">GitHub page</a>.
+</p>
+
+<p>
+Some experimental results are shown <a href="ssrc/">here</a>.
+</p>
+
+<p>
+Download link: <a href="https://github.com/shibatch/SSRC/releases">GitHub release page</a>.
+</p>
+
+
 <H3 id="nofreelunch"><a href="https://github.com/shibatch/nofreelunch?tab=coc-ov-file" style="text-decoration: none;">Community Guidelines for Sustainability of Open-Source Ecosystem</a></H3>
 
 <p>
@@ -207,29 +230,6 @@ our <a href="https://github.com/shibatch/cpuburnavx2">GitHub page</a>.
 
 
 <H2>Inactive projects</H2>
-
-<H3 id="SSRC"><a href="https://github.com/shibatch/SSRC" style="text-decoration: none;">SSRC - High Quality Audio Sampling Rate Converter</a></H3>
-
-<p>
-This program converts the sampling rate of a PCM wav file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is hard, because the ratio beteen these two frequencies is 147:160, which are not small numbers. Accordingly, we need a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> in order not to degrade the sound quality during conversion. This program utilizes <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>s to apply the FIR filter in order to reduce the amount of computation.
-</p>
-
-<p>
-This program also has a function to apply dither to extend the perceived dynamic range. It is optimized for human's ear characteristics.
-</p>
-
-<p>
-Please check out our <a href="https://github.com/shibatch/SSRC">GitHub page</a>.
-</p>
-
-<p>
-Some experimental results are shown <a href="ssrc/">here</a>.
-</p>
-
-<p>
-Download link: <a href="download/ssrc-1.33.tar.gz">ssrc-1.33.tar.gz</a>.
-</p>
-
 
 <H3 id="xpass"><a href="https://github.com/shibatch/xpass" style="text-decoration: none;">An experimental LLVM pass</a></H3>
 
