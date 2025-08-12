@@ -13,10 +13,10 @@
 <link rel="canonical" href="http://shibatch.sourceforge.net/" />
 <link rel="icon" type="image/png" href="/speaker.png" />
 <link rel="stylesheet" type="text/css" href="default.css" />
-<TITLE>Shibatch's Software Projects</TITLE>
+<TITLE>Shibatch Project</TITLE>
 </HEAD>
 <BODY>
-<H1>Shibatch's Software Projects</H1>
+<H1>Shibatch Project</H1>
 
 <p>
 This page introduces projects maintained
@@ -77,26 +77,22 @@ Please check out our <a href="https://github.com/shibatch/tlfloat">GitHub page</
 </p>
 
 
-<H3 id="SSRC"><a href="https://github.com/shibatch/SSRC" style="text-decoration: none;">SSRC - High Quality Audio Sampling Rate Converter</a></H3>
+<H3 id="SSRC"><a href="https://github.com/shibatch/SSRC" style="text-decoration: none;">SSRC - Audiophile-Grade Sample Rate Converter</a></H3>
 
 <p>
-This program converts the sampling rate of a PCM wav file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is hard, because the ratio beteen these two frequencies is 147:160, which are not small numbers. Accordingly, we need a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> in order not to degrade the sound quality during conversion. This program utilizes <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>s to apply the FIR filter in order to reduce the amount of computation.
+This library/tool converts the sampling rate of a PCM wav file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is not easy, because the ratio beteen these two frequencies is 147:160, which are not small numbers. We need a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> in order not to degrade the sound quality during this conversion. With our unique algorithm combining a polyphase filter and <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>, this library/tool performs this conversion process extremely quickly with high quality.
 </p>
 
 <p>
-This program also has a function to apply dither to extend the perceived dynamic range. It is optimized for human's ear characteristics.
+This library/tool also has a functionality to apply dither with noise shaping to extend the perceived dynamic range of the resulting PCM signal. Our noise shaper is capable of fitting the quantization noise to the <a href="https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing">absolute threshold of hearing</a> curve. See our <a href="ssrc/">experimental results</a>.
 </p>
 
 <p>
-It is now completely rewritten from scratch in C++. It utilizes functions in dr_wav library for WAV file input/output, enabling support for a wider range of formats. By utilizing SleefDFT, high-speed conversion using AVX-512 is possible.
+SSRC is now completely rewritten from scratch in C++. It utilizes functions in dr_wav library for WAV file input/output, enabling support for a wider range of formats. By utilizing <a href="https://sleef.org/dft.xhtml">SleefDFT</a>, high-speed conversion using AVX-512 is possible.
 </p>
 
 <p>
 Please check out our <a href="https://github.com/shibatch/SSRC">GitHub page</a>.
-</p>
-
-<p>
-Some experimental results are shown <a href="ssrc/">here</a>.
 </p>
 
 <p>
