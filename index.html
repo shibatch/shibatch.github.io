@@ -80,7 +80,7 @@ Please check out our <a href="https://github.com/shibatch/tlfloat">GitHub page</
 <H3 id="SSRC"><a href="https://github.com/shibatch/SSRC" style="text-decoration: none;">SSRC - Audiophile-Grade Sample Rate Converter</a></H3>
 
 <p>
-This library/tool converts the sampling rate of a PCM wav file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is not easy, because the ratio beteen these two frequencies is 147:160, which are not small numbers. We need a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> in order not to degrade the sound quality during this conversion. With our unique algorithm combining a polyphase filter and <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>, this library/tool performs this conversion process extremely quickly with high quality.
+This library/tool converts the sampling rate of a PCM WAV file. 44.1kHz sampling rate is used for a CD, and 48kHz is used for a DVD. However, converting between these frequencies is not easy, because the ratio beteen these two frequencies is 147:160, which are not small numbers. In order not to degrade the sound quality during this conversion, a very long <a href="http://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> is required. With our unique algorithm combining a polyphase filter and <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">FFT</a>, our library/tool performs this conversion process quickly with high quality.
 </p>
 
 <p>
@@ -88,7 +88,7 @@ This library/tool also has a functionality to apply dither with noise shaping to
 </p>
 
 <p>
-SSRC is now completely rewritten from scratch in C++. It utilizes functions in dr_wav library for WAV file input/output, enabling support for a wider range of formats. By utilizing <a href="https://sleef.org/dft.xhtml">SleefDFT</a>, high-speed conversion using AVX-512 is possible.
+SSRC is now completely rewritten from scratch in C++. It utilizes functions in dr_wav library for WAV file input/output, enabling support for a wider range of formats. By utilizing <a href="https://sleef.org/dft.xhtml">SleefDFT</a>, it is also capable of high-speed conversion using <a href="https://en.wikipedia.org/wiki/AVX-512">AVX-512</a>.
 </p>
 
 <p>
